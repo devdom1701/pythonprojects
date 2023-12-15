@@ -27,13 +27,13 @@ boplevel4 = 0
 boss1defeated = False
 boss2defeated = False
 roundhp = 100
-buff = 1
+buff = boplevel + boplevel2 + boplevel3 + boplevel4
 armour = 1
 plrhp = 100 * dirtarmourbuff * silverarmourbuff * goldarmourbuff * dragonarmourbuff * morbiusarmourbuff
 gold = 50
 shopvisitcount = 0
-skillopt = random.randint(15, 30 * buff)
-attkopt = random.randint(1, 15 * buff)
+skillopt = random.randint(15, 30) * buff
+attkopt = random.randint(1, 15) * buff
 attkdmg = attkopt * buff
 skilldmg = skillopt * buff
 
@@ -407,7 +407,7 @@ def gamble(gold):
                 print("Alright, you missed a golden opportunity though....")
                 main()
 
-def shop(plrhp,armour):
+def shop(buff,armour):
     global shopvisitcount,gold,bopbought,boplevel,boplevel2,boplevel3,boplevel4,dirtarmourbuff,silverarmourbuff,goldarmourbuff,dragonarmourbuff,morbiusarmourbuff
     print("________________________________")
     print("You've been at the shop " + str(shopvisitcount) + " Time(s)")
@@ -423,50 +423,57 @@ def shop(plrhp,armour):
         b = input("Currently, you can buy 1 buff, called Blessing of Protection ")
         print("type 'info' for the item's description.")
         if b == "buy" and gold > 1000:
-            if bopbought == 0 and gold >= 1000:
-                bopbought = bopbought + 1
-                boplevel = boplevel + 5
-                print("Applied Level I Buff")
-                gold = gold - 1000
-            else:
-                print(" ")
-                print("!!        Insuficcent currency")
-                print(" ")
-                shop(buff,armour)
-            if bopbought == 1 and gold >= 3000:
-                bopbought = bopbought + 1
-                boplevel2 = boplevel2 + 5
-                print("Applied Level II Buff")
-                gold = gold - 3000
-            else:
-                print(" ")
-                print("!!        Insuficcent currency")
-                print(" ")
-                shop(buff,armour)
-            if bopbought == 2 and gold >= 6000:
-                bopbought = bopbought + 1
-                boplevel3 = boplevel3 + 5
-                print("Applied Level III Buff")
-                gold = gold - 6000
-            else:
-                print(" ")
-                print("!!        Insuficcent currency")
-                print(" ")
-                shop(buff,armour)
-            if bopbought == 3 and gold >= 12000:
-                bopbought = bopbought + 1
-                boplevel4 = boplevel4 + 5
-                print("Applied Level III Buff")
-                gold = gold - 12000
-            else:
-                print(" ")
-                print("!!        Insuficcent currency")
-                print(" ")
-                shop(buff,armour)
+            if bopbought == 0:
+                if gold < 1000:
+                    print(" ")
+                    print("!!        Insuficcent currency")
+                    print(" ")
+                    shop(buff,armour)
+                else:
+                    bopbought = bopbought + 1
+                    boplevel = boplevel + 2
+                    print("Applied Level I Buff")
+                    gold = gold - 1000
+                    shop(buff,armour)
+            if bopbought == 1:
+                if gold < 3000:
+                    print(" ")
+                    print("!!        Insuficcent currency")
+                    print(" ")
+                    shop(buff,armour)
+                else:
+                    bopbought = bopbought + 1
+                    boplevel2 = boplevel2 + 1
+                    print("Applied Level II Buff")
+                    gold = gold - 3000
+                    shop(buff,armour)
+            if bopbought == 2:
+                if gold < 6000:
+                    print(" ")
+                    print("!!        Insuficcent currency")
+                    print(" ")
+                    shop(buff,armour)
+                else:
+                    bopbought = bopbought + 1
+                    boplevel3 = boplevel3 + 1
+                    print("Applied Level III Buff")
+                    gold = gold - 6000
+                    shop(buff,armour)
+            if bopbought == 3:
+                if gold < 12000:
+                    print(" ")
+                    print("!!        Insuficcent currency")
+                    print(" ")
+                    shop(buff,armour)
+                else:
+                    bopbought = bopbought + 1
+                    boplevel4 = boplevel4 + 1
+                    print("Applied Level III Buff")
+                    gold = gold - 12000
+                    shop(buff,armour)
             if bopbought == 4:
                 print("Maximum Level III Buff has allready been applied")
                 shop(buff,armour)
-            buff = boplevel + boplevel2 + boplevel3 + boplevel4
             print("________________________________")
         else:
             print("________________________________")
