@@ -10,6 +10,7 @@ dragonarmourbuff = 1
 morbiusarmourbuff = 1
 
 fishingrodowned = False
+bopbought = 0
 
 commonfish = 0
 uncommonfish = 0
@@ -18,17 +19,11 @@ legendaryfish = 0
 morbiusfish = 0
 TOTALfish = commonfish + uncommonfish + rarefish + legendaryfish + morbiusfish
 
-bopbought = 0
-boplevel = 0
-boplevel2 = 0
-boplevel3 = 0
-boplevel4 = 0
-
 boss1defeated = False
 boss2defeated = False
 
 roundhp = 100
-buff = boplevel + boplevel2 + boplevel3 + boplevel4
+buff = 1
 armour = 1
 plrhp = 100 * dirtarmourbuff * silverarmourbuff * goldarmourbuff * dragonarmourbuff * morbiusarmourbuff
 gold = 50
@@ -63,154 +58,6 @@ if a == 1:
 
 print("________________________________")
 print("Welcome to the game, the Legend of " + str(name) + str(randending))
-
-# ///////////////BOSS 1, REWORK COMBAT SYSTEM OVER WEEKEND.. PREHAPS USE FOR LOOPS//////////////////
-skilluse = 0
-def boss1(plrhp):
-    global buff,roundhp,attkopt,skillopt,armour,attkdmg,skilldmg,boss1defeated
-    roundhp = 100
-
-    skillopt = random.randint(15, 30)
-    attkopt = random.randint(1, 15)
-
-    def boss1defeatrule():
-        if roundhp <= 0 and plrhp >= 0:
-            print("You've Won! 1000 gold has been added to your account")
-            gold += gold + 1000
-            main()
-        elif roundhp >= 0 or plrhp <= 0:
-            print("You've lost all of you hp and or you've run out of turns!")
-            print("YOU LOOSE.....")
-            print(" ")
-            main()
-        else:
-            sleepge(3)
-
-    print("\n---" + name + "'s Turn ---")
-    round1 = input("do an Attack or Skill ")
-
-    if round1 == "attack":
-        roundhp = roundhp - attkdmg
-        print("The current boss health is... " + str(roundhp))
-    elif round1 == "skill":
-        roundhp = roundhp - skilldmg
-        skilluse + 1
-        print("The current boss health is... " + str(roundhp))
-        print("You dealt " + str(skilldmg) + " damage!")
-
-    
-    print("\n--- Opponents's Turn ---")
-
-    # OPPONENT'S TURN
-    print("Its now your opponent's turn")
-    sleepge(3)
-
-    opponentdmg = random.randint(1, 100)
-    plrhp = plrhp - (opponentdmg / armour)
-
-    if opponentdmg > 50:
-        print("that was quite the hit...")
-        print("your hp is... " + str(plrhp))
-    else:
-        print("your opponent's turn has ended~ your current hp is..." + str(plrhp))
-
-    # ROUND 2 TURN
-    print("\n---" + name + "'s Turn ---")
-    print("")
-    round2 = input("ROUND II! Would you like to attack, skill, or FLEE?")
-    if round2 == "attack":
-        roundhp = roundhp - attkdmg
-        print("The current boss health is... " + str(roundhp))
-        print("You dealt " + str(attkdmg) + " damage!")
-    elif round2 == "skill":
-        if skilluse > 1:
-            print("Sorry, but your SKILL is on ICD (internal cooldown)")
-            a = input("Would you like to sacrifice a turn to get your skill back? (Y)es,(N)o")
-            if a.upper() == "Y":
-                print("Alright, skipping turn...")
-                opponentdmg = random.randint(1, 100)
-                plrhp = plrhp - (opponentdmg / armour)
-                print("You currently have " + str(plrhp) + " HP left")
-                if plrhp > 0:
-                    print("Activating Skill...")
-                    roundhp = roundhp - skilldmg
-                    print("The current boss health is... " + str(roundhp))
-                    print("You dealt " + str(skilldmg) + " damage!")
-                else:
-                    print("You've died from the bosse's passive attack... Returning to main menu")
-                    main()
-    elif round2.lower() == "flee":
-        print("L Bozo, You Just Fled the battle!")
-        main()
-    
-    boss1defeatrule()
-
-    # OPPONENT'S TURN
-    print("Its now your opponent's turn")
-    sleepge(3)
-
-    opponentdmg = random.randint(1, 100)
-    plrhp = plrhp - (opponentdmg / armour)
-
-    if opponentdmg > 50:
-        print("that was quite the hit...")
-        print("your hp is... " + str(plrhp))
-    else:
-        print("your opponent's turn has ended~ your current hp is..." + str(plrhp))
-    
-    boss1defeatrule()
-
-    # ROUND 3 TURN
-
-    print("\n---" + name + "'s Turn ---")
-    round2 = input("ROUND III! Would you like to attack, skill, or FLEE?")
-    print("___________________________")
-    print("!!           At this stage in the game, one turn should defeat the boss!")
-    print("___________________________")
-    if round2 == "attack":
-        roundhp = roundhp - attkdmg
-        print("The current boss health is... " + str(roundhp))
-        print("You dealt " + str(attkdmg) + " damage!")
-    elif round2 == "skill":
-        roundhp = roundhp - skilldmg
-        print("The current boss health is... " + str(roundhp))
-        print("You dealt " + str(skilldmg) + " damage!")
-    elif round2.lower() == "flee":
-        print("L Bozo, You Just Fled the battle!")
-        main()
-    boss1defeatrule()
-
-    # OPPONENT'S TURN
-
-    print("Its now your opponent's turn")
-    sleepge(3)
-
-    opponentdmg = random.randint(1, 100)
-    plrhp = plrhp - (opponentdmg / armour)
-
-    boss1defeatrule()
-    if opponentdmg > 50:
-        print("that was quite the hit...")
-        print("your hp is... " + str(plrhp))
-    else:
-        print("your opponent's turn has ended~ your current hp is..." + str(plrhp))
-
-    if plrhp > 0 and roundhp <= 0:
-        print("You've successfully defeated the boss!")
-        boss1defeated = True
-        gold += 10000
-        print("You now have " + str(gold) + " gold")
-        main()
-    else:
-        print("You havent sucessfully defeated the boss...")
-        print("You've run out of turns! Returning to the home menu...")
-        main()
-
-# ///////////////BOSS 2, get dragon armour from this boss//////////////////
-def boss2():
-    print("___________________________")
-    print("second boss hasnt been added yet.")
-    main()
 
 # ///////////////PRE-GAME BUFFS AND ABILITIES, add fishing//////////////////
 def fishshop(gold):
@@ -559,7 +406,7 @@ def gamble(gold):
                 main()
 
 def shop(armour,shopvisitcount):
-    global gold,buff,bopbought,boplevel,boplevel2,boplevel3,boplevel4,dirtarmourbuff,silverarmourbuff,goldarmourbuff,dragonarmourbuff,morbiusarmourbuff
+    global gold,buff,bopbought,dirtarmourbuff,silverarmourbuff,goldarmourbuff,dragonarmourbuff,morbiusarmourbuff
     print("________________________________")
     print("You've been at the shop " + str(shopvisitcount) + " Time(s)")
     print("You currently have " + str(gold) + " gold!")
@@ -582,7 +429,6 @@ def shop(armour,shopvisitcount):
                     shop(armour,shopvisitcount)
                 else:
                     bopbought = bopbought + 1
-                    boplevel = boplevel + 2
                     print("Applied Level I Buff")
                     buff = 2
                     gold = gold - 1000
@@ -595,7 +441,6 @@ def shop(armour,shopvisitcount):
                     shop(armour,shopvisitcount)
                 else:
                     bopbought = bopbought + 1
-                    boplevel2 = boplevel2 + 1
                     print("Applied Level II Buff")
                     buff = 3
                     gold = gold - 3000
@@ -620,7 +465,6 @@ def shop(armour,shopvisitcount):
                     shop(armour,shopvisitcount)
                 else:
                     bopbought = bopbought + 1
-                    boplevel4 = boplevel4 + 1
                     print("Applied Level III Buff")
                     buff = 5
                     print(buff)
@@ -698,22 +542,24 @@ def main():
     print("Welcome to the main screen")
     i1 = input("Would you like to take on a boss, or go to the shop?")
     if i1.lower() == "boss":
-        bosses(gold)
+        bosses()
     elif i1.lower() == "shop":
         shop(armour,shopvisitcount)
 
 # ///////////////BOSSES//////////////////
-def bosses(gold):
+def bosses():
     global buff,plrhp
+    print(buff)
     print("________________________________")
     print("Hello and welcome to the boss area")
+    print(buff)
     print(" ")
     print("There are currently 10 bosses, the harder they are, the closer to 10 they're going to be.")
     print("It is recommended that you start with the (1)st boss.")
     a1 = input(" ")
     if a1 == "1" or a1.lower() == "first":
         print("________________________________")
-        boss1(plrhp)
+        boss1()
     elif a1 == "2" or a1.lower() == "second":
         if boss1defeated:
             boss2()
@@ -723,23 +569,168 @@ def bosses(gold):
     else:
         print("Returning back to main")
         main()
+# ///////////////BOSS 1, REWORK COMBAT SYSTEM OVER WEEKEND.. PREHAPS USE FOR LOOPS//////////////////
+skilluse = 0
+def boss1():
+    global buff,roundhp,attkopt,skillopt,armour,attkdmg,skilldmg,boss1defeated,plrhp
+    roundhp = 100
+
+    def boss1defeatrule():
+        if roundhp <= 0 and plrhp >= 0:
+            print("You've Won! 1000 gold has been added to your account")
+            gold += gold + 1000
+            main()
+        elif roundhp >= 0 or plrhp <= 0:
+            print("You've lost all of you hp and or you've run out of turns!")
+            print("YOU LOOSE.....")
+            print(" ")
+            main()
+        else:
+            sleepge(3)
+
+    print("\n---" + name + "'s Turn ---")
+    round1 = input("do an Attack or Skill ")
+
+    if round1 == "attack":
+        roundhp = roundhp - attkdmg
+        print("The current boss health is... " + str(roundhp))
+    elif round1 == "skill":
+        roundhp = roundhp - skilldmg
+        skilluse + 1
+        print("The current boss health is... " + str(roundhp))
+        print("You dealt " + str(skilldmg) + " damage!")
+
+    
+    print("\n--- Opponents's Turn ---")
+
+    # OPPONENT'S TURN
+    print("Its now your opponent's turn")
+    sleepge(3)
+
+    opponentdmg = random.randint(1, 100)
+    plrhp = plrhp - (opponentdmg / armour)
+
+    if opponentdmg > 50:
+        print("that was quite the hit...")
+        print("your hp is... " + str(plrhp))
+    else:
+        print("your opponent's turn has ended~ your current hp is..." + str(plrhp))
+
+    # ROUND 2 TURN
+    print("\n---" + name + "'s Turn ---")
+    print("")
+    round2 = input("ROUND II! Would you like to attack, skill, or FLEE?")
+    if round2 == "attack":
+        roundhp = roundhp - attkdmg
+        print("The current boss health is... " + str(roundhp))
+        print("You dealt " + str(attkdmg) + " damage!")
+    elif round2 == "skill":
+        if skilluse > 1:
+            print("Sorry, but your SKILL is on ICD (internal cooldown)")
+            a = input("Would you like to sacrifice a turn to get your skill back? (Y)es,(N)o")
+            if a.upper() == "Y":
+                print("Alright, skipping turn...")
+                opponentdmg = random.randint(1, 100)
+                plrhp = plrhp - (opponentdmg / armour)
+                print("You currently have " + str(plrhp) + " HP left")
+                if plrhp > 0:
+                    print("Activating Skill...")
+                    roundhp = roundhp - skilldmg
+                    print("The current boss health is... " + str(roundhp))
+                    print("You dealt " + str(skilldmg) + " damage!")
+                else:
+                    print("You've died from the bosse's passive attack... Returning to main menu")
+                    main()
+    elif round2.lower() == "flee":
+        print("L Bozo, You Just Fled the battle!")
+        main()
+    
+    boss1defeatrule()
+
+    # OPPONENT'S TURN
+    print("Its now your opponent's turn")
+    sleepge(3)
+
+    opponentdmg = random.randint(1, 100)
+    plrhp = plrhp - (opponentdmg / armour)
+
+    if opponentdmg > 50:
+        print("that was quite the hit...")
+        print("your hp is... " + str(plrhp))
+    else:
+        print("your opponent's turn has ended~ your current hp is..." + str(plrhp))
+    
+    boss1defeatrule()
+
+    # ROUND 3 TURN
+
+    print("\n---" + name + "'s Turn ---")
+    round2 = input("ROUND III! Would you like to attack, skill, or FLEE?")
+    print("___________________________")
+    print("!!           At this stage in the game, one turn should defeat the boss!")
+    print("___________________________")
+    if round2 == "attack":
+        roundhp = roundhp - attkdmg
+        print("The current boss health is... " + str(roundhp))
+        print("You dealt " + str(attkdmg) + " damage!")
+    elif round2 == "skill":
+        roundhp = roundhp - skilldmg
+        print("The current boss health is... " + str(roundhp))
+        print("You dealt " + str(skilldmg) + " damage!")
+    elif round2.lower() == "flee":
+        print("L Bozo, You Just Fled the battle!")
+        main()
+    boss1defeatrule()
+
+    # OPPONENT'S TURN
+
+    print("Its now your opponent's turn")
+    sleepge(3)
+
+    opponentdmg = random.randint(1, 100)
+    plrhp = plrhp - (opponentdmg / armour)
+
+    boss1defeatrule()
+    if opponentdmg > 50:
+        print("that was quite the hit...")
+        print("your hp is... " + str(plrhp))
+    else:
+        print("your opponent's turn has ended~ your current hp is..." + str(plrhp))
+
+    if plrhp > 0 and roundhp <= 0:
+        print("You've successfully defeated the boss!")
+        boss1defeated = True
+        gold += 10000
+        print("You now have " + str(gold) + " gold")
+        main()
+    else:
+        print("You havent sucessfully defeated the boss...")
+        print("You've run out of turns! Returning to the home menu...")
+        main()
+
+# ///////////////BOSS 2, get dragon armour from this boss//////////////////
+def boss2():
+    print("___________________________")
+    print("second boss hasnt been added yet.")
+    main()
+
 
 # ///////////////MAIN SCREEN//////////////////
 
 def main():
     global gold,buff,plrhp
+    print(buff)
     if name.lower() == "dominik":
         print("Hej developer dom, you gained a grap ton of currency rn.")
         gold = gold + 1000000000000
     print("___________________________")
     print("Welcome to the main screen")
-    print(buff)
     print("________________________________")
     print("P.S. for advanced options, type in 'help'")
     print("___________________________")
     i1 = input("Would you like to take on a boss, fish, or go to the shop? ")
     if i1.lower() == "boss":
-        bosses(gold)
+        bosses()
     elif i1.lower() == "shop":
         shop(armour,shopvisitcount)
     elif i1.lower() == "fish":
