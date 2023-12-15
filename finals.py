@@ -23,18 +23,19 @@ boplevel = 0
 boplevel2 = 0
 boplevel3 = 0
 boplevel4 = 0
+
 boss1defeated = False
 boss2defeated = False
 roundhp = 100
 buff = 1
 armour = 1
+plrhp = 100 * dirtarmourbuff * silverarmourbuff * goldarmourbuff * dragonarmourbuff * morbiusarmourbuff
 gold = 50
 shopvisitcount = 0
 skillopt = random.randint(15, 30 * buff)
 attkopt = random.randint(1, 15 * buff)
 attkdmg = attkopt * buff
 skilldmg = skillopt * buff
-plrhp = 100
 
 def sleepge(seconds):
     print(end='', flush=True)
@@ -78,7 +79,7 @@ def fishshop(gold):
         print("commonfish,uncommonfish,rarefish,legendaryfish,morbiusfish")
         print(" ")
         fishshop(gold)
-    if a1.lower() == "rods" or a1.lower() == "buy rods":
+    if a1.lower() == "rods" or a1.lower() == "buy rods" or a1.lower() == "rod":
         print("________________________________")
         print("currently you can buy a fishing rod, would you like to buy one?")
         b1 = input("it costs 50 gold.. ")
@@ -406,8 +407,7 @@ def gamble(gold):
                 print("Alright, you missed a golden opportunity though....")
                 main()
 
-def shop(buff,armour):
-    plrhp = 100
+def shop(plrhp,armour):
     global shopvisitcount,gold,bopbought,boplevel,boplevel2,boplevel3,boplevel4,dirtarmourbuff,silverarmourbuff,goldarmourbuff,dragonarmourbuff,morbiusarmourbuff
     print("________________________________")
     print("You've been at the shop " + str(shopvisitcount) + " Time(s)")
@@ -422,28 +422,48 @@ def shop(buff,armour):
         print("use the term 'buy' to buy products")
         b = input("Currently, you can buy 1 buff, called Blessing of Protection ")
         print("type 'info' for the item's description.")
-        if b == "buy" and gold > 100:
-            if bopbought == 0:
+        if b == "buy" and gold > 1000:
+            if bopbought == 0 and gold >= 1000:
                 bopbought = bopbought + 1
                 boplevel = boplevel + 5
                 print("Applied Level I Buff")
-                gold = gold - 100
-            elif bopbought == 1:
+                gold = gold - 1000
+            else:
+                print(" ")
+                print("!!        Insuficcent currency")
+                print(" ")
+                shop(buff,armour)
+            if bopbought == 1 and gold >= 3000:
                 bopbought = bopbought + 1
                 boplevel2 = boplevel2 + 5
                 print("Applied Level II Buff")
-                gold = gold - 150
-            elif bopbought == 2:
+                gold = gold - 3000
+            else:
+                print(" ")
+                print("!!        Insuficcent currency")
+                print(" ")
+                shop(buff,armour)
+            if bopbought == 2 and gold >= 6000:
                 bopbought = bopbought + 1
                 boplevel3 = boplevel3 + 5
                 print("Applied Level III Buff")
-                gold = gold - 300
-            elif bopbought == 3:
+                gold = gold - 6000
+            else:
+                print(" ")
+                print("!!        Insuficcent currency")
+                print(" ")
+                shop(buff,armour)
+            if bopbought == 3 and gold >= 12000:
                 bopbought = bopbought + 1
                 boplevel4 = boplevel4 + 5
                 print("Applied Level III Buff")
-                gold = gold - 450
-            elif bopbought == 4:
+                gold = gold - 12000
+            else:
+                print(" ")
+                print("!!        Insuficcent currency")
+                print(" ")
+                shop(buff,armour)
+            if bopbought == 4:
                 print("Maximum Level III Buff has allready been applied")
                 shop(buff,armour)
             buff = boplevel + boplevel2 + boplevel3 + boplevel4
@@ -454,7 +474,7 @@ def shop(buff,armour):
             shop(buff,armour)
         if b == "info":
             print("Blessing of Protection; Level " + str(bopbought))
-            print("This protection buff allows you to multiply your damage by 5,10,15, and 20 times as respective to the blessings level.")
+            print("This protection buff allows you to multiply your damage by 2,3,4, and 5 times as respective to the blessings level.")
             sleepge(3)
             shop(buff,armour)
     if a == "armour" or a == "armor":
