@@ -32,8 +32,9 @@ armour = 1
 plrhp = 100 * dirtarmourbuff * silverarmourbuff * goldarmourbuff * dragonarmourbuff * morbiusarmourbuff
 gold = 50
 shopvisitcount = 0
-skillopt = random.randint(15, 30) * buff
-attkopt = random.randint(1, 15) * buff
+skillopt = random.randint(15, 30)
+attkopt = random.randint(1, 15)
+
 attkdmg = attkopt * buff
 skilldmg = skillopt * buff
 
@@ -434,7 +435,7 @@ def shop(buff,armour):
                     boplevel = boplevel + 2
                     print("Applied Level I Buff")
                     gold = gold - 1000
-                    shop(buff,armour)
+                    shop(2,armour)
             if bopbought == 1:
                 if gold < 3000:
                     print(" ")
@@ -446,7 +447,7 @@ def shop(buff,armour):
                     boplevel2 = boplevel2 + 1
                     print("Applied Level II Buff")
                     gold = gold - 3000
-                    shop(buff,armour)
+                    shop(3,armour)
             if bopbought == 2:
                 if gold < 6000:
                     print(" ")
@@ -458,7 +459,7 @@ def shop(buff,armour):
                     boplevel3 = boplevel3 + 1
                     print("Applied Level III Buff")
                     gold = gold - 6000
-                    shop(buff,armour)
+                    shop(4,armour)
             if bopbought == 3:
                 if gold < 12000:
                     print(" ")
@@ -469,11 +470,12 @@ def shop(buff,armour):
                     bopbought = bopbought + 1
                     boplevel4 = boplevel4 + 1
                     print("Applied Level III Buff")
+                    print(buff)
                     gold = gold - 12000
-                    shop(buff,armour)
+                    shop(5,armour)
             if bopbought == 4:
                 print("Maximum Level III Buff has allready been applied")
-                shop(buff,armour)
+                shop(5,armour)
             print("________________________________")
         else:
             print("________________________________")
@@ -543,13 +545,13 @@ def main():
     print("Welcome to the main screen")
     i1 = input("Would you like to take on a boss, or go to the shop?")
     if i1.lower() == "boss":
-        bosses()
+        bosses(gold)
     elif i1.lower() == "shop":
         shop(buff,armour)
 
 # ///////////////BOSSES//////////////////
-def bosses():
-    global boss1defeated, gold
+def bosses(gold):
+    global buff,plrhp
     print("________________________________")
     print("Hello and welcome to the boss area")
     print(" ")
@@ -558,7 +560,7 @@ def bosses():
     a1 = input(" ")
     if a1 == "1" or a1.lower() == "first":
         print("________________________________")
-        boss1(roundhp)
+        boss1(buff,plrhp)
     elif a1 == "2" or a1.lower() == "second":
         if boss1defeated:
             boss2()
@@ -568,9 +570,14 @@ def bosses():
     else:
         print("Returning back to main")
         main()
-# ///////////////BOSS 1//////////////////
+# ///////////////BOSS 1, REWORK COMBAT SYSTEM OVER WEEKEND..//////////////////
 skilluse = 0
-def boss1(roundhp):
+def boss1(buff,plrhp):
+    roundhp = 100
+    global armour, boss1defeated, gold
+    attkdmg = attkopt * buff
+    skilldmg = skillopt * buff
+    buff = boplevel + boplevel2 + boplevel3 + boplevel4
     def boss1defeatrule():
         if roundhp < 0 and plrhp > 0:
             print("You've Won! 1000 gold has been added to your account")
@@ -578,18 +585,18 @@ def boss1(roundhp):
             main()
         elif roundhp > 0 or plrhp < 0:
             print("You've lost all of you hp and or you've run out of turns!")
+            print("YOU LOOSE.....")
+            print(" ")
+            main()
         else:
             sleepge(3)
 
-    global attkdmg, skilldmg, armour, boss1defeated, gold
-    plrhp = 100 * dirtarmourbuff * silverarmourbuff * dragonarmourbuff * morbiusarmourbuff
     print("\n---" + name + "'s Turn ---")
     round1 = input("do an Attack or Skill ")
 
     if round1 == "attack":
         roundhp = roundhp - attkdmg
         print("The current boss health is... " + str(roundhp))
-        print("You dealt " + str(attkdmg) + " damage!")
     elif round1 == "skill":
         roundhp = roundhp - skilldmg
         skilluse + 1
@@ -714,6 +721,7 @@ def boss2():
 # ///////////////MAIN SCREEN//////////////////
 
 def main():
+    plrhp = 100 * dirtarmourbuff * silverarmourbuff * goldarmourbuff * dragonarmourbuff * morbiusarmourbuff
     global gold
     if name.lower() == "dominik":
         print("Hej developer dom, you gained a grap ton of currency rn.")
@@ -726,7 +734,7 @@ def main():
     print("___________________________")
     i1 = input("Would you like to take on a boss, fish, or go to the shop? ")
     if i1.lower() == "boss":
-        bosses()
+        bosses(gold)
     elif i1.lower() == "shop":
         shop(buff,armour)
     elif i1.lower() == "fish":
