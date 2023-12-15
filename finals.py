@@ -570,7 +570,7 @@ def bosses(gold):
     else:
         print("Returning back to main")
         main()
-# ///////////////BOSS 1, REWORK COMBAT SYSTEM OVER WEEKEND..//////////////////
+# ///////////////BOSS 1, REWORK COMBAT SYSTEM OVER WEEKEND.. PREHAPS USE FOR LOOPS//////////////////
 skilluse = 0
 def boss1(buff,plrhp):
     roundhp = 100
