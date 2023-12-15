@@ -3,9 +3,6 @@ import time
 import math
 
 #///////////////CONSTANT VARIABLES AND FUNCTIONS//////////////////
-if input == "ye":
-    input = "yes"
-
 dirtarmourbuff = 1
 silverarmourbuff = 1
 goldarmourbuff = 1
@@ -81,7 +78,7 @@ def fishshop(gold):
         print("commonfish,uncommonfish,rarefish,legendaryfish,morbiusfish")
         print(" ")
         fishshop(gold)
-    if a1.lower() == "rods" or "buy rods":
+    if a1.lower() == "rods" or a1.lower() == "buy rods":
         print("________________________________")
         print("currently you can buy a fishing rod, would you like to buy one?")
         b1 = input("it costs 50 gold.. ")
@@ -91,7 +88,7 @@ def fishshop(gold):
             fishingrodowned = True
             gold = gold - 50
             b = input("Would you like to go and fish with your new rod? ")
-            if b == "yes" or "y":
+            if b == "yes" or b == "y":
                 print("Travelling to the docs...")
                 fish()
             else:
@@ -107,7 +104,7 @@ def fishshop(gold):
         print("________________________________")
         print("Returning back to main..")
         main()
-    elif a1.lower() == "fish" or "sell fish":
+    elif a1.lower() == "fish" or a1.lower() == "sell fish":
         def sellfish():
             if TOTALfish > 0:
                 print("________________________________")
@@ -128,7 +125,7 @@ def fishshop(gold):
                     print("________________________________")
                     print("Exiting sell kiosk..")
                     fishshop(gold)
-                if fish.lower() == "uncommon fish" or "uncommon" or "uncommonfish" and uncommonfish > 0:
+                if fish.lower() == "uncommon fish" or fish.lower() == "uncommon" or fish.lower() =="uncommonfish" and uncommonfish > 0:
                     uncommonfishtxt = input("how many uncommon fish would you like to sell?")
                     if uncommonfishtxt.isnumeric() == False:
                         print("________________________________")
@@ -147,7 +144,7 @@ def fishshop(gold):
                 else:
                     print("!!         fish not avaliable or typo.")
                     sellfish()
-                if fish.lower() == "common fish" or "common" or "commonfish" and commonfish > 0:
+                if fish.lower() == "common fish" or fish.lower() == "common" or fish.lower() == "commonfish" and commonfish > 0:
                     commonfishtxt = input("how many uncommon fish would you like to sell?")
                     if commonfishtxt.isnumeric() == False:
                         print("________________________________")
@@ -165,7 +162,7 @@ def fishshop(gold):
                 else:
                     print("!!         fish not avaliable or typo.")
                     sellfish()
-                if fish.lower() == "rare fish" or "rare" or "rarefish" and rarefish > 0:
+                if fish.lower() == "rare fish" or fish.lower() == "rare" or fish.lower() == "rarefish" and rarefish > 0:
                     rarefishtxt = input("how many rare fish would you like to sell?")
                     if rarefishtxt.isnumeric() == False:
                         print("________________________________")
@@ -182,7 +179,7 @@ def fishshop(gold):
                         sellfish()
                 else:
                     print("!!         fish not avaliable or typo.")
-                if fish.lower() == "legendary fish" or "legendary" or "legendaryfish" and legendaryfish > 0:
+                if fish.lower() == "legendary fish" or fish.lower() == "legendary" or fish.lower() == "legendaryfish" and legendaryfish > 0:
                     legendaryfishtxt = input("how many legendary fish would you like to sell?")
                     if legendaryfishtxt.isnumeric() == False:
                         print("________________________________")
@@ -323,7 +320,7 @@ def fish():
         print(" ")
         a = input("Would you like to be re-directed to the fish shop? ")
         print(" ")
-        if a.lower() == "y" or "yes" or "yae":
+        if a.lower() == "y" or a.lower() == "yes" or a.lower() == "yae":
             print("Transporting to fish shop")
             sleepge(1)
             fishshop(gold)
@@ -505,7 +502,7 @@ def shop(buff,armour):
             print("________________________________")
             print("insufficient gold")
             shop(buff,armour)
-        if a == "fish shop" or "fish" or "fishshop":
+        if a == "fish shop" or a == "fish" or a == "fishshop":
             fishshop(gold)
     else:
         c = input("do you want to exit the shop?")
@@ -527,11 +524,15 @@ def main():
 def bosses():
     global boss1defeated, gold
     print("________________________________")
-    a1 = input("Hello and welcome to the boss area, type 1 for the first boss, 2 for the second boss, or anything else to exit this menu")
-    if a1 == "1":
+    print("Hello and welcome to the boss area")
+    print(" ")
+    print("There are currently 10 bosses, the harder they are, the closer to 10 they're going to be.")
+    print("It is recommended that you start with the (1)st boss.")
+    a1 = input(" ")
+    if a1 == "1" or a1.lower() == "first":
         print("________________________________")
         boss1(roundhp)
-    elif a1 == "2":
+    elif a1 == "2" or a1.lower() == "second":
         if boss1defeated:
             boss2()
         else:
@@ -705,7 +706,7 @@ def main():
         fish()
     elif i1.lower() == "help":
         print("___________________________")
-        print("Other commands include: gamble,scavenge,statistics")
+        print("Other commands include: gamble,statistics")
         print("___________________________")
         main()
     elif i1.lower() == "exit":
