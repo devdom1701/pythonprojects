@@ -161,7 +161,7 @@ def sellfish():
             print("!!         fish not avaliable or typo.")
             sellfish()
     else:
-        print("Go get a fishing rod from the shop and start fishing!!")
+        print("!!!       Go get a fishing rod from the shop and start fishing!!")
         fishshop(gold)
 
 def fishshop(gold):
@@ -181,7 +181,7 @@ def fishshop(gold):
         print("________________________________")
         print("currently you can buy a fishing rod, would you like to buy one?")
         b1 = input("it costs 50 gold.. ")
-        if b1.lower() == "y" or "yes" and gold > 50:
+        if b1.lower() == "y" or "yes" and gold >= 50:
             print("________________________________")
             print("Purchase sucessfull..")
             fishingrodowned = True
@@ -211,90 +211,82 @@ def fishshop(gold):
 
 def fishaction():
     global commonfish,uncommonfish,rarefish,legendaryfish,morbiusfish,fishingrodowned
-    randomfish = random.randint(1,400)
-    if randomfish in range(1,110):
-        print(" - - - " + str(name) + "'s Fishing rewards - - -")
-        print("Reeling in...")
-        sleepge(1)
-        print("Done!")
-        sleepge(1)
-        randomamount = random.randint(1,15)
-        print("You gained " + str(randomamount) + " uncommon fish!")
-        uncommonfish = uncommonfish + randomamount
-        xyz = input("Would you like to continue fishing? ")
-        if xyz.lower() == "n" or xyz.lower() == "no" or xyz.lower() == "nae":
-            print("Returning to the main menu")
-            main()
-        else:
-            fishaction()
-    elif randomfish in range (111,282):
-        print(" - - - " + str(name) + "'s Fishing rewards - - -")
-        print("Reeling in...")
-        sleepge(1)
-        print("Done!")
-        sleepge(1)
-        randomamount = random.randint(1,10)
-        print("You gained " + str(randomamount) + " common fish!")
-        commonfish = commonfish + randomamount
-        xyz = input("Would you like to continue fishing? ")
-        if xyz.lower() == "n" or xyz.lower() == "no" or xyz.lower() == "nae":
-            print("Returning to the main menu")
-            main()
-        else:
-            fishaction()
-    elif randomfish in range (283,373):
-        print(" - - - " + str(name) + "'s Fishing rewards - - -")
-        print("Reeling in...")
-        sleepge(1)
-        print("Done!")
-        sleepge(1)
-        randomamount = random.randint(1,5)
-        rarefish = rarefish + randomamount
-        print("You gained " + str(randomamount) + " rare fish!")
-        xyz = input("Would you like to continue fishing? ")
-        if xyz.lower() == "n" or xyz.lower() == "no" or xyz.lower() == "nae":
-            print("Returning to the main menu")
-            main()
-        else:
-            fishaction()
-    elif randomfish in range (374,399):
-        print(" - - - " + str(name) + "'s Fishing rewards - - -")
-        print("Reeling in...")
-        sleepge(1)
-        print("Done!")
-        sleepge(1)
-        randomamount = random.randint(1,5)
-        legendaryfish = legendaryfish + randomamount
-        print("You gained " + str(randomamount) + " legendary fish!")
-        xyz = input("Would you like to continue fishing? ")
-        if xyz.lower() == "n" or xyz.lower() == "no" or xyz.lower() == "nae":
-            print("Returning to the main menu")
-            main()
-        else:
-            fishaction()
-    elif randomfish in range (399,400):
-        print(" - - - " + str(name) + "'s Fishing rewards - - -")
-        print("Reeling in...")
-        sleepge(1)
-        print("Done!")
-        sleepge(1)
-        randomamount = random.randint(1,3)
-        morbiusfish = morbiusfish + randomamount
-        print("You gained " + str(randomamount) + " morbius fish!")
-        xyz = input("Would you like to continue fishing? ")
-        if xyz.lower() == "n" or xyz.lower() == "no" or xyz.lower() == "nae":
-            print("Returning to the main menu")
-            main()
-        else:
-            fishaction()
-    if commonfish + uncommonfish + legendaryfish + morbiusfish + rarefish > 25:
-        b = random.randint(1,10000100101010)
-        if b % 2 > 0:
-            print("Your fishing rod BROKE!")
-            fishingrodowned = False
-        else:
-            fishaction()
-
+    xyz = input("Would you like to continue fishing? ")
+    if xyz.lower() == "n" or xyz.lower() == "no" or xyz.lower() == "nae":
+        print("Returning to the main menu")
+        main()
+    elif xyz.lower() == "y" or xyz.lower() == "yes":
+        randomfish = random.randint(1,400)
+        if randomfish in range (111,282):
+            print(" - - - " + str(name) + "'s Fishing rewards - - -")
+            print("Reeling in...")
+            sleepge(1)
+            print("Done!")
+            sleepge(1)
+            randomamount = random.randint(1,3)
+            print("You gained " + str(randomamount) + " common fish!")
+            commonfish = commonfish + randomamount
+            xyz = input("Would you like to continue fishing? ")
+            if xyz.lower() == "n" or xyz.lower() == "no" or xyz.lower() == "nae":
+                print("Returning to the main menu")
+                main()
+            else:
+                fishaction()
+        elif randomfish in range (283,373):
+            print(" - - - " + str(name) + "'s Fishing rewards - - -")
+            print("Reeling in...")
+            sleepge(1)
+            print("Done!")
+            sleepge(1)
+            randomamount = random.randint(1,5)
+            rarefish = rarefish + randomamount
+            print("You gained " + str(randomamount) + " rare fish!")
+            xyz = input("Would you like to continue fishing? ")
+            if xyz.lower() == "n" or xyz.lower() == "no" or xyz.lower() == "nae":
+                print("Returning to the main menu")
+                main()
+            else:
+                fishaction()
+        elif randomfish in range (374,399):
+            print(" - - - " + str(name) + "'s Fishing rewards - - -")
+            print("Reeling in...")
+            sleepge(1)
+            print("Done!")
+            sleepge(1)
+            randomamount = random.randint(1,2)
+            legendaryfish = legendaryfish + randomamount
+            print("You gained " + str(randomamount) + " legendary fish!")
+            xyz = input("Would you like to continue fishing? ")
+            if xyz.lower() == "n" or xyz.lower() == "no" or xyz.lower() == "nae":
+                print("Returning to the main menu")
+                main()
+            else:
+                fishaction()
+        elif randomfish in range (399,400):
+            print(" - - - " + str(name) + "'s Fishing rewards - - -")
+            print("Reeling in...")
+            sleepge(1)
+            print("Done!")
+            sleepge(1)
+            randomamount = random.randint(1,3)
+            morbiusfish = morbiusfish + randomamount
+            print("You gained " + str(randomamount) + " morbius fish!")
+            xyz = input("Would you like to continue fishing? ")
+            if xyz.lower() == "n" or xyz.lower() == "no" or xyz.lower() == "nae":
+                print("Returning to the main menu")
+                main()
+            else:
+                fishaction()
+        if commonfish + uncommonfish + legendaryfish + morbiusfish + rarefish > 25:
+            b = random.randint(1,10000100101010)
+            if b % 2 > 0:
+                print("Your fishing rod BROKE!")
+                fishingrodowned = False
+            else:
+                fishaction()
+    else:
+        fishaction()
+        
 
 def fish():
     global commonfish,uncommonfish,rarefish,legendaryfish,morbiusfish,fishingrodowned
