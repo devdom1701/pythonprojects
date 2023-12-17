@@ -60,6 +60,119 @@ print("________________________________")
 print("Welcome to the game, the Legend of " + str(name) + str(randending))
 
 # ///////////////PRE-GAME BUFFS AND ABILITIES, add fishing//////////////////
+
+def sellfish(gold):
+    if TOTALfish > 0:
+        print("________________________________")
+        print("Hello and welcome to the fish kiosk..")
+        print("________________________________")
+        print("You currently have.. " + str(commonfish) + "common fish, worth 25 gold")
+        print(str(uncommonfish) + "uncommon fish, worth 50 gold")
+        print(str(rarefish) + "rare fish, worth 150 gold")
+        if legendaryfish > 0:
+            print("________________________________")
+            print(str(legendaryfish) + "LEGENDARY fish, worth 300 gold")
+        if morbiusfish > 0:
+            print("________________________________")
+            print(str(morbiusfish) + "MORBIUS fish, worth 1200 gold")
+        fish = input("what fish do you wnat to sell?, type exit to exit.")
+        print("________________________________")
+        if fish.lower() == "exit":
+            print("________________________________")
+            print("Exiting sell kiosk..")
+            fishshop(gold)
+        if fish.lower() == "uncommon fish" or fish.lower() == "uncommon" or fish.lower() =="uncommonfish" and uncommonfish > 0:
+            uncommonfishtxt = input("how many uncommon fish would you like to sell?")
+            if uncommonfishtxt.isnumeric() == False:
+                print("________________________________")
+                print("only text is alloweed.")
+                sellfish(gold)
+            if uncommonfishtxt <= uncommonfish:
+                gold = gold + (uncommonfishtxt * 25)
+                uncommonfish = uncommonfish - uncommonfishtxt
+                print("________________________________")
+                print("Sold sucessfully.")
+                sellfish(gold)
+            else:
+                print("________________________________")
+                print("!!        uncommonfishtxt is larger than uncommon fish obtained.")
+                sellfish(gold)
+        else:
+            print("!!         fish not avaliable or typo.")
+            sellfish(gold)
+        if fish.lower() == "common fish" or fish.lower() == "common" or fish.lower() == "commonfish" and commonfish > 0:
+            commonfishtxt = input("how many uncommon fish would you like to sell?")
+            if commonfishtxt.isnumeric() == False:
+                print("________________________________")
+                print("only text allowed")
+                sellfish(gold)
+            if commonfishtxt <= commonfish:
+                gold = gold + (commonfishtxt * 50)
+                commonfish = commonfish - commonfishtxt
+                print("Sold sucessfully.")
+                sellfish(gold)
+            else:
+                print("________________________________")
+                print("!!        commonfishtxt is larger than common fish obtained.")
+                sellfish(gold)
+        else:
+            print("!!         fish not avaliable or typo.")
+            sellfish(gold)
+        if fish.lower() == "rare fish" or fish.lower() == "rare" or fish.lower() == "rarefish" and rarefish > 0:
+            rarefishtxt = input("how many rare fish would you like to sell?")
+            if rarefishtxt.isnumeric() == False:
+                print("________________________________")
+                print("only text allowed")
+                sellfish(gold)
+            if rarefishtxt <= rarefish:
+                gold = gold + (rarefishtxt *  150)
+                rarefish = rarefish - rarefishtxt
+                print("Sold sucessfully.")
+                sellfish(gold)
+            else:
+                print("________________________________")
+                print("!!        rarefishtxt is larger than rare fish obtained.")
+                sellfish(gold)
+        else:
+            print("!!         fish not avaliable or typo.")
+        if fish.lower() == "legendary fish" or fish.lower() == "legendary" or fish.lower() == "legendaryfish" and legendaryfish > 0:
+            legendaryfishtxt = input("how many legendary fish would you like to sell?")
+            if legendaryfishtxt.isnumeric() == False:
+                print("________________________________")
+                print("only text allowed")
+                sellfish(gold)
+            if legendaryfishtxt <= legendaryfish:
+                gold = gold + (legendaryfishtxt *  300)
+                legendaryfish = legendaryfish - legendaryfishtxt
+                print("Sold sucessfully.")
+                sellfish(gold)
+            else:
+                print("________________________________")
+                print("!!        legendaryfish text is larger than legendary fish obtained.")
+                sellfish(gold)
+        else:
+            print("!!         fish not avaliable or typo.")
+        if fish.lower() == "morbius fish" or "morbius" or "morbiusfish" and morbiusfish > 0:
+            morbiusfishtxt = input("how many morbius fish would you like to sell?")
+            if morbiusfishtxt.isnumeric() == False:
+                print("________________________________")
+                print("only text allowed")
+                sellfish(gold)
+            if morbiusfishtxt <= morbiusfish:
+                gold = gold + (morbiusfishtxt *  300)
+                morbiusfish = morbiusfish - morbiusfishtxt
+                print("Sold sucessfully.")
+                sellfish(gold)
+            else:
+                print("________________________________")
+                print("!!        morbius text is larger than morbius fish obtained.")
+                sellfish(gold)
+        else:
+            print("!!         fish not avaliable or typo.")
+    else:
+        print("Go get a fishing rod from the shop and start fishing!!")
+        fishshop(gold)
+
 def fishshop(gold):
     global commonfish,uncommonfish,rarefish,legendaryfish,morbiusfish,fishingrodowned
     print(" ")
@@ -72,12 +185,13 @@ def fishshop(gold):
     print(" ")
     print("Would you like to buy rods or sell fish?")
     a1 = input("type exit to go to the main screen ")
+    print("  ")
     if a1.lower() == "help":
         print("The fish names are...")
         print("commonfish,uncommonfish,rarefish,legendaryfish,morbiusfish")
         print(" ")
         fishshop(gold)
-    if a1.lower() == "rods" or a1.lower() == "buy rods" or a1.lower() == "rod":
+    elif a1.lower() == "rods" or a1.lower() == "buy rods" or a1.lower() == "rod":
         print("________________________________")
         print("currently you can buy a fishing rod, would you like to buy one?")
         b1 = input("it costs 50 gold.. ")
@@ -99,126 +213,15 @@ def fishshop(gold):
             print("________________________________")
             print("Insufficent currency or typo.")
             fishshop(gold)
-    elif a1.lower() == "exit":
-        print("________________________________")
-        print("Returning back to main..")
-        main()
-    elif a1.lower() == "fish" or a1.lower() == "sell fish":
-        def sellfish():
-            if TOTALfish > 0:
-                print("________________________________")
-                print("Hello and welcome to the fish kiosk..")
-                print("________________________________")
-                print("You currently have.. " + str(commonfish) + "common fish, worth 25 gold")
-                print(str(uncommonfish) + "uncommon fish, worth 50 gold")
-                print(str(rarefish) + "rare fish, worth 150 gold")
-                if legendaryfish > 0:
-                    print("________________________________")
-                    print(str(legendaryfish) + "LEGENDARY fish, worth 300 gold")
-                if morbiusfish > 0:
-                    print("________________________________")
-                    print(str(morbiusfish) + "MORBIUS fish, worth 1200 gold")
-                fish = input("what fish do you wnat to sell?, type exit to exit.")
-                print("________________________________")
-                if fish.lower() == "exit":
-                    print("________________________________")
-                    print("Exiting sell kiosk..")
-                    fishshop(gold)
-                if fish.lower() == "uncommon fish" or fish.lower() == "uncommon" or fish.lower() =="uncommonfish" and uncommonfish > 0:
-                    uncommonfishtxt = input("how many uncommon fish would you like to sell?")
-                    if uncommonfishtxt.isnumeric() == False:
-                        print("________________________________")
-                        print("only text is alloweed.")
-                        sellfish()
-                    if uncommonfishtxt <= uncommonfish:
-                        gold = gold + (uncommonfishtxt * 25)
-                        uncommonfish = uncommonfish - uncommonfishtxt
-                        print("________________________________")
-                        print("Sold sucessfully.")
-                        sellfish()
-                    else:
-                        print("________________________________")
-                        print("!!        uncommonfishtxt is larger than uncommon fish obtained.")
-                        sellfish()
-                else:
-                    print("!!         fish not avaliable or typo.")
-                    sellfish()
-                if fish.lower() == "common fish" or fish.lower() == "common" or fish.lower() == "commonfish" and commonfish > 0:
-                    commonfishtxt = input("how many uncommon fish would you like to sell?")
-                    if commonfishtxt.isnumeric() == False:
-                        print("________________________________")
-                        print("only text allowed")
-                        sellfish()
-                    if commonfishtxt <= commonfish:
-                        gold = gold + (commonfishtxt * 50)
-                        commonfish = commonfish - commonfishtxt
-                        print("Sold sucessfully.")
-                        sellfish()
-                    else:
-                        print("________________________________")
-                        print("!!        commonfishtxt is larger than common fish obtained.")
-                        sellfish()
-                else:
-                    print("!!         fish not avaliable or typo.")
-                    sellfish()
-                if fish.lower() == "rare fish" or fish.lower() == "rare" or fish.lower() == "rarefish" and rarefish > 0:
-                    rarefishtxt = input("how many rare fish would you like to sell?")
-                    if rarefishtxt.isnumeric() == False:
-                        print("________________________________")
-                        print("only text allowed")
-                        sellfish()
-                    if rarefishtxt <= rarefish:
-                        gold = gold + (rarefishtxt *  150)
-                        rarefish = rarefish - rarefishtxt
-                        print("Sold sucessfully.")
-                        sellfish()
-                    else:
-                        print("________________________________")
-                        print("!!        rarefishtxt is larger than rare fish obtained.")
-                        sellfish()
-                else:
-                    print("!!         fish not avaliable or typo.")
-                if fish.lower() == "legendary fish" or fish.lower() == "legendary" or fish.lower() == "legendaryfish" and legendaryfish > 0:
-                    legendaryfishtxt = input("how many legendary fish would you like to sell?")
-                    if legendaryfishtxt.isnumeric() == False:
-                        print("________________________________")
-                        print("only text allowed")
-                        sellfish()
-                    if legendaryfishtxt <= legendaryfish:
-                        gold = gold + (legendaryfishtxt *  300)
-                        legendaryfish = legendaryfish - legendaryfishtxt
-                        print("Sold sucessfully.")
-                        sellfish()
-                    else:
-                        print("________________________________")
-                        print("!!        legendaryfish text is larger than legendary fish obtained.")
-                        sellfish()
-                else:
-                    print("!!         fish not avaliable or typo.")
-                if fish.lower() == "morbius fish" or "morbius" or "morbiusfish" and morbiusfish > 0:
-                    morbiusfishtxt = input("how many morbius fish would you like to sell?")
-                    if morbiusfishtxt.isnumeric() == False:
-                        print("________________________________")
-                        print("only text allowed")
-                        sellfish()
-                    if morbiusfishtxt <= morbiusfish:
-                        gold = gold + (morbiusfishtxt *  300)
-                        morbiusfish = morbiusfish - morbiusfishtxt
-                        print("Sold sucessfully.")
-                        sellfish()
-                    else:
-                        print("________________________________")
-                        print("!!        morbius text is larger than morbius fish obtained.")
-                        sellfish()
-                else:
-                    print("!!         fish not avaliable or typo.")
-            else:
-                print("Go get a fishing rod from the shop and start fishing!!")
-                fishshop(gold)
-
+    elif a1.lower() == "fish" or a1.lower() == "sell fish" or a1.lower() == "sell":
+        sellfish(gold)
     else:
-        print("Typo occured!")
-        fishshop(gold)
+        c = input("do you want to exit the fish shop?")
+        if c.lower() == "yes" or c.lower() == "y" or c.lower() == "exit":
+            print("ok returning to the game")
+            main()
+        else:
+            shop(armour,shopvisitcount)
 
 def fishaction():
     global commonfish,uncommonfish,rarefish,legendaryfish,morbiusfish,fishingrodowned
@@ -416,6 +419,8 @@ def shop(armour,shopvisitcount):
     print("Currently you can buy buffs, armour, or go to the fish shop")
     a = input(" ")
     print("________________________________")
+    if a == "fish shop" or a == "fish" or a == "fishshop":
+        fishshop(gold)
     if a == "buffs":
         print("use the term 'buy' to buy products")
         b = input("Currently, you can buy 1 buff, called Blessing of Protection ")
@@ -465,13 +470,13 @@ def shop(armour,shopvisitcount):
                     shop(armour,shopvisitcount)
                 else:
                     bopbought = bopbought + 1
-                    print("Applied Level III Buff")
+                    print("Applied Level IV Buff")
                     buff = 5
                     print(buff)
                     gold = gold - 12000
                     shop(5,armour)
             if bopbought == 4:
-                print("Maximum Level III Buff has allready been applied")
+                print("Maximum Level IV Buff has allready been applied")
                 shop(5,armour)
             print("________________________________")
         else:
@@ -528,8 +533,6 @@ def shop(armour,shopvisitcount):
             print("________________________________")
             print("insufficient gold")
             shop(armour,shopvisitcount)
-        if a == "fish shop" or a == "fish" or a == "fishshop":
-            fishshop(gold)
     else:
         c = input("do you want to exit the shop?")
         if c.lower() == "yes" or c.lower() == "y" or c.lower() == "exit":
@@ -574,7 +577,7 @@ skilluse = 0
 def boss1():
     global buff,roundhp,attkopt,skillopt,armour,attkdmg,skilldmg,boss1defeated,plrhp
     roundhp = 100
-
+    print(buff)
     def boss1defeatrule():
         if roundhp <= 0 and plrhp >= 0:
             print("You've Won! 1000 gold has been added to your account")
@@ -592,14 +595,15 @@ def boss1():
     round1 = input("do an Attack or Skill ")
 
     if round1 == "attack":
-        roundhp = roundhp - attkdmg
+        roundhp = roundhp - (attkdmg * buff)
         print("The current boss health is... " + str(roundhp))
     elif round1 == "skill":
-        roundhp = roundhp - skilldmg
+        roundhp = roundhp - (skilldmg * buff)
         skilluse + 1
         print("The current boss health is... " + str(roundhp))
-        print("You dealt " + str(skilldmg) + " damage!")
+        print("You dealt " + str(skilldmg * buff) + " damage!")
 
+    boss1defeatrule()
     
     print("\n--- Opponents's Turn ---")
 
@@ -641,10 +645,14 @@ def boss1():
                 else:
                     print("You've died from the bosse's passive attack... Returning to main menu")
                     main()
+        else:
+            roundhp = roundhp - skilldmg
+            print("The current boss health is... " + str(roundhp))
+            print("You dealt " + str(skilldmg) + " damage!")
     elif round2.lower() == "flee":
         print("L Bozo, You Just Fled the battle!")
         main()
-    
+
     boss1defeatrule()
 
     # OPPONENT'S TURN
