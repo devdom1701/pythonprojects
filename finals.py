@@ -8,6 +8,7 @@ armourliszt = ["gold", "iron","silver", "platinum", "dragon","morbius"]
 
 fishingrodowned = False
 bopbought = 0
+AutoFish = False
 
 commonfish = 0
 uncommonfish = 0
@@ -129,7 +130,7 @@ def sellfish():
                 print("!!        uncommonfishtxt is larger than uncommon fish obtained.")
                 sellfish()
         if fish.lower() == "common fish" or fish.lower() == "common" or fish.lower() == "commonfish" and commonfish > 0:
-            commonfishtxt = input("how many uncommon fish would you like to sell?")
+            commonfishtxt = input("how many common fish would you like to sell?")
             if commonfishtxt.isnumeric() == False:
                 print("________________________________")
                 print("only text allowed")
@@ -151,7 +152,7 @@ def sellfish():
                 sellfish()
             if int(rarefishtxt) <= rarefish:
                 gold = gold + int(rarefishtxt) *  150
-                rarefish = rarefish - rarefishtxt
+                rarefish = rarefish - int(rarefishtxt)
                 print("Sold sucessfully.")
                 sellfish()
             else:
@@ -210,10 +211,13 @@ def fishshop(gold):
     print("  ")
     if a1.lower() == "rods" or a1.lower() == "buy rods" or a1.lower() == "rod":
         print("________________________________")
-        print("currently you can buy a fishing rod, would you like to buy one?")
-        b1 = input("it costs 50 gold.. ")
-        if b1.lower() == "y" or "yes" and gold >= 50:
-            if gold > 1000:
+        print("Currently there is TWO fishing rods in stock!!! Would you like to buy one?")
+        print("(Y)es or (N)o")
+        print("You can buy the AutoRod or the standard rod")
+        print("Type 1 for the standard rod, and 2 for the AutoRod")
+        b1 = input(" ")
+        if b1== "1" and gold >= 50:
+            if gold > 0:
                 print("________________________________")
                 print("Purchase sucessfull..")
                 fishingrodowned = True
@@ -222,8 +226,8 @@ def fishshop(gold):
                 if b == "yes" or b == "y":
                     print("Travelling to the docs...")
                     fish()
-            elif gold > 10000:
-                print("________________________________")
+            if gold > 10000:
+                print("__s______________________________")
                 print("Purchase sucessfull..")
                 fishingrodowned = True
                 gold = gold - 500
@@ -254,6 +258,18 @@ def fishshop(gold):
                 print("Returning to fish shoppe.")
                 print(" ")
                 fishshop(gold)
+        elif b1 == "2" and gold >= 5000:
+            if gold > 5000:
+                global Autofish
+                Autofish = True
+                print("________________________________")
+                print("Purchase sucessfull..")
+                fishingrodowned = True
+                gold = gold - 50
+                b = input("Would you like to go and fish with your new rod? ")
+                if b == "yes" or b == "y":
+                    print("Travelling to the docs...")
+                    fish()
         else:
             print("________________________________")
             print("Insufficent currency or typo.")
@@ -269,9 +285,31 @@ def fishshop(gold):
             fishshop(gold)
 
 def fishaction():
-    global commonfish,uncommonfish,rarefish,legendaryfish,morbiusfish,fishingrodowned
+    global commonfish,uncommonfish,rarefish,legendaryfish,morbiusfish,fishingrodowned,AutoRod
     xyz = input("Would you like to continue fishing? ")
-    if xyz.lower() == "y" or xyz.lower() == "yes":
+    global Autofish
+    autofishcount = 0
+    if Autofish == True:
+        autofishamount = input("How many times would you like to fish?")
+        if autofishamount.isnumeric() == False:
+            print("  ")
+            print("Please input a number")
+            print("  ")
+            fishaction()
+            autofishcount = 0
+            while autofishcount >= int(autofishamount):
+                print(" - - - " + str(name) + "'s Fishing rewards - - -")
+                autofishcount + 1
+                print("Reeling in...")
+                sleepge(1)
+                print("Done!")
+                sleepge(1)
+                randomamount = random.randint(1,3)
+                print("You gained " + str(randomamount) + " common fish!")
+                commonfish = commonfish + randomamount
+        else:
+            fishaction()
+    elif xyz.lower() == "y" or xyz.lower() == "yes":
         randomfish = random.randint(1,400)
         if randomfish in range (111,282):
             print(" - - - " + str(name) + "'s Fishing rewards - - -")
@@ -319,15 +357,18 @@ def fishaction():
             print("Morbius blesses you and multiplies your amount of money by how many morbius fish you caught.")
             gold = gold * randomamount
             fishaction()
-        if commonfish + uncommonfish + legendaryfish + morbiusfish + rarefish > 25:
+        elif commonfish + uncommonfish + legendaryfish + morbiusfish + rarefish > 25:
             b = random.randint(1,10000100101010)
             if b % 2 > 0:
                 print("Your fishing rod BROKE!")
                 fishingrodowned = False
             else:
                 fishaction()
+        else:
+            fishaction()
     else:
         def exitlog():
+            global gold
             a = input("Would you like to be re-directed to the fish shop, continue fishing or return to the main menu? ")
             print(" ")
             if a.lower() == "fishshop" or a.lower() == "fish" or a.lower() == "shop":
@@ -367,7 +408,8 @@ def fish():
             main()
 
 
-def gamble(gold):
+def gamble():
+    global gold
     mingold = int(gold)/2
     sleepge(3)
     print("You currently have " + str(gold) + " złote (gold) in your pocket")
@@ -375,16 +417,15 @@ def gamble(gold):
         print("You broke. You cant gamble no more.")
         main()
     print("___________________________")
-    print("Hello and welcome to Roberts gambilling corner")
+    print("Hello and welcome to Roberts gambling corner")
     print("___________________________")
-    print("input using numbers 1,2, or 3 ")
-    print(" !!     type in exit to return back to the main screen, or type continue to continue gambilling!")
+    print("input using numbers 1 or 2")
     print("___________________________")
     a = input(" ")
     if a.lower() == "exit":
         print("Returning to main screen")
         main()
-    if a.lower() == "1":
+    elif a.lower() == "1":
         print("So, you've chosen the 1st game eh?")
         a2 = input("How much money would you like to gamble? ")
         if a2.isnumeric == False:
@@ -393,21 +434,21 @@ def gamble(gold):
             print("You currently have " + str(gold) + " gold.")
         elif int(a2) > gold:
             print("Just by looking at your pockets, i can determine that YOU DONT HAVE THAT MONEY!!!!")
-            gamble(gold)
+            gamble()
         if int(a2) < float(mingold):
             print("You see, after taking a look at your pockets, id advise you to gamble some more...")
-            gamble(gold)
+            gamble()
         b = random.randint(1,1000000000000000)
         if b % 2 > 0:
             print("HAHA, ALL MINE.")
             gold = gold - int(a2)
             print("You've lost " + str(int(gold - int(a2))))
-            gamble(gold)
+            gamble()
         else:
             print("Ahh, you seem quite lucky! you've won it all!")
+            gold = gold + int(a2) * 2
             print("You now have " + str(gold) + " gold.")
             print("___________________________")
-            gold = + (int(a2) * 2)
             print("Doubble or nothing?, (Y)ae or (N)ae?")
             print("___________________________")
             doub = input(" ")
@@ -425,10 +466,10 @@ def gamble(gold):
                     main()
                 elif int(a1) > gold:
                     print("Just by looking at your pockets, i can determine that YOU DONT HAVE THAT MONEY!!!!")
-                    gamble(gold)
+                    gamble()
                 if int(a1) < float(mingold):
                     print("You see, after taking a look at your pockets, id advise you to gamble some more...")
-                    gamble(gold)
+                    gamble()
                 b1 = random.randint(1,1000000000000000)
                 if b1 % 2 > 0:
                     print("HAHA, ALL MINE.")
@@ -437,12 +478,15 @@ def gamble(gold):
                     main()
                 else:
                     print("Ahh, you seem quite lucky! you've won it all!")
+                    gold = gold + int(a1) * 4
                     print("You now have " + str(gold) + " gold.")
-                    gold = str(a1) * 4
-                    gamble(gold)
+                    gamble()
             else:
                 print("Alright, you missed a golden opportunity though....")
                 main()
+    elif a.lower() == "2":
+        print("Jk there isnt a second game !!!")
+        gamble()
 
 def shop(shopvisitcount,plrhp):
     global gold,buff,bopbought,armour
@@ -460,7 +504,7 @@ def shop(shopvisitcount,plrhp):
     if a == "buffs":
         print("use the term 'buy' to buy products")
         b = input("Currently, you can buy 1 buff, called Blessing of Protection ")
-        print("type 'info' for the item's description.")
+        print("type 'info' for the item's description before purchase.")
         if b == "buy" and gold > 1000:
             if bopbought == 0:
                 if gold < 1000:
@@ -562,8 +606,19 @@ def shop(shopvisitcount,plrhp):
     if a == "armour" or a == "armor":
         print("________________________________")
         print("There are currently 4 armour sets..")
-        print("Iron, Gold, and Platinum")
+        print("Dirt,Iron, Gold, and Platinum")
         e = input(" ")
+        if e.lower() == "dirt":
+            print("this armour costs 500 gold, would you like to buy it?")
+            a1 = input("(Y)ae or (N)ae? ")
+            if a1.lower() == "y" and gold > 1500:
+                print("Purchase complete!")
+                armour = armour + .5
+                gold = gold - 1500
+                shop(shopvisitcount,plrhp)
+            else:
+                print("!!     Insufficent currency or typo.")
+                shop(shopvisitcount,plrhp)
         if e.lower() == "iron":
             print("this armour costs 1500 gold, would you like to buy it?")
             a1 = input("(Y)ae or (N)ae? ")
@@ -696,7 +751,7 @@ def boss1():
     elif round2 == "skill":
         if skilluse > 1:
             print("Sorry, but your SKILL is on ICD (internal cooldown)")
-            a = input("Would you like to sacrifice a turn to get your skill back? (Y)es,(N)o")
+            a = input("Would you like to sacrifice a turn to get your skill back? (Y)es,(N)o ")
             if a.upper() == "Y":
                 print("Alright, skipping turn...")
                 opponentdmg = random.randint(1, 100)
@@ -725,7 +780,7 @@ def boss1():
     sleepge(3)
 
     opponentdmg = random.randint(1, 100)
-    plrhp = plrhp * buff - (opponentdmg)
+    plrhp = plrhp - (opponentdmg)
 
     if opponentdmg > 50:
         print("that was quite the hit...")
@@ -738,7 +793,7 @@ def boss1():
     # ROUND 3 TURN
 
     print("\n---" + name + "'s Turn ---")
-    round2 = input("ROUND III! Would you like to attack, skill, or FLEE?")
+    round2 = input("ROUND III! Would you like to attack, skill, or FLEE? ")
     print("___________________________")
     print("!!           At this stage in the game, one turn should defeat the boss!")
     print("___________________________")
@@ -761,7 +816,7 @@ def boss1():
     sleepge(3)
 
     opponentdmg = random.randint(1, 100)
-    plrhp = plrhp * buff - (opponentdmg)
+    plrhp = plrhp - (opponentdmg)
 
     bossdefeatrule(gold,plrhp)
     if opponentdmg > 50:
@@ -1002,7 +1057,7 @@ def boss2():
             plrhp = plrhp - (opponentdmg * 10 )
         if y == 2:
             print("You sucessfully doged the blast!")
-    dogechance()
+    dogechance(plrhp)
 
     boss2defeatrule(gold,plrhp)
     if opponentdmg > 500:
@@ -1183,7 +1238,7 @@ def boss3():
             plrhp = plrhp - (opponentdmg * 20 )
         if y == 2:
             print("You sucessfully doged the blast!")
-    dogechance()
+    dogechance(plrhp)
 
     boss2defeatrule(gold,plrhp)
     if opponentdmg > 500:
@@ -1196,7 +1251,7 @@ def boss3():
             print("Secret Achievement unlocked: Prelude of Water's Flow")
             print("Survive the maximum damage output of the hydro construct")
             print(" !!! ")
-            gold = gold + 250
+            gold = gold + 25000
             opom = opom + 1
             secretachievements = secretachievements + 1
         print("your opponent's turn has ended~ your current hp is..." + str(plrhp))
@@ -1225,14 +1280,18 @@ def boss3():
 
 def main():
     global gold,buff,plrhp
+    if name == "dom":
+        print("Trollag frree developer mone")
+        gold = gold + 1000000000000
     print("Your current health is... " + str(plrhp))
     print("___________________________")
     print("Welcome to the main screen")
     print("________________________________")
     print("P.S. for advanced options, type in 'help'")
     print("___________________________")
-    i1 = input("Would you like to take on a boss, fish, or go to the shop? ")
+    print("Would you like to take on a boss, fish, or go to the shop? ")
     print("additional options include gamble and statistics!")
+    i1 = input(" ")
     if i1.lower() == "boss":
         bosses()
     elif i1.lower() == "shop":
@@ -1242,6 +1301,7 @@ def main():
     elif i1.lower() == "help":
         print("___________________________")
         print("Other commands include: gamble,statistics")
+        print("Suggestions: when prompted a yes or no input, you can do 'y' or 'n'")
         print("___________________________")
         main()
     elif i1.lower() == "exit":
@@ -1268,7 +1328,7 @@ def main():
         print("___________________________")
         main()
     elif i1.lower() == "gamble":
-        gamble(gold)
+        gamble()
     else:
         print(" ")
         print("!!        Thats not in the selection!")
