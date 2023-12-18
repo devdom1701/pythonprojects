@@ -213,14 +213,42 @@ def fishshop(gold):
         print("currently you can buy a fishing rod, would you like to buy one?")
         b1 = input("it costs 50 gold.. ")
         if b1.lower() == "y" or "yes" and gold >= 50:
-            print("________________________________")
-            print("Purchase sucessfull..")
-            fishingrodowned = True
-            gold = gold - 50
-            b = input("Would you like to go and fish with your new rod? ")
-            if b == "yes" or b == "y":
-                print("Travelling to the docs...")
-                fish()
+            if gold > 1000:
+                print("________________________________")
+                print("Purchase sucessfull..")
+                fishingrodowned = True
+                gold = gold - 50
+                b = input("Would you like to go and fish with your new rod? ")
+                if b == "yes" or b == "y":
+                    print("Travelling to the docs...")
+                    fish()
+            elif gold > 10000:
+                print("________________________________")
+                print("Purchase sucessfull..")
+                fishingrodowned = True
+                gold = gold - 500
+                b = input("Would you like to go and fish with your new rod? ")
+                if b == "yes" or b == "y":
+                    print("Travelling to the docs...")
+                    fish()
+            elif gold > 100000:
+                print("________________________________")
+                print("Purchase sucessfull..")
+                fishingrodowned = True
+                gold = gold - 25000
+                b = input("Would you like to go and fish with your new rod? ")
+                if b == "yes" or b == "y":
+                    print("Travelling to the docs...")
+                    fish()
+            elif gold > 1000000:
+                print("________________________________")
+                print("Purchase sucessfull..")
+                fishingrodowned = True
+                gold = gold - 250000
+                b = input("Would you like to go and fish with your new rod? ")
+                if b == "yes" or b == "y":
+                    print("Travelling to the docs...")
+                    fish()
             else:
                 print(" ")
                 print("Returning to fish shoppe.")
@@ -284,6 +312,12 @@ def fishaction():
             randomamount = random.randint(1,3)
             morbiusfish = morbiusfish + randomamount
             print("You gained " + str(randomamount) + " morbius fish!")
+            print(" ")
+            print("Secret achievement: ITS MORBIN TIMEEEE!!!!!")
+            print("Catch a morbius fish")
+            print(" ")
+            print("Morbius blesses you and multiplies your amount of money by how many morbius fish you caught.")
+            gold = gold * randomamount
             fishaction()
         if commonfish + uncommonfish + legendaryfish + morbiusfish + rarefish > 25:
             b = random.randint(1,10000100101010)
@@ -431,7 +465,7 @@ def shop(shopvisitcount,plrhp):
             if bopbought == 0:
                 if gold < 1000:
                     print(" ")
-                    print("!!        Insuficcent currency")
+                    print("!!        Insuficcent currency, this costs 1k gold")
                     print(" ")
                     shop(shopvisitcount,plrhp)
                 else:
@@ -443,7 +477,7 @@ def shop(shopvisitcount,plrhp):
             if bopbought == 1:
                 if gold < 3000:
                     print(" ")
-                    print("!!        Insuficcent currency")
+                    print("!!        Insuficcent currency, this costs 3k gold")
                     print(" ")
                     shop(shopvisitcount,plrhp)
                 else:
@@ -455,7 +489,7 @@ def shop(shopvisitcount,plrhp):
             if bopbought == 2:
                 if gold < 6000:
                     print(" ")
-                    print("!!        Insuficcent currency")
+                    print("!!        Insuficcent currency, this costs 6k gold")
                     print(" ")
                     shop(shopvisitcount,plrhp)
                 else:
@@ -467,7 +501,7 @@ def shop(shopvisitcount,plrhp):
             if bopbought == 3:
                 if gold < 12000:
                     print(" ")
-                    print("!!        Insuficcent currency")
+                    print("!!        Insuficcent currency, this costs 12k gold")
                     print(" ")
                     shop(shopvisitcount,plrhp)
                 else:
@@ -477,7 +511,43 @@ def shop(shopvisitcount,plrhp):
                     gold = gold - 12000
                     shop(5,plrhp)
             if bopbought == 4:
-                print("Maximum Level IV Buff has allready been applied")
+                if gold < 16000:
+                    print(" ")
+                    print("!!        Insuficcent currency, this costs 16k gold")
+                    print(" ")
+                    shop(shopvisitcount,plrhp)
+                else:
+                    bopbought = bopbought + 1
+                    print("Applied Level V Buff")
+                    buff = 6
+                    gold = gold - 16000
+                    shop(5,plrhp)
+            if bopbought == 5:
+                if gold < 32000:
+                    print(" ")
+                    print("!!        Insuficcent currency, this costs 32k gold")
+                    print(" ")
+                    shop(shopvisitcount,plrhp)
+                else:
+                    bopbought = bopbought + 1
+                    print("Applied Level VI Buff")
+                    buff = 7
+                    gold = gold - 16000
+                    shop(5,plrhp)
+            if bopbought == 6:
+                if gold < 42000:
+                    print(" ")
+                    print("!!        Insuficcent currency, this costs 42k gold")
+                    print(" ")
+                    shop(shopvisitcount,plrhp)
+                else:
+                    bopbought = bopbought + 1
+                    print("Applied Level VI Buff")
+                    buff = 10
+                    gold = gold - 64000
+                    shop(5,plrhp)
+            if bopbought == 7:
+                print("Maximum Level VII Buff has allready been applied")
                 shop(5,plrhp)
             print("________________________________")
         else:
@@ -486,7 +556,7 @@ def shop(shopvisitcount,plrhp):
             shop(shopvisitcount,plrhp)
         if b == "info":
             print("Blessing of Protection; Level " + str(bopbought))
-            print("This protection buff allows you to multiply your damage by 2,3,4, and 5 times as respective to the blessings level.")
+            print("This protection buff allows you to multiply your damage by 2,3,4,5,6,7 and 10 times as respective to the blessings level.")
             sleepge(3)
             shop(shopvisitcount,plrhp)
     if a == "armour" or a == "armor":
@@ -550,12 +620,10 @@ def main():
 # ///////////////BOSSES//////////////////
 def bosses():
     global buff,plrhp
-    print(armour)
     print("________________________________")
     print("Hello and welcome to the boss area")
-    print(armour)
     print(" ")
-    print("There are currently 10 bosses, the harder they are, the closer to 10 they're going to be.")
+    print("There are currently 3 bosses, the harder they are, the closer to 10 they're going to be.")
     print("It is recommended that you start with the (1)st boss.")
     a1 = input(" ")
     if a1 == "1" or a1.lower() == "first":
@@ -565,8 +633,20 @@ def bosses():
         if boss1defeated:
             boss2()
         else:
-            print("You have to defeat the 1st boss to take on the second!")
+            print("You have to defeat the previous boss to take on the next!")
             main()
+    elif a1 == "3" or a1.lower() == "third":
+        if boss2defeated:
+            boss3()
+        else:
+            print("You have to defeat the previous boss to take on the next!")
+            main()
+    elif a1 == "4" or a1.lower() == "fourth":
+            if boss3defeated:
+                boss4()
+            else:
+                print("You have to defeat the previous boss to take on the next!")
+                main()
     else:
         print("Returning back to main")
         main()
@@ -575,7 +655,6 @@ skilluse = 0
 def boss1():
     global buff,roundhp,attkopt,skillopt,armour,attkdmg,skilldmg,plrhp,gold,boss1defeated
     roundhp = 100
-    print(armour)
     print("\n---" + name + "'s Turn ---")
     round1 = input("do an Attack or Skill ")
 
@@ -707,17 +786,80 @@ def boss1():
         print(" !!! ")
         main()
 
-# ///////////////BOSS 2, get dragon armour from this boss//////////////////
+def boss4():
+    sleepge(3)
+    print("You apporach the heavenly steps to encounter the one who is 'god'")
+    sleepge(3)
+    print(" ")
+    print(" ")
+    print(" ")
+    print(" ")
+    print(" ")
+    print(" ")
+    print(" ")
+    print(" ")
+    print(" ")
+    print(" ")
+    print("Scilence cools the air, as the man emerging forth the throne stands beside you")
+    sleepge(3)
+    global buff,attkopt,skillopt,armour,attkdmg,skilldmg,plrhp,gold,boss2defeated
+    roundhp = 5000000000
+
+    print("\n---" + name + "'s Turn ---")
+    round1 = input("do an Attack or Skill ")
+
+    if round1 == "attack":
+        roundhp = roundhp - (attkdmg * buff)
+        print("The current boss health is... " + str(roundhp))
+        print("You dealt " + str(attkdmg * buff) + " damage!")
+    elif round1 == "skill":
+        roundhp = roundhp - (skilldmg * buff)
+        skilluse + 1
+        print("The current boss health is... " + str(roundhp))
+        print("You dealt " + str(skilldmg * buff) + " damage!")
+    
+    print("\n--- god's Turn ---")
+    print("Your oppoent inokes divine interference...")
+    print("Your armour shatters at his command..")
+    print("Armour is now equvalent to 0.")
+    print("Attk and skill dmg have been multipied by 0.")
+    # OPPONENT'S TURN
+    print("Its now your opponent's turn")
+    sleepge(3)
+
+    opponentdmg = random.randint(1, 10000)
+    plrhp = plrhp - (opponentdmg * 150000)
+
+    if opponentdmg > 0:
+        print("Well, now it truly is the end...")
+        print(" !!! ")
+        print("Secret Achievement unlocked: Strucketh Down..")
+        print("You dared to stand againgst the power of this world...")
+        print(" ")
+        secretachievements = secretachievements + 1
+        print("your hp is... " + str(float(plrhp)))
+        sleepge(5)
+        print("Gold accumulated: " + str(gold))
+        print("Armour points accumulated: " + str(armour))
+        print("Total fish caught: " + str(uncommonfish + commonfish + rarefish + legendaryfish + morbiusfish))
+        print("Secret achievements unlocked: " + str(secretachievements) + "/5")
+        sleepge(3)
+        print("This game was proudly developed by dominik r")
+        print("I hoped you had fun! :)")
+        sleepge(3)
+        quit()
+
 def boss2():
     global buff,attkopt,skillopt,armour,attkdmg,skilldmg,plrhp,gold,boss2defeated
     roundhp = 500
-    print(armour)
+    print("You tremble as the power of electro engulfs the air...")
+    sleepge(3)
     def boss2defeatrule(gold,plrhp):
         if roundhp <= 0 and plrhp >= 0:
             global boss2defeated
             print("    ")
             print(" !!! ")
-            print("You've Won! 10000 gold has been added to your account,along with the dragon armour suit!")
+            print("You've Won! 10000 gold has been added to your account,along with the dragon armour!")
             print(" !!! ")
             armour = armour + 4
             gold += gold + 10000
@@ -896,16 +1038,194 @@ def boss2():
         print(" !!! ")
         main()
 
+def boss3():
+    global buff,attkopt,skillopt,armour,attkdmg,skilldmg,plrhp,gold,boss3defeated
+    roundhp = 5000
+    print("The Hydro Construct summons its power, and it commences its attack..")
+    sleepge(3)
+    def boss2defeatrule(gold,plrhp):
+        if roundhp <= 0 and plrhp >= 0:
+            global boss3defeated
+            print("    ")
+            print(" !!! ")
+            print("You've Won! 10000 gold has been added to your account,along with the dragon armour suit!")
+            print(" !!! ")
+            armour = armour + 4
+            gold += gold + 100000
+            plrhp = 100 * armour
+            boss3defeated = True
+            main()
+        elif roundhp >= 0 and plrhp <= 0:
+            print("    ")
+            print(" !!! ")
+            print("You've lost all of you hp and or you've run out of turns!")
+            print("YOU LOOSE.....")
+            print(" !!! ")
+            print(" ")
+            main()
+        else:
+            sleepge(3)
+
+    print("\n---" + name + "'s Turn ---")
+    round1 = input("do an Attack or Skill ")
+
+    if round1 == "attack":
+        roundhp = roundhp - (attkdmg * buff)
+        print("The current boss health is... " + str(roundhp))
+        print("You dealt " + str(attkdmg * buff) + " damage!")
+    elif round1 == "skill":
+        roundhp = roundhp - (skilldmg * buff)
+        skilluse + 1
+        print("The current boss health is... " + str(roundhp))
+        print("You dealt " + str(skilldmg * buff) + " damage!")
+
+    boss2defeatrule(gold,plrhp)
+    
+    print("\n--- Opponents's Turn ---")
+    print("Your oppoent soothes the waters and cleanses your armour")
+    # OPPONENT'S TURN
+    print("Its now your opponent's turn")
+    sleepge(3)
+
+    opponentdmg = random.randint(1, 100)
+    plrhp = plrhp - (opponentdmg * 10 )
+
+    if opponentdmg > 50:
+        print("that was quite the hit...")
+        print("your hp is... " + str(float(plrhp)))
+    else:
+        print("your opponent's turn has ended~ your current hp is..." + str(float(plrhp)))
+
+    # ROUND 2 TURN
+    print("\n---" + name + "'s Turn ---")
+    print("")
+    round2 = input("ROUND II! Would you like to attack, skill, or FLEE?")
+    print(" ")
+    if round2 == "attack":
+        roundhp = roundhp - attkdmg * buff
+        print("The current boss health is... " + str(roundhp))
+        print("You dealt " + str(attkdmg * buff) + " damage!")
+    elif round2 == "skill":
+        if skilluse > 1:
+            print("Sorry, but your SKILL is on ICD (internal cooldown)")
+            a = input("Would you like to sacrifice a turn to get your skill back? (Y)es,(N)o")
+            if a.upper() == "Y":
+                print("Alright, skipping turn...")
+                print("Your opponent flows with the power of water...")
+                opponentdmg = random.randint(1, 100)
+                plrhp = plrhp - (opponentdmg * 10 )
+                print("You currently have " + str(float(plrhp) + " HP left"))
+                if plrhp > 0:
+                    print("Activating Skill...")
+                    roundhp = roundhp - skilldmg
+                    print("The current boss health is... " + str(roundhp))
+                    print("You dealt " + str(skilldmg) + " damage!")
+                else:
+                    print(" !!! ")
+                    print("You've died from the bosse's passive attack... Returning to main menu")
+                    main()
+        else:
+            roundhp = roundhp - skilldmg * buff
+            print("The current boss health is... " + str(roundhp))
+            print("You dealt " + str(skilldmg * buff) + " damage!")
+    elif round2.lower() == "flee":
+        print("L Bozo, You Just Fled the battle!")
+        main()
+
+    boss2defeatrule(gold,plrhp)
+
+    # OPPONENT'S TURN
+    print("Its now your opponent's turn")
+    print("You opponent expells all the surrounding water, creating a substantial blast.")
+    sleepge(3)
+
+    opponentdmg = random.randint(1, 100)
+    plrhp = plrhp - (opponentdmg * 15 )
+
+    if opponentdmg > 500:
+        print("that was quite the hit...")
+        print("your hp is... " + str(plrhp))
+    else:
+        print("your opponent's turn has ended~ your current hp is..." + str(plrhp))
+    
+    boss2defeatrule(gold,plrhp)
+
+    # ROUND 3 TURN
+
+    print("\n---" + name + "'s Turn ---")
+    round2 = input("ROUND III! Would you like to attack, skill, or FLEE?")
+    print("___________________________")
+    print("!!           At this stage in the game, one turn should defeat the boss!")
+    print("___________________________")
+    if round2.lower() == "attack":
+        roundhp = roundhp - attkdmg * buff
+        print("The current boss health is... " + str(roundhp))
+        print("You dealt " + str(attkdmg * buff) + " damage!")
+    elif round2.lower() == "skill":
+        roundhp = roundhp - skilldmg * buff
+        print("The current boss health is... " + str(roundhp))
+        print("You dealt " + str(skilldmg * buff) + " damage!")
+    elif round2.lower() == "flee":
+        print("L Bozo, You Just Fled the battle!")
+        main()
+    boss2defeatrule(gold,plrhp)
+
+    # OPPONENT'S TURN
+
+    print("Its now your opponent's turn")
+    print("You opponent now cleanses you with the water, which weakens your bones...")
+    sleepge(3)
+
+    opponentdmg = random.randint(1, 100)
+    def dogechance(plrhp):
+        y = random.randint(1,2)
+        if y == 1:
+            plrhp = plrhp - (opponentdmg * 20 )
+        if y == 2:
+            print("You sucessfully doged the blast!")
+    dogechance()
+
+    boss2defeatrule(gold,plrhp)
+    if opponentdmg > 500:
+        print("that was quite the hit...")
+        print("your hp is... " + str(plrhp))
+    else:
+        opom = 0
+        if opom == 0:
+            print(" !!! ")
+            print("Secret Achievement unlocked: Prelude of Water's Flow")
+            print("Survive the maximum damage output of the hydro construct")
+            print(" !!! ")
+            gold = gold + 250
+            opom = opom + 1
+            secretachievements = secretachievements + 1
+        print("your opponent's turn has ended~ your current hp is..." + str(plrhp))
+
+    if plrhp > 0 and roundhp <= 0:
+        print(" !!! ")
+        print("You've successfully defeated the boss!")
+        print(" !!! ")
+        print("You've gained the dragon armour!")
+        armour = armour + 4
+        boss3defeated = True
+        gold += 10000
+        print("You now have " + str(gold) + " gold")
+        main()
+    else:
+        print(" ")
+        print(" !!! ")
+        print("You havent sucessfully defeated the boss...")
+        print("You've run out of turns! Returning to the home menu...")
+        print(" !!! ")
+        main()
+
+
 
 # ///////////////MAIN SCREEN//////////////////
 
 def main():
     global gold,buff,plrhp
-    print(plrhp)
-    print(armour)
-    if name.lower() == "dominik":
-        print("Hej developer dom, you gained a grap ton of currency rn.")
-        gold = gold + 1000000000000
+    print("Your current health is... " + str(plrhp))
     print("___________________________")
     print("Welcome to the main screen")
     print("________________________________")
