@@ -8,7 +8,9 @@ armourliszt = ["gold", "iron","silver", "platinum", "dragon","morbius"]
 
 fishingrodowned = False
 bopbought = 0
+
 AutoFish = False
+autofishcount = 0
 
 commonfish = 0
 uncommonfish = 0
@@ -274,7 +276,7 @@ def fishshop(gold):
             print("________________________________")
             print("Insufficent currency or typo.")
             fishshop(gold)
-    if a1.lower() == "fish" or a1.lower() == "sell fish" or a1.lower() == "sell":
+    elif a1.lower() == "fish" or a1.lower() == "sell fish" or a1.lower() == "sell":
         sellfish()
     else:
         c = input("do you want to exit the fish shop?")
@@ -285,10 +287,8 @@ def fishshop(gold):
             fishshop(gold)
 
 def fishaction():
-    global commonfish,uncommonfish,rarefish,legendaryfish,morbiusfish,fishingrodowned,AutoRod
     xyz = input("Would you like to continue fishing? ")
-    global Autofish
-    autofishcount = 0
+    global commonfish,uncommonfish,rarefish,legendaryfish,morbiusfish,fishingrodowned,AutoRod,Autofish,autofishcount
     if Autofish == True:
         autofishamount = input("How many times would you like to fish?")
         if autofishamount.isnumeric() == False:
@@ -296,17 +296,21 @@ def fishaction():
             print("Please input a number")
             print("  ")
             fishaction()
-            autofishcount = 0
-            while autofishcount >= int(autofishamount):
-                print(" - - - " + str(name) + "'s Fishing rewards - - -")
-                autofishcount + 1
-                print("Reeling in...")
-                sleepge(1)
-                print("Done!")
-                sleepge(1)
-                randomamount = random.randint(1,3)
-                print("You gained " + str(randomamount) + " common fish!")
-                commonfish = commonfish + randomamount
+        elif autofishcount <= int(autofishamount):
+            def autofish():
+                while autofishcount <= int(autofishamount):
+                    global commonfish
+                    autofishcount + 1
+                    print(" - - - " + str(name) + "'s Fishing rewards - - -")
+                    print("Reeling in...")
+                    sleepge(1)
+                    print("Done!")
+                    sleepge(1)
+                    randomamount = random.randint(1,3)
+                    print("You gained " + str(randomamount) + " common fish!")
+                    commonfish = commonfish + randomamount
+                autofish()
+            autofish()
         else:
             fishaction()
     elif xyz.lower() == "y" or xyz.lower() == "yes":
