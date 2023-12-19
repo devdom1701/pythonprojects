@@ -9,9 +9,6 @@ armourliszt = ["gold", "iron","silver", "platinum", "dragon","morbius"]
 fishingrodowned = False
 bopbought = 0
 
-AutoFish = False
-autofishcount = 0
-
 commonfish = 0
 uncommonfish = 0
 rarefish = 0
@@ -288,32 +285,8 @@ def fishshop(gold):
 
 def fishaction():
     xyz = input("Would you like to continue fishing? ")
-    global commonfish,uncommonfish,rarefish,legendaryfish,morbiusfish,fishingrodowned,AutoRod,Autofish,autofishcount
-    if Autofish == True:
-        autofishamount = input("How many times would you like to fish?")
-        if autofishamount.isnumeric() == False:
-            print("  ")
-            print("Please input a number")
-            print("  ")
-            fishaction()
-        elif autofishcount <= int(autofishamount):
-            def autofish():
-                while autofishcount <= int(autofishamount):
-                    global commonfish
-                    autofishcount + 1
-                    print(" - - - " + str(name) + "'s Fishing rewards - - -")
-                    print("Reeling in...")
-                    sleepge(1)
-                    print("Done!")
-                    sleepge(1)
-                    randomamount = random.randint(1,3)
-                    print("You gained " + str(randomamount) + " common fish!")
-                    commonfish = commonfish + randomamount
-                autofish()
-            autofish()
-        else:
-            fishaction()
-    elif xyz.lower() == "y" or xyz.lower() == "yes":
+    global commonfish,uncommonfish,rarefish,legendaryfish,morbiusfish,fishingrodowned
+    if xyz.lower() == "y" or xyz.lower() == "yes":
         randomfish = random.randint(1,400)
         if randomfish in range (111,282):
             print(" - - - " + str(name) + "'s Fishing rewards - - -")
@@ -361,13 +334,11 @@ def fishaction():
             print("Morbius blesses you and multiplies your amount of money by how many morbius fish you caught.")
             gold = gold * randomamount
             fishaction()
-        elif commonfish + uncommonfish + legendaryfish + morbiusfish + rarefish > 25:
-            b = random.randint(1,10000100101010)
-            if b % 2 > 0:
-                print("Your fishing rod BROKE!")
-                fishingrodowned = False
-            else:
-                fishaction()
+    elif commonfish + uncommonfish + legendaryfish + morbiusfish + rarefish > 25:
+        b = random.randint(1,10000100101010)
+        if b % 2 > 0:
+            print("Your fishing rod BROKE!")
+            fishingrodowned = False
         else:
             fishaction()
     else:
@@ -1266,7 +1237,7 @@ def boss3():
         print(" !!! ")
         print("You've gained the dragon armour!")
         armour = armour + 4
-        boss3defeated = True
+        boss3defeated = True 
         gold += 10000
         print("You now have " + str(gold) + " gold")
         main()
