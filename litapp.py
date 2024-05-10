@@ -42,4 +42,4 @@ with tab2:
     with st.expander("Leave a Comment"):
         messages = st.empty()
         if prompt := st.text_input('Say something'):
-            messages.write(f' {username}' + prompt)
+            messages.write(f'{username}: ' + prompt)
