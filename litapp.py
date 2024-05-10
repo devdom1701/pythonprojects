@@ -18,7 +18,7 @@ genre = st.radio(
     [f':rainbow[{item1}]', f"***{item2}***", f'{item3} :movie_camera:'],
     captions = ["Joke", "No.", "Test"])
 
-if genre == ":rainbow[{item1}}]":
+if genre == f":rainbow[{item1}]":
     st.write("thats gay.")
 else:
     st.write("based.")
