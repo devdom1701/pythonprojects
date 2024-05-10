@@ -41,9 +41,6 @@ with tab2:
     st.header('Comments')
     with st.expander("Leave a Comment"):
         messages = st.empty()
-        messages.markdown("""
-        <div style="height: 300px; overflow-y: scroll;">
-        """, unsafe_allow_html=True)
         if prompt := st.text_area('Say something', height=100):
             messages.write(f'{username}: ' + prompt)
-        messages.markdown("</div>", unsafe_allow_html=True)
+            messages.write("------------")
