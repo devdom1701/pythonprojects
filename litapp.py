@@ -8,7 +8,7 @@ item3 = 'Rahhh'
 item3points = 0
 Voted = False
 
-tab1, tab2 = st.columns(2)
+tab1, tab2 = st.tabs(2)
 
 with tab1:
     st.header('Voting')
