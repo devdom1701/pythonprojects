@@ -21,6 +21,11 @@ elif foodselection == f'{item2}':
 elif foodselection == f'{item3}':
     item3 += 1
 
+col1, col2, col3 = st.columns(3)
+col1.metric("Item One", f"{item1}", f"{item1points}")
+col2.metric("Item Two", f"{item2}", f"{item2points}")
+col3.metric("Item Three", f"{item3}", f"{item3points}")
+
 #______-"Backend code"-_______
 # (python code supporting the layout code)
 
