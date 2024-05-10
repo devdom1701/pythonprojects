@@ -4,7 +4,7 @@ import streamlit as st
 
 item1 = "chicken"
 item2 = "phart"
-item2 = "Rahhh"
+item3 = "Rahhh"
 
 
 st.button("Reset", type="primary")
@@ -15,7 +15,7 @@ else:
 
 genre = st.radio(
     "Today's Lunch",
-    [":rainbow[{item1}}]", "***{item2}***", "{item3} :movie_camera:"],
+    [f':rainbow[{item1}]', f"***{item2}***", f'{item3} :movie_camera:'],
     captions = ["Joke", "No.", "Test"])
 
 if genre == ":rainbow[{item1}}]":
