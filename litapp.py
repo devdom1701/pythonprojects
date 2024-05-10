@@ -1,4 +1,5 @@
 import streamlit as st
+username = "Fart"
 
 item1 = 'Chicken'
 item1points = 0
@@ -41,4 +42,4 @@ with tab2:
     with st.expander("Leave a Comment"):
         messages = st.empty()
         if prompt := st.text_input('Say something'):
-            messages.write(prompt)
+            messages.write(f' {username}' + prompt)
