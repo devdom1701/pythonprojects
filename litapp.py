@@ -19,7 +19,7 @@ genre = st.radio(
     captions = ["Joke", "No.", "Test"])
 
 if genre == f":rainbow[{item1}]":
-    st.write("thats gay.")
+    st.write("thats Happi.")
 else:
     st.write("based.")
 
