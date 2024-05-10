@@ -15,11 +15,11 @@ foodselection = st.radio(
     captions = ["Joke", "No.", "Test"])
 
 if foodselection == f'{item1}':
-    item1 += 1
+    item1points += 1
 elif foodselection == f'{item2}':
-    item2 += 1
+    item2points += 1
 elif foodselection == f'{item3}':
-    item3 += 1
+    item3points += 1
 
 col1, col2, col3 = st.columns(3)
 col1.metric("Item One", f"{item1}", f"{item1points}")
