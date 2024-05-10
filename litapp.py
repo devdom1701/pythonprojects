@@ -3,25 +3,23 @@
 import streamlit as st
 
 item1 = "chicken"
+item1points = 0
 item2 = "phart"
+item2points = 0
 item3 = "Rahhh"
+item3points = 0
 
-
-st.button("Reset", type="primary")
-if st.button("Say hello"):
-    st.write("Why hello there")
-else:
-    st.write("Goodbye")
-
-genre = st.radio(
+foodselection = st.radio(
     "Today's Lunch",
     [f':rainbow[{item1}]', f"***{item2}***", f'{item3} :movie_camera:'],
     captions = ["Joke", "No.", "Test"])
 
-if genre == f":rainbow[{item1}]":
-    st.write("thats Happi.")
-else:
-    st.write("based.")
+if foodselection == f'{item1}':
+    item1 += 1
+elif foodselection == f'{item2}':
+    item2 += 1
+elif foodselection == f'{item3}':
+    item3 += 1
 
 #______-"Backend code"-_______
 # (python code supporting the layout code)
