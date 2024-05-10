@@ -41,5 +41,13 @@ with tab2:
     st.header('Comments')
     with st.expander("Leave a Comment"):
         messages = st.empty()
-        if prompt := st.text_input('Say something'):
+        with messages.beta_container():
+            for _ in range(20):  
+                st.write(" ")
+        with st.expander("View More", expanded=False):
+            for _ in range(80):
+                st.write(" ")
+        prompt = st.text_area('Say something', height=100)
+        if st.button('Submit'):
             messages.write(f'{username}: ' + prompt)
+
