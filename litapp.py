@@ -10,7 +10,7 @@ item3points = 0
 foodselection = st.radio(
     "Today's Lunch",
     [f':rainbow: {item1}', f"***{item2}***", f'{item3} :movie_camera:'],
-    format_func=lambda x: "Joke" if x == f':rainbow: {item1}' else "No." if x == f"***{item2}***" else "Test")
+    format_func=lambda x: f"{item1}" if x == f':rainbow: {item1}' else f"{item2}" if x == f"***{item2}***" else f"{item3}")
 
 if foodselection == f':rainbow: {item1}':
     if st.button("Vote"):
