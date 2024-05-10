@@ -8,6 +8,15 @@ if st.button("Say hello"):
 else:
     st.write("Goodbye")
 
+genre = st.radio(
+    "What's your favorite movie genre",
+    [":rainbow[gay]", "***testing***", "Documentary :movie_camera:"],
+    captions = ["Joke", "No.", "Test"])
+
+if genre == ":rainbow[gay]":
+    st.write("You selected gay.")
+else:
+    st.write("You didn't select gay.")
 
 #______-"Backend code"-_______
 # (python code supporting the layout code)
