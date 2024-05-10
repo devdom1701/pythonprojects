@@ -1,13 +1,13 @@
 #______-Basic Layout-_______
 # (headers, footers text)
-import streamlit as st
-
 item1 = "chicken"
 item1points = 0
 item2 = "phart"
 item2points = 0
 item3 = "Rahhh"
 item3points = 0
+
+import streamlit as st
 
 foodselection = st.radio(
     "Today's Lunch",
