@@ -33,7 +33,6 @@ if st.sidebar.button("Sign In"):
 # Voting
 if signed_in:
     st.header('Voting')
-    foodlist = ["fart", "chicken", "shart"]
     itempoints = [0] * len(foodlist)
 
     Voted = False
