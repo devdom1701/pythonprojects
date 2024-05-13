@@ -60,5 +60,8 @@ st.sidebar.header('Comments')
 with st.sidebar:
     prompt = st.text_input("Say something")
     if prompt:
+        messagelog.append(f'**{username}:** {prompt}')
+
+    for message in messagelog:
         with st.container():
-            st.markdown(f'**{username}:** {prompt}', unsafe_allow_html=True)
+            st.markdown(message, unsafe_allow_html=True)
