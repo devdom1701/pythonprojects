@@ -16,58 +16,51 @@ usernamelist = []
 usernamelistcounter = 0
 
 foodlist = ["fart", "chicken", "poopp", "bunger", "Fungus"]
+st.title("Voting Ahhh App")
 
 # Sign-in Sidebar
 username = st.sidebar.text_input("Username")
 password = st.sidebar.text_input("Password", type="password")
 
-def sign_in(username, password, Voted):
-    global usernamelistcounter, signed_in
+# Data storage
+users = {}
+
+# Function to sign in
+def sign_in(username, password):
     if len(username) > 3 and len(password) > 3:
         st.sidebar.success(f'Done, signed in as "{username}"')
-        signed_in = True
-        usernamelist.append(f"{username}")
-        passwordlist.append(f"{password}")
-        usernamelistcounter += 1
+        users[username] = {'password': password, 'voted': False}
         return True
     else:
         st.sidebar.warning("Please enter a valid username and password.")
         return False
 
+# Sign in
 if st.sidebar.button("Sign In"):
-    signed_in = sign_in(username, password, Voted)
-    st.sidebar.empty()
+    signed_in = sign_in(username, password)
 
 # Voting
 if signed_in:
     st.header('Voting')
-    itempoints = [0] * len(foodlist)
-
-    if not Voted:
-        for i, food in enumerate(foodlist):
-            if st.button(f'Vote for {food}'):
-                itempoints[i] += 1
-                st.bar_chart({food: itempoints[i] for i, food in enumerate(foodlist)})
-                st.toast('Successfully Voted.')
-                Voted = True
-                break
-
-    else:
-        st.warning('Already Voted Bozo')
-
-if Voted:
-    tab1 = st.tabs(["Comment"])
-    with tab1:
-        # Comments
-        st.header('Comments')
-        with st.container():
-            prompt = st.text_input("Say something")
-            if prompt:
-                messages = st.container()
-                messages.markdown(f'{usernamelist[usernamelistcounter - 1]}: {prompt}', unsafe_allow_html=True)
-
+    foodlist = ["fart", "chicken", "poopp", "bunger", "Fungus"]
+    votes = [0] * len(foodlist)
+    for i, food in enumerate(foodlist):
+        if st.button(f'Vote for {food}'):
+            votes[i] += 1
+            st.bar_chart({food: votes[i] for i, food in enumerate(foodlist)})
+            st.success('Successfully Voted.')
+            users[username]['voted'] = True
+            break
+    if not any(user['voted'] for user in users.values()):
+        st.warning("Vote to unlock the comment section.")
 else:
-    if signed_in:
-        st.warning("Vote to unlock the comment section..")
-    elif not signed_in and not Voted:
-        st.sidebar.warning("Sign in to continue..")
+    st.sidebar.warning("Sign in to continue.")
+
+# Comments
+if signed_in and users[username]['voted']:
+    st.header('Comments')
+    prompt = st.text_input("Say something")
+    if prompt:
+        st.markdown(f'{username}: {prompt}', unsafe_allow_html=True)
+    else:
+        st.warning("Type something to leave a comment.")
