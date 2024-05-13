@@ -72,5 +72,5 @@ if Voted:
 else:
     if signed_in:
         st.warning("Vote to unlock the comment section..")
-    elif not signed_in:
+    elif not signed_in and not Voted:
         st.sidebar.warning("Sign in to continue..")
