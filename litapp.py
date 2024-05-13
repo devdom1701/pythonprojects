@@ -45,8 +45,10 @@ with tab2:
         messages = st.container(height=300)
         prompt = st.text_input("Say something")
         if prompt:
-            messages.write(f'{username}: {prompt}')
+            messages.markdown(f'{username}: {prompt}', unsafe_allow_html=True)
+            messages.markdown('<br>', unsafe_allow_html=True)
             messagelog.append(f'{username}: {prompt}')
         else:
             for message in messagelog:
-                messages.write(message)
+                messages.markdown(f'{message}', unsafe_allow_html=True)
+                messages.markdown('<br>', unsafe_allow_html=True)
