@@ -5,9 +5,7 @@ st.title("Voting ahhh App")
 
 itemnumba = 0
 
-item1points = 0
-item2points = 0
-item3points = 0
+itempoints = 0
 
 Voted = False
 signed_in = False
