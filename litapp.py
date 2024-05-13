@@ -63,5 +63,6 @@ with st.sidebar:
     if prompt:
         message_history.append((username, prompt))
     for username, message in message_history:
-        st.chat_message(f"{username}:", message)
+        st.chat_message(f"{username}: {message}")
+
 
