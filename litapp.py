@@ -45,20 +45,17 @@ with tab1:
             if st.button('Vote'):
                 item1points += 1
                 Voted = True
-                st.balloons
-                msg = st.toast.info('Sucessfully Voted.')
+                msg = st.toast('Sucessfully Voted.')
         elif foodselection == f'{item2}':
             if st.button('Vote'):
                 item2points += 1
                 Voted = True
-                st.balloons
-                msg = st.toast.info('Sucessfully Voted.')
+                msg = st.toast('Sucessfully Voted.')
         elif foodselection == f'{item3}':
             if st.button('Vote'):
                 item3points += 1
                 Voted = True
-                st.balloons
-                msg = st.toast.info('Sucessfully Voted.')
+                msg = st.toast('Sucessfully Voted.')
     else:
         msg = st.toast('Sucessfully Voted.')
 
