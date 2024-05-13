@@ -43,6 +43,7 @@ if st.sidebar.button("Sign In"):
 if signed_in:
     st.header('Voting')
     itempoints = [0] * len(foodlist)
+    st.warning("Vote to unlock the comment section..")
 
     if not Voted:
         for i, food in enumerate(foodlist):
@@ -52,13 +53,7 @@ if signed_in:
                 st.toast('Successfully Voted.')
                 Voted = True
                 break
-
-    else:
-        st.warning('Already Voted Bozo')
-
-else:
-    if signed_in:
-        st.warning("Vote to unlock the comment section..")
+    
     elif Voted == True:
         # Comments
         st.title('Comments')
