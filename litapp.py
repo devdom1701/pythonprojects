@@ -19,15 +19,18 @@ username = st.sidebar.text_input("Username")
 password = st.sidebar.text_input("Password", type="password")
 
 if st.sidebar.button("Sign In"):
-    if len(username and password) > 1:
+    if len(username and password) > 3:
         signed_in = True
+    else:
+        st.sidebar.text("")
     if not signed_in:
         st.sidebar.title("Not signed in Brotha")
     elif signed_in:
         with st.sidebar:
             with st.spinner('Loading...'):
-                time.sleep(5)
-                st.sidebar.success(f'Done, signed in as {username}')
+                time.sleep(1)
+                st.sidebar.success(f'Done, signed in as "{username}"')
+                st.balloons
 
 #_____Voting____
 with tab1:
