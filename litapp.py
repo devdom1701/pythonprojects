@@ -1,74 +1,48 @@
 import streamlit as st
 import time
+
 st.title("Voting Rahhh App")
 
-username = "Fart"
-item1 = 'Chicken'
-item1points = 0
-item2 = 'Phart'
-item2points = 0
-item3 = 'Rahhh'
-item3points = 0
-Voted = False
-signed_in = False
+def sign_in(username, password):
+    if len(username) > 3 and len(password) > 3:
+        st.sidebar.success(f'Done, signed in as "{username}"')
+        return True
+    else:
+        st.sidebar.warning("Please enter a valid username and password.")
+        return False
 
-tab1, tab2 = st.columns(2)
-messagelog = []
-#_____ Sign-in Sidebar _____
+# Sign-in Sidebar
 username = st.sidebar.text_input("Username")
 password = st.sidebar.text_input("Password", type="password")
 
 if st.sidebar.button("Sign In"):
-    if len(username and password) > 3:
-        signed_in = True
-    else:
-        st.sidebar.text("")
-    if not signed_in:
-        st.sidebar.title("Not signed in Brotha")
-    elif signed_in:
-        with st.sidebar:
-            with st.spinner('Loading...'):
-                time.sleep(1)
-                st.sidebar.success(f'Done, signed in as "{username}"')
-                signed_in = True
+    signed_in = sign_in(username, password)
 
-#_____Voting____
-with tab1:
+# Voting
+if signed_in:
     st.header('Voting')
-    foodselection = st.radio(
-        "Today's Lunch",
-        [f'{item1}', f'{item2}', f'{item3}'],
-        format_func=lambda x: f'{item1}' if x == f'{item1}' else f'{item2}' if x == f'{item2}' else f'{item3}'
-    )
-    if not Voted:
-        if foodselection == f'{item1}':
-            if st.button('Vote'):
-                item1points += 1
-                Voted = True
-                msg = st.toast('Sucessfully Voted.')
-        elif foodselection == f'{item2}':
-            if st.button('Vote'):
-                item2points += 1
-                Voted = True
-                msg = st.toast('Sucessfully Voted.')
-        elif foodselection == f'{item3}':
-            if st.button('Vote'):
-                item3points += 1
-                Voted = True
-                msg = st.toast('Sucessfully Voted.')
-    else:
-        msg = st.toast('Already Voted Bozo')
+    foodlist = ["fart", "chicken", "shart"]
+    itempoints = [0] * len(foodlist)
 
-    if Voted:
-        st.bar_chart({f'{item1}': item1points, f'{item2}': item2points, f'{item3}': item3points})
+    Voted = False
 
-with tab2:
-    st.header('Comments')
-    with st.container():
-        prompt = st.text_input("Say something")
-        if prompt:
-            messages = st.container()
-            messages.markdown(f'{username}: {prompt}', unsafe_allow_html=True)
+    for i, food in enumerate(foodlist):
+        if not Voted:
+            if st.button(f'Vote for {food}'):
+                itempoints[i] += 1
+                Voted = True
+                st.info('Successfully Voted.')
         else:
-            for message in messagelog:
-                st.container().markdown(f'{message}', unsafe_allow_html=True)
+            st.warning('Already Voted Bozo')
+
+    st.bar_chart({food: points for food, points in zip(foodlist, itempoints)})
+
+# Comments
+st.header('Comments')
+with st.container():
+    prompt = st.text_input("Say something")
+    if prompt:
+        messages = st.container()
+        messages.markdown(f'{username}: {prompt}', unsafe_allow_html=True)
+    else:
+        st.warning("Type something to leave a comment.")
