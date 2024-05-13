@@ -21,8 +21,6 @@ password = st.sidebar.text_input("Password", type="password")
 if st.sidebar.button("Sign In"):
     if len(username and password) > 3:
         signed_in = True
-    elif signed_in: 
-        st.balloons
     else:
         st.sidebar.text("")
     if not signed_in:
@@ -47,14 +45,17 @@ with tab1:
             if st.button('Vote'):
                 item1points += 1
                 Voted = True
+                st.balloons
         elif foodselection == f'{item2}':
             if st.button('Vote'):
                 item2points += 1
                 Voted = True
+                st.balloons
         elif foodselection == f'{item3}':
             if st.button('Vote'):
                 item3points += 1
                 Voted = True
+                st.balloons
 
     if Voted:
         st.bar_chart({f'{item1}': item1points, f'{item2}': item2points, f'{item3}': item3points})
