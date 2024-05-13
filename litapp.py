@@ -46,16 +46,21 @@ with tab1:
                 item1points += 1
                 Voted = True
                 st.balloons
+                msg = st.toast.info('Sucessfully Voted.')
         elif foodselection == f'{item2}':
             if st.button('Vote'):
                 item2points += 1
                 Voted = True
                 st.balloons
+                msg = st.toast.info('Sucessfully Voted.')
         elif foodselection == f'{item3}':
             if st.button('Vote'):
                 item3points += 1
                 Voted = True
                 st.balloons
+                msg = st.toast.info('Sucessfully Voted.')
+    else:
+        msg = st.toast('Sucessfully Voted.')
 
     if Voted:
         st.bar_chart({f'{item1}': item1points, f'{item2}': item2points, f'{item3}': item3points})
