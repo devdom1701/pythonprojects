@@ -47,7 +47,7 @@ if signed_in:
                 st.info('Successfully Voted.')
         else:
             st.warning('Already Voted Bozo')
-    if voted:
+    if Voted:
         # Comments
         st.header('Comments')
         with st.container():
