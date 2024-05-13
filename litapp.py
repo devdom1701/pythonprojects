@@ -13,7 +13,7 @@ signed_in = False
 
 tab1, tab2 = st.columns(2)
 messagelog = []
-foodlist = ["fart","chicken","shart"]
+foodlist = ["fart","chicken","poopp","bunger","Fungus"]
 
 def sign_in(username, password):
     if len(username) > 3 and len(password) > 3:
@@ -42,19 +42,18 @@ if signed_in:
         if not Voted:
             if st.button(f'Vote for {food}'):
                 itempoints[i] += 1
+                st.bar_chart({food: points for food, points in zip(foodlist, itempoints)})
                 Voted = True
                 st.info('Successfully Voted.')
         else:
             st.warning('Already Voted Bozo')
-
-    st.bar_chart({food: points for food, points in zip(foodlist, itempoints)})
-
-# Comments
-st.header('Comments')
-with st.container():
-    prompt = st.text_input("Say something")
-    if prompt:
-        messages = st.container()
-        messages.markdown(f'{username}: {prompt}', unsafe_allow_html=True)
-    else:
-        st.warning("Type something to leave a comment.")
+    if voted:
+        # Comments
+        st.header('Comments')
+        with st.container():
+            prompt = st.text_input("Say something")
+            if prompt:
+                messages = st.container()
+                messages.markdown(f'{username}: {prompt}', unsafe_allow_html=True)
+else:
+    st.warning("Sign in to continue..")
