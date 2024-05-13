@@ -1,7 +1,19 @@
 import streamlit as st
 import time
-
 st.title("Voting Rahhh App")
+
+itemnumba = 0
+
+item1points = 0
+item2points = 0
+item3points = 0
+
+Voted = False
+signed_in = False
+
+tab1, tab2 = st.columns(2)
+messagelog = []
+foodlist = ["fart","chicken","shart"]
 
 def sign_in(username, password):
     if len(username) > 3 and len(password) > 3:
