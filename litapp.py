@@ -21,6 +21,8 @@ password = st.sidebar.text_input("Password", type="password")
 if st.sidebar.button("Sign In"):
     if len(username and password) > 3:
         signed_in = True
+    elif signed_in: 
+        st.balloons
     else:
         st.sidebar.text("")
     if not signed_in:
@@ -30,7 +32,7 @@ if st.sidebar.button("Sign In"):
             with st.spinner('Loading...'):
                 time.sleep(1)
                 st.sidebar.success(f'Done, signed in as "{username}"')
-                st.balloons
+                signed_in = True
 
 #_____Voting____
 with tab1:
