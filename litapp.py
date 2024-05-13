@@ -24,9 +24,9 @@ if st.sidebar.button("Sign In"):
     if not signed_in:
         st.sidebar.title("Not signed in Brotha")
     elif signed_in:
-        with st.spinner('Loading...'):
+        with st.sidebar.spinner('Loading...'):
             time.sleep(5)
-        st.success('Done!')
+        st.sidebar.success('Done!')
         st.sidebar.title("AAAAAHHH")
 
 #_____Voting____
