@@ -56,8 +56,8 @@ if signed_in:
     else:
         st.warning('Already Voted Bozo')
 
-st.header('Comments')
+st.sidebar.header('Comments')
 with st.sidebar:
     messages = st.container(height=300)
     if prompt := st.chat_input("Say something"):
-        messages.chat_message(f"{username}").write(prompt)
+        messages.chat_message(f"{username}").write(f'{username} + {prompt}')
