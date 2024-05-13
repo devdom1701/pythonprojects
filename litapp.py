@@ -66,5 +66,5 @@ else:
                 if prompt:
                     messages = st.container()
                     messages.markdown(f'{usernamelist[usernamelistcounter]}: {prompt}', unsafe_allow_html=True)
-        else:
-            st.warning("Sign in to continue..")
+    else:
+        st.warning("Sign in to continue..")
