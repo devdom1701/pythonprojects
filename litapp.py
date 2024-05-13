@@ -38,6 +38,7 @@ def sign_in(username, password):
 
 if st.sidebar.button("Sign In"):
     signed_in = sign_in(username, password)
+    st.sidebar.empty()
 
 # Voting
 if signed_in:
@@ -65,13 +66,14 @@ if Voted:
             prompt = st.text_input("Say something")
             if prompt:
                 messages = st.container()
-                messages.markdown(f'{usernamelist[usernamelistcounter - 1]}: {prompt}', unsafe_allow_html=True)  # Adjusted counter
+                messages.markdown(f'{usernamelist[usernamelistcounter - 1]}: {prompt}', unsafe_allow_html=True)
 
 else:
     if signed_in:
         st.warning("Vote to unlock the comment section..")
     else:
         st.warning("Sign in to continue..")
+
 
 
 
