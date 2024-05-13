@@ -11,7 +11,7 @@ item3points = 0
 
 Voted = False
 signed_in = False
-notsignedin = False
+notsignedin = True  # Initialize as True to display sign-in initially
 
 messagelog = []
 passwordlist = []
@@ -21,7 +21,7 @@ usernamelistcounter = 0
 foodlist = ["fart", "chicken", "poopp", "bunger", "Fungus"]
 
 # Sign-in Sidebar
-if not notsignedin and not Voted:
+if notsignedin and not Voted:
     username = st.sidebar.text_input("Username")
     password = st.sidebar.text_input("Password", type="password")
 
@@ -32,32 +32,29 @@ def sign_in(username, password):
         usernamelist.append(f"{username}")
         passwordlist.append(f"{password}")
         usernamelistcounter += 1
-        notsignedin = True
+        notsignedin = False  # Once signed in, set notsignedin to False
         return True
     else:
         st.sidebar.warning("Please enter a valid username and password.")
         return False
 
-if st.sidebar.button("Sign In") and not notsignedin and not Voted:
+if st.sidebar.button("Sign In") and notsignedin and not Voted:
     signed_in = sign_in(username, password)
 
 # Voting
-if signed_in:
+if signed_in and not Voted:  # Display voting section only if signed in and not voted
     st.header('Voting')
     itempoints = [0] * len(foodlist)
 
-    if not Voted:
-        for i, food in enumerate(foodlist):
-            if st.button(f'Vote for {food}'):
-                itempoints[i] += 1
-                st.toast('Successfully Voted.')
-                Voted = True
-                break
-    else:
-        st.warning('Already Voted Bozo')
+    for i, food in enumerate(foodlist):
+        if st.button(f'Vote for {food}'):
+            itempoints[i] += 1
+            st.toast('Successfully Voted.')
+            Voted = True
+            break
 
 # Comments Section
-if Voted:
+if Voted:  # Display comment section only if voted
     st.sidebar.header('Comments')
     with st.sidebar.container():
         prompt = st.sidebar.text_input("Say something")
@@ -65,5 +62,5 @@ if Voted:
             messages = st.sidebar.container()
             messages.markdown(f'{usernamelist[usernamelistcounter - 1]}: {prompt}', unsafe_allow_html=True)
 else:
-    if signed_in:
+    if signed_in:  # Display message only if signed in but not voted
         st.sidebar.warning("Vote to unlock the comment section..")
