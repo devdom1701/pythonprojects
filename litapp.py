@@ -22,6 +22,7 @@ if st.sidebar.button("Sign In"):
     if not signed_in and not enteredcredentials:
         username = st.sidebar.text_input("Username")
         password = st.sidebar.text_input("Password", type="password")
+        st.title(username + password)
 
 with tab1:
     st.header('Voting')
