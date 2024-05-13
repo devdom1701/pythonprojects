@@ -48,20 +48,24 @@ if signed_in:
         for i, food in enumerate(foodlist):
             if st.button(f'Vote for {food}'):
                 itempoints[i] += 1
-                st.bar_chart({food: itempoints[i] for i, food in enumerate(foodlist)})  # Fixed points variable
+                st.bar_chart({food: itempoints[i] for i, food in enumerate(foodlist)})
                 st.toast('Successfully Voted.')
                 Voted = True
-                break 
+                break
+
     else:
         st.warning('Already Voted Bozo')
 
-if signed_in and Voted:
-    st.header('Comments')
-    with st.container():
-        prompt = st.text_input("Say something")
-        if prompt:
-            messages = st.container()
-            messages.markdown(f'{usernamelist[usernamelistcounter - 1]}: {prompt}', unsafe_allow_html=True)
+if Voted:
+    tab1 = st.tabs(["Comment"])
+    with tab1:
+        # Comments
+        st.header('Comments')
+        with st.container():
+            prompt = st.text_input("Say something")
+            if prompt:
+                messages = st.container()
+                messages.markdown(f'{usernamelist[usernamelistcounter - 1]}: {prompt}', unsafe_allow_html=True)
 
 else:
     if signed_in:
