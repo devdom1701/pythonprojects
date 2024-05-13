@@ -21,7 +21,7 @@ usernamelistcounter = 0
 foodlist = ["fart", "chicken", "poopp", "bunger", "Fungus"]
 
 # Sign-in Sidebar
-if not notsignedin:
+if not notsignedin and not Voted:
     username = st.sidebar.text_input("Username")
     password = st.sidebar.text_input("Password", type="password")
 
@@ -38,7 +38,7 @@ def sign_in(username, password):
         st.sidebar.warning("Please enter a valid username and password.")
         return False
 
-if st.sidebar.button("Sign In") and not notsignedin:
+if st.sidebar.button("Sign In") and not notsignedin and not Voted:
     signed_in = sign_in(username, password)
 
 # Voting
