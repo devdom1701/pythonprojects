@@ -29,10 +29,8 @@ def sign_out():
 if st.sidebar.button("Sign In/Out"):
     if signed_in:
         sign_out()
-        signed_in = False
     else:
         sign_in()
-        signed_in = True
 
 with tab1:
     st.header('Voting')
