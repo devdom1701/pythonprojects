@@ -62,7 +62,6 @@ with st.sidebar:
     prompt = st.text_input("Say something")
     if prompt:
         message_history.append((username, prompt))
-
     for username, message in message_history:
         st.chat_message(f"{username}:", message)
 
