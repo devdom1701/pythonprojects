@@ -51,9 +51,10 @@ if signed_in and not Voted:
             break
 
 # Comments Section
-st.sidebar.header('Comments')
-with st.sidebar.container():
-    prompt = st.sidebar.text_input("Say something")
-    if prompt:
-        messages = st.sidebar.container()
-        messages.markdown(f'{usernamelist[usernamelistcounter - 1]}: {prompt}', unsafe_allow_html=True)
+if Voted:
+    st.sidebar.header('Comments')
+    with st.sidebar.container():
+        prompt = st.sidebar.text_input("Say something")
+        if prompt:
+            messages = st.sidebar.container()
+            messages.markdown(f'{usernamelist[usernamelistcounter - 1]}: {prompt}', unsafe_allow_html=True)
