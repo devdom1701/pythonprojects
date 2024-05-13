@@ -9,20 +9,23 @@ item2points = 0
 item3 = 'Rahhh'
 item3points = 0
 Voted = False
+signed_in = False
 
 
 tab1, tab2 = st.columns(2)
 messagelog = []
 
 def sign_in():
-    st.sidebar.text_input("Username")
-    st.sidebar.text_input("Password", type="password")
-    st.sidebar.button("Sign In")
+    username = st.sidebar.text_input("Username")
+    password = st.sidebar.text_input("Password", type="password")
+    if username and password:
+        st.sidebar.button("Sign In")
+        return True
+    return False
 
 def sign_out():
     st.sidebar.write("You are signed out.")
 
-signed_in = False
 if st.sidebar.button("Sign In/Out"):
     if signed_in:
         sign_out()
