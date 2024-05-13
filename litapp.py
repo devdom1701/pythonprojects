@@ -11,7 +11,7 @@ item3points = 0
 
 Voted = False
 signed_in = False
-tab1, tab2 = st.columns(2)
+notsignedin = False
 
 messagelog = []
 passwordlist = []
@@ -21,22 +21,24 @@ usernamelistcounter = 0
 foodlist = ["fart", "chicken", "poopp", "bunger", "Fungus"]
 
 # Sign-in Sidebar
-username = st.sidebar.text_input("Username")
-password = st.sidebar.text_input("Password", type="password")
+if not notsignedin:
+    username = st.sidebar.text_input("Username")
+    password = st.sidebar.text_input("Password", type="password")
 
 def sign_in(username, password):
-    global usernamelistcounter
+    global usernamelistcounter, notsignedin
     if len(username) > 3 and len(password) > 3:
         st.sidebar.success(f'Done, signed in as "{username}"')
         usernamelist.append(f"{username}")
         passwordlist.append(f"{password}")
         usernamelistcounter += 1
+        notsignedin = True
         return True
     else:
         st.sidebar.warning("Please enter a valid username and password.")
         return False
 
-if st.sidebar.button("Sign In"):
+if st.sidebar.button("Sign In") and not notsignedin:
     signed_in = sign_in(username, password)
 
 # Voting
@@ -52,7 +54,6 @@ if signed_in:
                 st.toast('Successfully Voted.')
                 Voted = True
                 break
-
     else:
         st.warning('Already Voted Bozo')
 
@@ -66,9 +67,6 @@ if Voted:
             if prompt:
                 messages = st.container()
                 messages.markdown(f'{usernamelist[usernamelistcounter - 1]}: {prompt}', unsafe_allow_html=True)
-
 else:
     if signed_in:
         st.warning("Vote to unlock the comment section..")
-    else:
-        st.warning("Sign in to continue..")
