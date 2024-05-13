@@ -50,7 +50,6 @@ if signed_in:
         for i, food in enumerate(foodlist):
             if st.button(f'Vote for {food}'):
                 itempoints[i] += 1
-                st.bar_chart({food: itempoints[i] for i, food in enumerate(foodlist)})
                 st.toast('Successfully Voted.')
                 Voted = True
                 break
