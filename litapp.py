@@ -40,7 +40,7 @@ with tab1:
 with tab2:
     st.header('Comments')
     with st.container():
-        messages = st.empty()
-        if prompt := st.text_area('Leave a Comment', height=100):
-            messages.write(f'{username}: ' + prompt)
-            messages.write("------------")
+        messages = st.container(height=300)
+        if prompt := st.chat_input("Say sumthin"):
+            messages.chat_message("user").write(prompt)
+            messages.chat_message("assistant").write(f"Echo: {prompt}")
