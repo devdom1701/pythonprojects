@@ -58,6 +58,6 @@ if signed_in:
 
 st.sidebar.header('Comments')
 with st.sidebar:
-    messages = st.container(height=300)
     if prompt := st.text_input("Say something"):
-        messages.markdown(f'**{username}:** {prompt}', unsafe_allow_html=True)
+        with st.container():
+            st.markdown(f'**{username}:** {prompt}', unsafe_allow_html=True)
