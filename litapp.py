@@ -1,5 +1,7 @@
+python
 import streamlit as st
 import time
+
 st.title("Voting Rahhh App")
 
 itemnumba = 0
@@ -17,21 +19,20 @@ passwordlist = []
 usernamelist = []
 usernamelistcounter = 0
 
-foodlist = ["fart","chicken","poopp","bunger","Fungus"]
+foodlist = ["fart", "chicken", "poopp", "bunger", "Fungus"]
 
 # Sign-in Sidebar
 username = st.sidebar.text_input("Username")
 password = st.sidebar.text_input("Password", type="password")
 
 def sign_in(username, password):
+    global usernamelistcounter
     if len(username) > 3 and len(password) > 3:
         st.sidebar.success(f'Done, signed in as "{username}"')
         usernamelist.append(f"{username}")
         passwordlist.append(f"{password}")
+        usernamelistcounter += 1
         return True
-        username = ""
-        usernamecounter += 1
-        password = ""
     else:
         st.sidebar.warning("Please enter a valid username and password.")
         return False
@@ -44,17 +45,17 @@ if signed_in:
     st.header('Voting')
     itempoints = [0] * len(foodlist)
 
-    Voted = False
-
-    for i, food in enumerate(foodlist):
-        if not Voted:
+    if not Voted:
+        for i, food in enumerate(foodlist):
             if st.button(f'Vote for {food}'):
                 itempoints[i] += 1
-                st.bar_chart({food: points for food, points in zip(foodlist, itempoints)})
+                st.bar_chart({food: itempoints[i] for i, food in enumerate(foodlist)})  # Fixed points variable
                 st.toast('Successfully Voted.')
                 Voted = True
-        else:
-            st.warning('Already Voted Bozo')
+                break  # Exit the loop once voted
+
+    else:
+        st.warning('Already Voted Bozo')
 else:
     if Voted:
         tab1 = st.tabs(["Comment"])
@@ -65,6 +66,6 @@ else:
                 prompt = st.text_input("Say something")
                 if prompt:
                     messages = st.container()
-                    messages.markdown(f'{usernamelist[usernamelistcounter]}: {prompt}', unsafe_allow_html=True)
+                    messages.markdown(f'{usernamelist[usernamelistcounter - 1]}: {prompt}', unsafe_allow_html=True)  # Adjusted counter
     else:
         st.warning("Sign in to continue..")
