@@ -1,6 +1,6 @@
 import streamlit as st
 username = "Fart"
-
+#--------- variables ----------
 item1 = 'Chicken'
 item1points = 0
 item2 = 'Phart'
@@ -9,8 +9,10 @@ item3 = 'Rahhh'
 item3points = 0
 Voted = False
 
-tab1, tab2 = st.tabs(["Voting","Comment"])
+messagelog = []
 
+tab1, tab2 = st.tabs(["Voting","Comment"])
+#--------- main code ----------
 with tab1:
     st.header('Voting')
     foodselection = st.radio(
@@ -41,6 +43,10 @@ with tab2:
     st.header('Comments')
     with st.container():
         messages = st.container(height=300)
-        if prompt := st.chat_input("Say sumthin"):
-            messages.chat_message("user").write(prompt)
-            messages.chat_message("assistant").write(f"Echo: {prompt}")
+        prompt = st.text_input("Say something")
+        if prompt:
+            messages.write(f'{username}: {prompt}')
+            messagelog.append(f'{username}: {prompt}')
+        else:
+            for message in messagelog:
+                messages.write(message)
