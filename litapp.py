@@ -16,7 +16,6 @@ usernamelist = []
 usernamelistcounter = 0
 
 foodlist = ["fart", "chicken", "poopp", "bunger", "Fungus"]
-st.title("Voting Ahhh App")
 
 # Sign-in Sidebar
 username = st.sidebar.text_input("Username")
