@@ -57,7 +57,7 @@ with tab1:
                 Voted = True
                 msg = st.toast('Sucessfully Voted.')
     else:
-        msg = st.toast('Sucessfully Voted.')
+        msg = st.toast('Already Voted Bozo')
 
     if Voted:
         st.bar_chart({f'{item1}': item1points, f'{item2}': item2points, f'{item3}': item3points})
