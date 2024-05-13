@@ -18,7 +18,7 @@ messagelog = []
 username = st.sidebar.text_input("Username")
 password = st.sidebar.text_input("Password", type="password")
 
-with st.sidebar.button("Sign In"):
+if st.sidebar.button("Sign In"):
     if not signed_in and not enteredcredentials:
         username = st.sidebar.text_input("Username")
         password = st.sidebar.text_input("Password", type="password")
