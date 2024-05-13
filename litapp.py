@@ -40,6 +40,18 @@ if st.sidebar.button("Sign In"):
     signed_in = sign_in(username, password)
 
 # Voting
+
+if Voted:
+    # Comments
+    st.title('Comments')
+    with st.container():
+        prompt = st.text_input("Say something")
+        if prompt:
+            messages = st.container()
+            messages.markdown(f'{usernamelist[usernamelistcounter - 1]}: {prompt}', unsafe_allow_html=True)
+else:
+    st.sidebar.warning("Sign in to continue..")
+
 if signed_in:
     st.header('Voting')
     itempoints = [0] * len(foodlist)
@@ -53,14 +65,3 @@ if signed_in:
                 st.toast('Successfully Voted.')
                 Voted = True
                 break
-    
-if Voted:
-    # Comments
-    st.title('Comments')
-    with st.container():
-        prompt = st.text_input("Say something")
-        if prompt:
-            messages = st.container()
-            messages.markdown(f'{usernamelist[usernamelistcounter - 1]}: {prompt}', unsafe_allow_html=True)
-else:
-    st.sidebar.warning("Sign in to continue..")
