@@ -56,11 +56,9 @@ if signed_in:
     else:
         st.warning('Already Voted Bozo')
 
-st.header('Comments')
-with st.container():
-    prompt = st.text_input("Say something")
-    if prompt:
-        messages = st.container()
-        if usernamelist:
-            messages.markdown(f'{usernamelist[-1]}: {prompt}', unsafe_allow_html=True)
-
+if len(usernamelist) > 1:
+    st.header('Comments')
+    with st.sidebar:
+        messages = st.container(height=300)
+        if prompt := st.chat_input("Say something"):
+            messages.chat_message(f"{username}").write(prompt)
