@@ -39,8 +39,8 @@ with tab1:
 
 with tab2:
     st.header('Comments')
-    with st.expander("Leave a Comment"):
+    with st.container():
         messages = st.empty()
-        if prompt := st.text_area('Say something', height=100):
+        if prompt := st.text_area('Leave a Comment', height=100):
             messages.write(f'{username}: ' + prompt)
             messages.write("------------")
