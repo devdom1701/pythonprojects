@@ -4,7 +4,6 @@ import time
 st.title("Voting ahhh App")
 
 itemnumba = 0
-
 itempoints = 0
 
 Voted = False
