@@ -25,9 +25,10 @@ username = st.sidebar.text_input("Username")
 password = st.sidebar.text_input("Password", type="password")
 
 def sign_in(username, password, Voted):
-    global usernamelistcounter
+    global usernamelistcounter, signed_in
     if len(username) > 3 and len(password) > 3:
         st.sidebar.success(f'Done, signed in as "{username}"')
+        signed_in = True
         usernamelist.append(f"{username}")
         passwordlist.append(f"{password}")
         usernamelistcounter += 1
