@@ -60,10 +60,10 @@ if signed_in:
 if not Voted:
     if signed_in:
         st.warning("Vote to unlock the comment section..")
-    elif Voted:
-        st.header('Comments')
-        with st.container():
-            prompt = st.text_input("Say something")
-            if prompt:
-                messages = st.container()
-                messages.markdown(f'{usernamelist[usernamelistcounter - 1]}: {prompt}', unsafe_allow_html=True)
+else:
+    st.header('Comments')
+    with st.container():
+        prompt = st.text_input("Say something")
+        if prompt:
+            messages = st.container()
+            messages.markdown(f'{usernamelist[usernamelistcounter - 1]}: {prompt}', unsafe_allow_html=True)
