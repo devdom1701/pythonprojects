@@ -55,13 +55,13 @@ if signed_in:
                 Voted = True
         else:
             st.warning('Already Voted Bozo')
-    if Voted:
-        # Comments
-        st.header('Comments')
-        with st.container():
-            prompt = st.text_input("Say something")
-            if prompt:
-                messages = st.container()
-                messages.markdown(f'{usernamelist[usernamelistcounter]}: {prompt}', unsafe_allow_html=True)
+if Voted:
+    # Comments
+    st.header('Comments')
+    with st.container():
+        prompt = st.text_input("Say something")
+        if prompt:
+            messages = st.container()
+            messages.markdown(f'{usernamelist[usernamelistcounter]}: {prompt}', unsafe_allow_html=True)
 else:
     st.warning("Sign in to continue..")
