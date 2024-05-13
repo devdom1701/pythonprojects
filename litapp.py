@@ -54,13 +54,13 @@ if signed_in:
                 Voted = True
                 break
     
-    elif Voted == True:
-        # Comments
-        st.title('Comments')
-        with st.container():
-            prompt = st.text_input("Say something")
-            if prompt:
-                messages = st.container()
-                messages.markdown(f'{usernamelist[usernamelistcounter - 1]}: {prompt}', unsafe_allow_html=True)
-    else:
-        st.sidebar.warning("Sign in to continue..")
+if Voted:
+    # Comments
+    st.title('Comments')
+    with st.container():
+        prompt = st.text_input("Say something")
+        if prompt:
+            messages = st.container()
+            messages.markdown(f'{usernamelist[usernamelistcounter - 1]}: {prompt}', unsafe_allow_html=True)
+else:
+    st.sidebar.warning("Sign in to continue..")
