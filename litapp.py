@@ -24,20 +24,20 @@ foodlist = ["fart", "chicken", "poopp", "bunger", "Fungus"]
 username = st.sidebar.text_input("Username")
 password = st.sidebar.text_input("Password", type="password")
 
-def sign_in(username, password):
-    global usernamelistcounter, Voted
+def sign_in(username, password, Voted):
+    global usernamelistcounter
     if len(username) > 3 and len(password) > 3:
         st.sidebar.success(f'Done, signed in as "{username}"')
         usernamelist.append(f"{username}")
         passwordlist.append(f"{password}")
         usernamelistcounter += 1
-        Voted = True
+        return True
     else:
         st.sidebar.warning("Please enter a valid username and password.")
-        Voted = False
+        return False
 
 if st.sidebar.button("Sign In"):
-    signed_in = sign_in(username, password)
+    signed_in = sign_in(username, password, Voted)
     st.sidebar.empty()
 
 # Voting
@@ -73,6 +73,7 @@ else:
         st.warning("Vote to unlock the comment section..")
     else:
         st.warning("Sign in to continue..")
+
 
 
 
