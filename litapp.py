@@ -58,10 +58,11 @@ if signed_in:
 
 st.sidebar.header('Comments')
 with st.sidebar:
+    message_history = []
     prompt = st.text_input("Say something")
     if prompt:
-        messagelog.append(f'**{username}:** {prompt}')
+        message_history.append((username, prompt))
 
-    for message in messagelog:
-        with st.container():
-            st.markdown(message, unsafe_allow_html=True)
+    for username, message in message_history:
+        st.chat_message(f"{username}:", message)
+
