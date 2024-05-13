@@ -11,7 +11,7 @@ item3points = 0
 
 Voted = False
 signed_in = False
-notsignedin = True  # Initialize as True to display sign-in initially
+notsignedin = True
 
 messagelog = []
 passwordlist = []
@@ -32,7 +32,7 @@ def sign_in(username, password):
         usernamelist.append(f"{username}")
         passwordlist.append(f"{password}")
         usernamelistcounter += 1
-        notsignedin = False  # Once signed in, set notsignedin to False
+        notsignedin = False
         return True
     else:
         st.sidebar.warning("Please enter a valid username and password.")
@@ -42,7 +42,7 @@ if st.sidebar.button("Sign In") and notsignedin and not Voted:
     signed_in = sign_in(username, password)
 
 # Voting
-if signed_in and not Voted:  # Display voting section only if signed in and not voted
+if signed_in and not Voted:
     st.header('Voting')
     itempoints = [0] * len(foodlist)
 
@@ -54,7 +54,7 @@ if signed_in and not Voted:  # Display voting section only if signed in and not 
             break
 
 # Comments Section
-if Voted:  # Display comment section only if voted
+if Voted:
     st.sidebar.header('Comments')
     with st.sidebar.container():
         prompt = st.sidebar.text_input("Say something")
@@ -62,5 +62,5 @@ if Voted:  # Display comment section only if voted
             messages = st.sidebar.container()
             messages.markdown(f'{usernamelist[usernamelistcounter - 1]}: {prompt}', unsafe_allow_html=True)
 else:
-    if signed_in:  # Display message only if signed in but not voted
+    if signed_in:
         st.sidebar.warning("Vote to unlock the comment section..")
