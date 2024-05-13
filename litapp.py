@@ -57,13 +57,13 @@ if signed_in:
     else:
         st.warning('Already Voted Bozo')
 
-if not Voted:
-    if signed_in:
-        st.warning("Vote to unlock the comment section..")
-else:
+if Voted:
     st.header('Comments')
     with st.container():
         prompt = st.text_input("Say something")
         if prompt:
             messages = st.container()
             messages.markdown(f'{usernamelist[usernamelistcounter - 1]}: {prompt}', unsafe_allow_html=True)
+else:
+    if signed_in:
+        st.warning("Vote to unlock the comment section..")
