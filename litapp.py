@@ -59,5 +59,5 @@ if signed_in:
 st.sidebar.header('Comments')
 with st.sidebar:
     messages = st.container(height=300)
-    if prompt := st.chat_input("Say something"):
-        messages.chat_message(f"{username}").write(f'{username} + {prompt}')
+    if prompt := st.text_input("Say something"):
+        messages.markdown(f'**{username}:** {prompt}', unsafe_allow_html=True)
