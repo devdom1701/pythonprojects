@@ -38,18 +38,19 @@ with tab1:
         col1.metric('Item One', f'{item1}', f'{item1points}')
         col2.metric('Item Two', f'{item2}', f'{item2points}')
         col3.metric('Item Three', f'{item3}', f'{item3points}')
+
 with tab2:
     st.header('Comments')
     with st.container():
         messages = st.container(height=300)
         prompt = st.text_input("Say something")
         if prompt:
-            if messagelog:
-                messages.markdown('<br>', unsafe_allow_html=True)
-            messages.markdown(f'{username}: {prompt}', unsafe_allow_html=True)
+            if messagelog: 
+                combined_messages = "<br>".join(messagelog) + "<br>" + f'{username}: {prompt}'
+            else:
+                combined_messages = f'{username}: {prompt}'
+            messages.markdown(combined_messages, unsafe_allow_html=True)
             messagelog.append(f'{username}: {prompt}')
         else:
-            for message in messagelog:
-                if messagelog.index(message) != 0:
-                    messages.markdown('<br>', unsafe_allow_html=True)
-                messages.markdown(f'{message}', unsafe_allow_html=True)
+            combined_messages = "<br>".join(messagelog)
+            messages.markdown(combined_messages, unsafe_allow_html=True)
