@@ -48,15 +48,14 @@ if signed_in:
         for i, food in enumerate(foodlist):
             if st.button(f'Vote for {food}'):
                 itempoints[i] += 1
-                st.bar_chart({food: itempoints[i] for i, food in enumerate(foodlist)})
+                st.bar_chart({food: itempoints[i] for i, food in enumerate(foodlist)})  # Fixed points variable
                 st.toast('Successfully Voted.')
                 Voted = True
-                break
-
+                break 
     else:
         st.warning('Already Voted Bozo')
 
-if Voted:
+if signed_in and Voted:
     tab1 = st.tabs(["Comment"])
     with tab1:
         # Comments
