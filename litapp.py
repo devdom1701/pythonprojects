@@ -14,16 +14,15 @@ enteredcredentials = False
 
 tab1, tab2 = st.columns(2)
 messagelog = []
-
+#_____ Sign-in Sidebar _____
 username = st.sidebar.text_input("Username")
 password = st.sidebar.text_input("Password", type="password")
 
 if st.sidebar.button("Sign In"):
     if not signed_in and not enteredcredentials:
-        username = st.sidebar.text_input("Username")
-        password = st.sidebar.text_input("Password", type="password")
-        st.title(username + password)
+        st.title("Not signed in Brotha")
 
+#_____Voting____
 with tab1:
     st.header('Voting')
     foodselection = st.radio(
