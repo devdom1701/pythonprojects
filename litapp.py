@@ -61,5 +61,3 @@ with st.container():
     prompt = st.text_input("Say something")
     if prompt:
         messages = st.container()
-        if len(usernamelist) > 1:
-            messages.markdown(f'{usernamelist[-1]}: {prompt}', unsafe_allow_html=True)
