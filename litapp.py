@@ -43,7 +43,7 @@ if signed_in:
                 itempoints[i] += 1
                 st.bar_chart({food: points for food, points in zip(foodlist, itempoints)})
                 Voted = True
-                st.info('Successfully Voted.')
+                st.toast('Successfully Voted.')
         else:
             st.warning('Already Voted Bozo')
     if Voted:
