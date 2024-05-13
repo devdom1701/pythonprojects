@@ -32,6 +32,9 @@ with tab1:
             if st.button('Vote'):
                 item3points += 1
                 Voted = True
+    else:
+        st.error("You have already voted!")
+
     if Voted:
         st.bar_chart({f'{item1}': item1points, f'{item2}': item2points, f'{item3}': item3points})
 
