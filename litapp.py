@@ -20,6 +20,11 @@ usernamelistcounter = 0
 
 foodlist = ["fart", "chicken", "poopp", "bunger", "Fungus"]
 
+# Sign-in Sidebar
+if notsignedin and not Voted:
+    username = st.sidebar.text_input("Username")
+    password = st.sidebar.text_input("Password", type="password")
+
 def sign_in(username, password):
     global usernamelistcounter, notsignedin
     if len(username) > 3 and len(password) > 3:
@@ -31,12 +36,8 @@ def sign_in(username, password):
     else:
         st.sidebar.warning("Please enter a valid username and password.")
 
-# Sign-in Sidebar
-if notsignedin and not Voted:
-    username = st.sidebar.text_input("Username")
-    password = st.sidebar.text_input("Password", type="password")
-    if st.sidebar.button("Sign In"):
-        signed_in = sign_in(username, password)
+if st.sidebar.button("Sign In") and notsignedin and not Voted:
+    signed_in = sign_in(username, password)
 
 # Voting
 if signed_in and not Voted:
@@ -58,3 +59,6 @@ if Voted:
         if prompt:
             messages = st.sidebar.container()
             messages.markdown(f'{usernamelist[usernamelistcounter - 1]}: {prompt}', unsafe_allow_html=True)
+else:
+    if signed_in:
+        st.sidebar.warning("Vote to unlock the comment section..")
