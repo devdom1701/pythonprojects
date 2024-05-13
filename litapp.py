@@ -59,9 +59,9 @@ if signed_in:
 else:
     if signed_in:
         st.warning("Vote to unlock the comment section..")
-    elif signed_in and Voted == True:
+    elif Voted == True:
         # Comments
-        st.header('Comments')
+        st.title('Comments')
         with st.container():
             prompt = st.text_input("Say something")
             if prompt:
