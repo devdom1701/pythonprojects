@@ -10,7 +10,6 @@ item3 = 'Rahhh'
 item3points = 0
 Voted = False
 signed_in = False
-enteredcredentials = False
 
 tab1, tab2 = st.columns(2)
 messagelog = []
@@ -19,8 +18,12 @@ username = st.sidebar.text_input("Username")
 password = st.sidebar.text_input("Password", type="password")
 
 if st.sidebar.button("Sign In"):
-    if not signed_in and not enteredcredentials:
-        st.title("Not signed in Brotha")
+    if len(username and password) > 1:
+        signed_in = True
+    if not signed_in:
+        st.sidebar.title("Not signed in Brotha")
+    elif signed_in:
+        st.sidebar.title("AAAAAHHH")
 
 #_____Voting____
 with tab1:
