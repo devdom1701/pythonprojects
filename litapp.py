@@ -42,15 +42,11 @@ with tab1:
 with tab2:
     st.header('Comments')
     with st.container():
-        messages = st.container(height=300)
         prompt = st.text_input("Say something")
         if prompt:
-            if messagelog: 
-                combined_messages = "<br>".join(messagelog) + "<br>" + f'{username}: {prompt}'
-            else:
-                combined_messages = f'{username}: {prompt}'
-            messages.markdown(combined_messages, unsafe_allow_html=True)
+            messages = st.container()
+            messages.markdown(f'{username}: {prompt}', unsafe_allow_html=True)
             messagelog.append(f'{username}: {prompt}')
         else:
-            combined_messages = "<br>".join(messagelog)
-            messages.markdown(combined_messages, unsafe_allow_html=True)
+            for message in messagelog:
+                st.container().markdown(f'{message}', unsafe_allow_html=True)
