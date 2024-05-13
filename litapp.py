@@ -1,6 +1,6 @@
 import streamlit as st
+
 username = "Fart"
-#--------- variables ----------
 item1 = 'Chicken'
 item1points = 0
 item2 = 'Phart'
@@ -9,10 +9,9 @@ item3 = 'Rahhh'
 item3points = 0
 Voted = False
 
+tab1, tab2 = st.columns(2)
 messagelog = []
 
-tab1, tab2 = st.tabs(["Voting","Comment"])
-#--------- main code ----------
 with tab1:
     st.header('Voting')
     foodselection = st.radio(
@@ -34,10 +33,7 @@ with tab1:
                 item3points += 1
                 Voted = True
     if Voted:
-        col1, col2, col3 = st.columns(3)
-        col1.metric('Item One', f'{item1}', f'{item1points}')
-        col2.metric('Item Two', f'{item2}', f'{item2points}')
-        col3.metric('Item Three', f'{item3}', f'{item3points}')
+        st.bar_chart({f'{item1}': item1points, f'{item2}': item2points, f'{item3}': item3points})
 
 with tab2:
     st.header('Comments')
@@ -46,7 +42,6 @@ with tab2:
         if prompt:
             messages = st.container()
             messages.markdown(f'{username}: {prompt}', unsafe_allow_html=True)
-            messagelog.append(f'{username}: {prompt}')
         else:
             for message in messagelog:
                 st.container().markdown(f'{message}', unsafe_allow_html=True)
