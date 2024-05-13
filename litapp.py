@@ -27,8 +27,7 @@ if st.sidebar.button("Sign In"):
         with st.sidebar:
             with st.spinner('Loading...'):
                 time.sleep(5)
-                st.sidebar.success('Done!')
-                st.sidebar.title("AAAAAHHH")
+                st.sidebar.success(f'Done, signed in as {username}')
 
 #_____Voting____
 with tab1:
