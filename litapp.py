@@ -1,4 +1,5 @@
 import streamlit as st
+st.title("Voting Rahhh App")
 
 username = "Fart"
 item1 = 'Chicken'
@@ -9,8 +10,26 @@ item3 = 'Rahhh'
 item3points = 0
 Voted = False
 
+
 tab1, tab2 = st.columns(2)
 messagelog = []
+
+def sign_in():
+    st.sidebar.text_input("Username")
+    st.sidebar.text_input("Password", type="password")
+    st.sidebar.button("Sign In")
+
+def sign_out():
+    st.sidebar.write("You are signed out.")
+
+signed_in = False
+if st.sidebar.button("Sign In/Out"):
+    if signed_in:
+        sign_out()
+        signed_in = False
+    else:
+        sign_in()
+        signed_in = True
 
 with tab1:
     st.header('Voting')
