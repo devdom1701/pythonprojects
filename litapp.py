@@ -1,7 +1,7 @@
 import streamlit as st
 import time
 
-st.title("Voting Rahhh App")
+st.title("Voting ahhh App")
 
 itemnumba = 0
 
