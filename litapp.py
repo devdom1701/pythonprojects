@@ -30,7 +30,7 @@ if st.sidebar.button("Sign In"):
     sign_in(username, password)
 
 # Voting
-if st.session_state.signed_in:
+if st.session_state.signed_in and not Voted:
     st.header('Voting')
     foodlist = ["fart", "chicken", "poopp", "bunger", "Fungus", "Monkey(Because why not)"]
     for i in foodlist:
