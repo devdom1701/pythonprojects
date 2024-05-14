@@ -48,12 +48,10 @@ if st.sidebar.button("Sign In"):
 if signed_in:
     st.header('Voting')
     votes = [0] * len(foodlist)
-    for i, food in enumerate(foodlist):
-
-        while st.button(f'Vote for {food}'):
-            votes[i] += 1
-            st.toast('Successfully Voted.')
+    for i in foodlist:
+        if st.button(f'Vote for {i}'):
             Voted = True
+            st.toast('Successfully Voted.')
             st.title("Voted!!!")
 
     while Voted:
