@@ -5,9 +5,11 @@ st.title("Voting ahhh App")
 
 itemnumba = 0
 itempoints = 0
+signincounter = 0
 
 Voted = False
-signed_in = False
+if signincounter == 0:
+    signed_in = False
 tab1, tab2 = st.columns(2)
 
 messagelog = []
@@ -31,6 +33,7 @@ def sign_in(username, password):
         st.sidebar.success(f'Done, signed in as "{username}"')
         users[username] = {'password': password, 'Voted': False}
         signed_in = True
+        signincounter += 1
     else:
         st.sidebar.warning("Please enter a valid username and password.")
 
@@ -48,11 +51,13 @@ if signed_in:
             st.bar_chart({food: votes[i] for i, food in enumerate(foodlist)})
             st.toast('Successfully Voted.')
             signed_in = True
+            signincounter += 1
             break
     if not any(user['Voted'] for user in users.values()):
         st.warning("Vote to unlock the comment section.")
     else:
         signed_in = True
+        signincounter += 1
 else:
     st.sidebar.warning("Sign in to continue.")
 
