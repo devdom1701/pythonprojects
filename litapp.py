@@ -36,7 +36,7 @@ def sign_in(username, password):
         st.sidebar.success(f'Done, signed in as "{username}"')
         signed_in = True
         signincounter += 1
-        users[username] = {'password': password, 'Voted': False}
+        users[username] = {'password': password}
     else:
         st.sidebar.warning("Please enter a valid username and password.")
 
