@@ -28,7 +28,7 @@ users = {}
 def sign_in(username, password):
     if len(username) > 3 and len(password) > 3:
         st.sidebar.success(f'Done, signed in as "{username}"')
-        users[username] = {'password': password, 'voted': False}
+        users[username] = {'password': password, 'Voted': False}
         return True
     else:
         st.sidebar.warning("Please enter a valid username and password.")
@@ -48,15 +48,15 @@ if signed_in:
             votes[i] += 1
             st.bar_chart({food: votes[i] for i, food in enumerate(foodlist)})
             st.success('Successfully Voted.')
-            users[username]['voted'] = True
+            users[username]['Voted'] = True
             break
-    if not any(user['voted'] for user in users.values()):
+    if not any(user['Voted'] for user in users.values()):
         st.warning("Vote to unlock the comment section.")
 else:
     st.sidebar.warning("Sign in to continue.")
 
 # Comments
-if signed_in and users[username]['voted']:
+if not signed_in and users[username]['Voted']:
     st.header('Comments')
     prompt = st.text_input("Say something")
     if prompt:
