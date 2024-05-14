@@ -36,7 +36,7 @@ if st.session_state.signed_in and st.session_state.votedcounter == 0:
     if st.session_state.votedcounter == 0:
         for i in foodlist:
             if st.button(f'Vote for {i}'):
-                st.toast('Successfully Voted.')
+                st.toast(f'Successfully Voted for {i}')
                 st.session_state.Voted = True
                 st.session_state.votedcounter += 1
 
