@@ -1,63 +1,49 @@
 import streamlit as st
-import time
 
-st.title("Voting ahhh App")
+if 'signincounter' not in st.session_state:
+    st.session_state.signincounter = 0
+if 'votedcounter' not in st.session_state:
+    st.session_state.votedcounter = 0
+if 'Voted' not in st.session_state:
+    st.session_state.Voted = False
+if 'signed_in' not in st.session_state:
+    st.session_state.signed_in = False
 
-itemnumba = 0
-itempoints = 0
-signincounter = 0
-votedcounter = 0
+st.title("Voting Ahhh App")
 
-if votedcounter == 0:
-    Voted = False
-else:
-    Voted = True
-
-if signincounter == 0:
-    signed_in = False
-else:
-    signed_in = True
-
-tab1, tab2 = st.columns(2)
-
-messagelog = []
-passwordlist = []
-usernamelist = []
-usernamelistcounter = 0
-
-foodlist = ["fart", "chicken", "poopp", "bunger", "Fungus", "Monkey(Because why not)"]
+# Function to sign in
+def sign_in(username, password):
+    if len(username) > 3 and len(password) > 3:
+        st.sidebar.success(f'Done, signed in as "{username}"')
+        st.toast("Signed In")
+        st.session_state.signed_in = True
+        st.session_state.signincounter += 1
+    else:
+        st.sidebar.warning("Please enter a valid username and password.")
 
 # Sign-in Sidebar
 username = st.sidebar.text_input("Username")
 password = st.sidebar.text_input("Password", type="password")
 
-def sign_in(username, password):
-    global signed_in, signincounter
-    if len(username) > 3 and len(password) > 3:
-        st.sidebar.success(f'Done, signed in as "{username}"')
-        st.toast("Signed In")
-        signed_in = True
-        signincounter += 1
-    else:
-        st.sidebar.warning("Please enter a valid username and password.")
-
 # Sign in
 if st.sidebar.button("Sign In"):
-    signinfield = sign_in(username, password)
+    sign_in(username, password)
 
 # Voting
-if signed_in:
+if st.session_state.signed_in:
     st.header('Voting')
-    votes = [0] * len(foodlist)
+    foodlist = ["fart", "chicken", "poopp", "bunger", "Fungus", "Monkey(Because why not)"]
     for i in foodlist:
         if st.button(f'Vote for {i}'):
             st.toast('Successfully Voted.')
-            Voted = True
-            votedcounter += 1
-    while Voted:
-        st.header('Comments')
-        prompt = st.text_input("Say something")
-        if prompt:
-            st.markdown(f'{username}: {prompt}', unsafe_allow_html=True)
-#else:
-    #st.sidebar.warning("Sign in to continue.")
+            st.session_state.Voted = True
+            st.session_state.votedcounter += 1
+
+# Comments
+if st.session_state.Voted:
+    st.header('Comments')
+    prompt = st.text_input("Say something")
+    if prompt:
+        st.markdown(f'{username}: {prompt}', unsafe_allow_html=True)
+else:
+    st.sidebar.warning("Sign in to continue.")
