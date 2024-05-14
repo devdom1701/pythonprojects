@@ -34,12 +34,12 @@ if st.session_state.signed_in and st.session_state.votedcounter == 0:
     st.header('Voting')
     foodlist = ["fart", "chicken", "poopp", "bunger", "Fungus", "Monkey(Because why not)", "Freaky Drizzy🥵🥵😍😍", "Mold", "Soul food But Freaky"]
     for i in foodlist:
-        if st.button(f'Vote for {i}'):
-            st.empty()
-            st.toast(f'Successfully Voted for {i}')
-            st.session_state.votedcounter += 1
-            st.session_state.Voted = True
-        # Clear the voting options
+        if not st.session_state.Voted:
+            if st.button(f'Vote for {i}'):
+                st.toast(f'Successfully Voted for {i}')
+                st.session_state.votedcounter += 1
+                st.session_state.Voted = True
+            # Clear the voting options
 
 # Comments
 if st.session_state.Voted and st.session_state.signed_in:
