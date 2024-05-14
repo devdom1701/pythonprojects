@@ -46,6 +46,7 @@ if st.sidebar.button("Sign In"):
 
 # Voting
 if signed_in:
+    st.title("Signed in!!!")
     st.header('Voting')
     votes = [0] * len(foodlist)
     for i, food in enumerate(foodlist):
@@ -54,7 +55,9 @@ if signed_in:
             # st.bar_chart({food: votes[i] for i, food in enumerate(foodlist)})
             st.toast('Successfully Voted.')
             Voted = True
+            st.title("Voted!!!")
     if Voted:
+        st.title("Voted!!!")
         st.header('Comments')
         prompt = st.text_input("Say something")
         if prompt:
