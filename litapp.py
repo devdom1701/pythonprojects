@@ -41,7 +41,7 @@ if st.session_state.signed_in and not st.session_state.Voted:
             st.session_state.Voted = True
 
 # Comments
-if st.session_state.Voted and st.session_state.signed_in and st.session_state.votedcounter == 2:
+if st.session_state.Voted and st.session_state.signed_in and st.session_state.votedcounter > 1:
     st.toast(f'Voted for {i}')
     st.header('Comments')
     prompt = st.text_input("Say something")
