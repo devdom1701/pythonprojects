@@ -20,7 +20,7 @@ passwordlist = []
 usernamelist = []
 usernamelistcounter = 0
 
-foodlist = ["fart", "chicken", "poopp", "bunger", "Fungus", "Mon"]
+foodlist = ["fart", "chicken", "poopp", "bunger", "Fungus", "Monkey(Because why not)"]
 
 # Sign-in Sidebar
 username = st.sidebar.text_input("Username")
