@@ -26,17 +26,17 @@ users = {}
 
 # Function to sign in
 def sign_in(username, password):
+    global signed_in
     if len(username) > 3 and len(password) > 3:
         st.sidebar.success(f'Done, signed in as "{username}"')
         users[username] = {'password': password, 'Voted': False}
-        return True
+        signed_in = True
     else:
         st.sidebar.warning("Please enter a valid username and password.")
-        return False
 
 # Sign in
 if st.sidebar.button("Sign In"):
-    signed_in = sign_in(username, password)
+    signinfield = sign_in(username, password)
 
 # Voting
 if signed_in:
