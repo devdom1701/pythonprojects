@@ -51,10 +51,10 @@ if signed_in:
     votes = [0] * len(foodlist)
     for i in foodlist:
         if st.button(f'Vote for {i}'):
+            st.toast('Successfully Voted.')
             Voted = True
             votedcounter += 1
-            st.toast('Successfully Voted.')
-    if Voted:
+    while Voted:
         st.header('Comments')
         prompt = st.text_input("Say something")
         if prompt:
