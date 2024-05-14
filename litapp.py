@@ -12,7 +12,7 @@ if signincounter == 0:
     signed_in = False
 else:
     signed_in = True
-    
+
 tab1, tab2 = st.columns(2)
 
 messagelog = []
@@ -34,9 +34,9 @@ def sign_in(username, password):
     global signed_in, signincounter
     if len(username) > 3 and len(password) > 3:
         st.sidebar.success(f'Done, signed in as "{username}"')
-        users[username] = {'password': password, 'Voted': False}
         signed_in = True
         signincounter += 1
+        users[username] = {'password': password, 'Voted': False}
     else:
         st.sidebar.warning("Please enter a valid username and password.")
 
@@ -51,24 +51,13 @@ if signed_in:
     for i, food in enumerate(foodlist):
         if st.button(f'Vote for {food}'):
             votes[i] += 1
-            st.bar_chart({food: votes[i] for i, food in enumerate(foodlist)})
+            # st.bar_chart({food: votes[i] for i, food in enumerate(foodlist)})
             st.toast('Successfully Voted.')
-            signed_in = True
-            signincounter += 1
-            break
-    if not any(user['Voted'] for user in users.values()):
-        st.warning("Vote to unlock the comment section.")
-    else:
-        signed_in = True
-        signincounter += 1
+            Voted = True
+    if Voted:
+        st.header('Comments')
+        prompt = st.text_input("Say something")
+        if prompt:
+            st.markdown(f'{username}: {prompt}', unsafe_allow_html=True)
 else:
     st.sidebar.warning("Sign in to continue.")
-
-# Comments
-if not signed_in:
-    st.warning("Vote and Sign in to leave a comment.")
-if signed_in:
-    st.header('Comments')
-    prompt = st.text_input("Say something")
-    if prompt:
-        st.markdown(f'{username}: {prompt}', unsafe_allow_html=True)
