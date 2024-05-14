@@ -38,6 +38,8 @@ if st.session_state.signed_in and not st.session_state.Voted:
         if button:
             st.toast(f'Press Again to vote for {i}')
             st.session_state.votedcounter += 1
+            if votedcounter == 1:
+                st.session_state.Voted = True
 
 # Comments
 if st.session_state.Voted and st.session_state.signed_in:
