@@ -10,6 +10,9 @@ signincounter = 0
 Voted = False
 if signincounter == 0:
     signed_in = False
+else:
+    signed_in = True
+    
 tab1, tab2 = st.columns(2)
 
 messagelog = []
@@ -64,8 +67,7 @@ else:
 # Comments
 if not signed_in:
     st.warning("Vote and Sign in to leave a comment.")
-else:
-    sign_in = True
+if signed_in:
     st.header('Comments')
     prompt = st.text_input("Say something")
     if prompt:
