@@ -28,7 +28,7 @@ users = {}
 
 # Function to sign in
 def sign_in(username, password):
-    global signed_in
+    global signed_in, signincounter
     if len(username) > 3 and len(password) > 3:
         st.sidebar.success(f'Done, signed in as "{username}"')
         users[username] = {'password': password, 'Voted': False}
