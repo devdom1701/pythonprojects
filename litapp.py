@@ -49,6 +49,7 @@ if signed_in:
             st.bar_chart({food: votes[i] for i, food in enumerate(foodlist)})
             st.success('Successfully Voted.')
             users[username]['Voted'] = True
+            signed_in = True
             break
     if not any(user['Voted'] for user in users.values()):
         st.warning("Vote to unlock the comment section.")
