@@ -60,4 +60,4 @@ if signed_in:
         if prompt:
             st.markdown(f'{username}: {prompt}', unsafe_allow_html=True)
 else:
-    st.sidebar.warning("Sign in to continue.")
+    #st.sidebar.warning("Sign in to continue.")
