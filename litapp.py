@@ -30,9 +30,9 @@ if st.sidebar.button("Sign In"):
     sign_in(username, password)
 
 # Voting
-if st.session_state.signed_in:
+if st.session_state.signed_in and st.session_state.votedcounter == 0:
     st.header('Voting')
-    foodlist = ["fart", "chicken", "poopp", "bunger", "Fungus", "Monkey(Because why not)","Freaky Drizzy🥵🥵😍😍","Feaky Night Special", "Mold"]
+    foodlist = ["fart", "chicken", "poopp", "bunger", "Fungus", "Monkey(Because why not)","Freaky Drizzy🥵🥵😍😍", "Mold"]
     for i in foodlist:
         if st.button(f'Vote for {i}'):
             st.toast('Successfully Voted.')
