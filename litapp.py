@@ -20,7 +20,7 @@ passwordlist = []
 usernamelist = []
 usernamelistcounter = 0
 
-foodlist = ["fart", "chicken", "poopp", "bunger", "Fungus"]
+foodlist = ["fart", "chicken", "poopp", "bunger", "Fungus", "Mon"]
 
 # Sign-in Sidebar
 username = st.sidebar.text_input("Username")
@@ -50,7 +50,7 @@ if signed_in:
     votes = [0] * len(foodlist)
     for i, food in enumerate(foodlist):
 
-        with st.button(f'Vote for {food}'):
+        while st.button(f'Vote for {food}'):
             votes[i] += 1
             st.toast('Successfully Voted.')
             Voted = True
