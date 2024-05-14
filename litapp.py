@@ -21,18 +21,16 @@ def sign_in(username, password):
     else:
         st.sidebar.warning("Please enter a valid username and password.")
 
-# Sign-in Sidebar
 username = st.sidebar.text_input("Username")
 password = st.sidebar.text_input("Password", type="password")
 
-# Sign in
 if st.sidebar.button("Sign In"):
     sign_in(username, password)
 
 # Voting
 if st.session_state.signed_in and st.session_state.votedcounter == 0:
     st.header('Voting')
-    foodlist = ["fart", "chicken", "poopp", "bunger", "Fungus", "Monkey(Because why not)","Freaky Drizzy🥵🥵😍😍", "Mold","Soul food But Freaky"]
+    foodlist = ["fart", "chicken", "poopp", "bunger", "Fungus","Mold","Starvation"]
     for i in foodlist:
         if st.button(f'Vote for {i}'):
             st.toast(f'Successfully Voted for {i}')
@@ -47,4 +45,4 @@ if st.session_state.Voted and st.session_state.signed_in:
     if prompt:
         st.markdown(f'{username}: {prompt}', unsafe_allow_html=True)
 else:
-    st.sidebar.warning("Sign in to continue.🤜🏿✌🏽🤜🏿✌🏽🤞🏼🤛🏾🖕🏻✍🏿🤚🏾🖐🏾✋🏽🖖🏿🤞🏼🤛🏾🖕🏻✍🏿🤜🏿✌🏽🤞🏼🤛🏾🖕🏻✍🏿🤚🏾🖐🏾✋🏽🖖🏿🤞🏼🤛🏾🖕🏻✍🏿🤜🏿✌🏽🤞🏼🤛🏾🖕🏻✍🏿🤚🏾🖐🏾✋🏽🖖🏿🤞🏼🤛🏾🖕🏻✍🏿🤜🏿🤜🏿✌🏽🤞🏼🤛🏾🖕🏻✍🏿🤚🏾🖐🏾✋🏽🖖🏿🤞🏼🤛🏾🖕🏻✍🏿🤜🏿✌🏽🤞🏼🤛🏾🖕🏻🤜🏿✌🏽🤞🏼🤛🏾🖕🏻✍🏿🤚🏾🖐🏾✋🏽🖖🏿🤜🏿✌🏽🤞🏼🤜🏿✌🏽🤞🏼🤛🏾🖕🏻✍🏿🤚🏾🖐🏾✋🏽🖖🏿🤛🏾🖕🏻✍🏿🤚🏾🖐🏾✋🏽🖖🏿🖐🏾✋🏽🖖🏿🤚🏾🤜🏿✌")
+    st.sidebar.warning("Sign in to continue.")
