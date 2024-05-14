@@ -34,9 +34,8 @@ if st.session_state.signed_in and not st.session_state.Voted:
     for i in foodlist:
         button = st.button(f'Vote for "{i}"')
         if st.session_state.Voted:
-            st.toast("YOu cant VOTE anymore!!!!!")
-            st.empty()
-        elif button:
+            foodlist = []
+        if button:
             st.toast(f'Successfully Voted for {i}')
             st.session_state.votedcounter += 1
             st.session_state.Voted = True
