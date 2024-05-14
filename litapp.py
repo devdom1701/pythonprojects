@@ -59,5 +59,5 @@ if signed_in:
         prompt = st.text_input("Say something")
         if prompt:
             st.markdown(f'{username}: {prompt}', unsafe_allow_html=True)
-else:
+#else:
     #st.sidebar.warning("Sign in to continue.")
