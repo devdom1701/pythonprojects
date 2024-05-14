@@ -6,8 +6,13 @@ st.title("Voting ahhh App")
 itemnumba = 0
 itempoints = 0
 signincounter = 0
+votedcounter = 0
 
-Voted = False
+if votedcounter == 0:
+    Voted = False
+else:
+    Voted = True
+
 if signincounter == 0:
     signed_in = False
 else:
@@ -26,17 +31,13 @@ foodlist = ["fart", "chicken", "poopp", "bunger", "Fungus", "Monkey(Because why 
 username = st.sidebar.text_input("Username")
 password = st.sidebar.text_input("Password", type="password")
 
-# Data storage
-users = {}
-
-# Function to sign in
 def sign_in(username, password):
     global signed_in, signincounter
     if len(username) > 3 and len(password) > 3:
         st.sidebar.success(f'Done, signed in as "{username}"')
+        st.toast("Signed In")
         signed_in = True
         signincounter += 1
-        users[username] = {'password': password}
     else:
         st.sidebar.warning("Please enter a valid username and password.")
 
@@ -51,11 +52,9 @@ if signed_in:
     for i in foodlist:
         if st.button(f'Vote for {i}'):
             Voted = True
+            votedcounter += 1
             st.toast('Successfully Voted.')
-            st.title("Voted!!!")
-
-    while Voted:
-        st.title("Voted!!!")
+    if Voted:
         st.header('Comments')
         prompt = st.text_input("Say something")
         if prompt:
