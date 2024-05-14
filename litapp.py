@@ -41,13 +41,12 @@ if st.sidebar.button("Sign In"):
 # Voting
 if signed_in:
     st.header('Voting')
-    foodlist = ["fart", "chicken", "poopp", "bunger", "Fungus"]
     votes = [0] * len(foodlist)
     for i, food in enumerate(foodlist):
         if st.button(f'Vote for {food}'):
             votes[i] += 1
             st.bar_chart({food: votes[i] for i, food in enumerate(foodlist)})
-            st.success('Successfully Voted.')
+            st.toast('Successfully Voted.')
             signed_in = True
             break
     if not any(user['Voted'] for user in users.values()):
@@ -58,11 +57,11 @@ else:
     st.sidebar.warning("Sign in to continue.")
 
 # Comments
-st.header('Comments')
 if not signed_in:
     st.warning("Vote and Sign in to leave a comment.")
 else:
     sign_in = True
+    st.header('Comments')
     prompt = st.text_input("Say something")
     if prompt:
         st.markdown(f'{username}: {prompt}', unsafe_allow_html=True)
