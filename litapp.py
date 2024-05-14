@@ -9,8 +9,6 @@ if 'Voted' not in st.session_state:
 if 'signed_in' not in st.session_state:
     st.session_state.signed_in = False
 
-NotVoted = True
-
 st.title("Voting Ahhh App")
 
 # Function to sign in
@@ -35,13 +33,11 @@ if st.sidebar.button("Sign In"):
 if st.session_state.signed_in and st.session_state.votedcounter == 0:
     st.header('Voting')
     foodlist = ["fart", "chicken ", "poopp", "bunger", "Fungus", "Monkey(Because why not)","Freaky Drizzy🥵🥵😍😍", "Mold","Soul food But Freaky"]
-    while NotVoted:
-        for i in foodlist:
-            if st.button(f'Vote for {i}'):
-                st.toast(f'Successfully Voted for {i}')
-                st.session_state.Voted = True
-                NotVoted = False
-                st.session_state.votedcounter += 1
+    for i in foodlist:
+        if st.button(f'Vote for {i}'):
+            st.toast(f'Successfully Voted for {i}')
+            st.session_state.Voted = True
+            st.session_state.votedcounter += 1
 
 # Comments
 if st.session_state.Voted and st.session_state.signed_in:
