@@ -9,9 +9,7 @@ if 'Voted' not in st.session_state:
 if 'signed_in' not in st.session_state:
     st.session_state.signed_in = False
 
-st.title("Voting App")
-if not st.session_state.signed_in:
-    st.write("##### --- sign in to continue --- ")
+st.title("Voting for Food App")
 
 # Function to sign in
 def sign_in(username, password):
@@ -38,11 +36,10 @@ if st.session_state.signed_in and not st.session_state.Voted:
         if button:
             st.toast(f'Press Again to vote for {i}')
             st.session_state.votedcounter += 1
-            if st.session_state.votedcounter == 1:
-                st.session_state.Voted = True
+            st.session_state.Voted = True
 
 # Comments
-if st.session_state.Voted and st.session_state.signed_in:
+if st.session_state.Voted and st.session_state.signed_in and st.session_state.votedcounter == 2:
     st.toast(f'Voted for {i}')
     st.header('Comments')
     prompt = st.text_input("Say something")
