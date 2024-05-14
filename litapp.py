@@ -57,10 +57,9 @@ else:
 
 # Comments
 st.header('Comments')
-prompt = st.text_input("Say something")
-if prompt:
-    st.markdown(f'{username}: {prompt}', unsafe_allow_html=True)
-elif not signed_in:
+if not signed_in:
     st.warning("Vote and Sign in to leave a comment.")
 else:
-    st.warning("Vote and Sign in to leave a comment.")
+    prompt = st.text_input("Say something")
+    if prompt:
+        st.markdown(f'{username}: {prompt}', unsafe_allow_html=True)
