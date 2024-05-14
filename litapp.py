@@ -30,13 +30,12 @@ if st.sidebar.button("Sign In"):
 # Voting
 if st.session_state.signed_in and not st.session_state.Voted:
     st.header('Voting')
-    if not st.session_state.Voted:
-        st.session_state.foodlist = ["fart", "chicken", "poopp", "bunger", "Fungus","Mold","Starvation"]
-    else:
-        st.session_state.foodlist = []
+    foodlist = ["fart", "chicken", "poopp", "bunger", "Fungus","Mold","Starvation"]
     for i in st.session_state.foodlist:
         button = st.button(f'Vote for "{i}"')
-        if button:
+        if st.session_state.Voted:
+            st.toast("YOu cant VOTE anymore!!!!!")
+        elif button:
             st.toast(f'Successfully Voted for {i}')
             st.session_state.votedcounter += 1
             st.session_state.Voted = True
@@ -48,4 +47,4 @@ if st.session_state.Voted and st.session_state.signed_in:
     if prompt:
         st.markdown(f'{username}: {prompt}', unsafe_allow_html=True)
 else:
-    st.sidebar.warning("Sign in to continue.)")
+    st.sidebar.warning("Sign in to continue.")
