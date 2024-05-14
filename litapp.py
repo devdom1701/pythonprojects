@@ -56,10 +56,11 @@ else:
     st.sidebar.warning("Sign in to continue.")
 
 # Comments
-if not signed_in and users[username]['Voted']:
-    st.header('Comments')
-    prompt = st.text_input("Say something")
-    if prompt:
-        st.markdown(f'{username}: {prompt}', unsafe_allow_html=True)
-    else:
-        st.warning("Type something to leave a comment.")
+st.header('Comments')
+prompt = st.text_input("Say something")
+if prompt:
+    st.markdown(f'{username}: {prompt}', unsafe_allow_html=True)
+elif not signed_in:
+    st.warning("Vote and Sign in to leave a comment.")
+else:
+    st.warning("Vote and Sign in to leave a comment.")
