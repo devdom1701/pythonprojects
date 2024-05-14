@@ -32,14 +32,13 @@ if st.sidebar.button("Sign In"):
 # Voting
 if st.session_state.signed_in and st.session_state.votedcounter == 0:
     st.header('Voting')
-    foodlist = ["fart", "chicken", "poopp", "bunger", "Fungus", "Monkey(Because why not)", "Freaky Drizzy🥵🥵😍😍", "Mold", "Soul food But Freaky"]
+    foodlist = ["fart", "chicken", "poopp", "bunger", "Fungus", "Monkey(Because why not)","Freaky Drizzy🥵🥵😍😍", "Mold","Soul food But Freaky"]
     for i in foodlist:
-        if not st.session_state.Voted:
-            if st.button(f'Vote for {i}'):
-                st.toast(f'Successfully Voted for {i}')
-                st.session_state.votedcounter += 1
-                st.session_state.Voted = True
-            # Clear the voting options
+        if st.button(f'Vote for {i}'):
+            st.toast(f'Successfully Voted for {i}')
+            st.session_state.votedcounter += 1
+            st.session_state.Voted = True
+            st.empty()
 
 # Comments
 if st.session_state.Voted and st.session_state.signed_in:
@@ -48,4 +47,4 @@ if st.session_state.Voted and st.session_state.signed_in:
     if prompt:
         st.markdown(f'{username}: {prompt}', unsafe_allow_html=True)
 else:
-    st.sidebar.warning("Sign in to continue.🤜🏿✌🏽🤜🏿✌🏽🤞🏼🤛🏾🖕🏻✍🏿🤚🏾🖐🏾✋🏽🖖🏿🤞🏼🤛🏾🖕🏻✍🏿🤜🏿✌🏽🤞🏼🤛🏾🖕🏻✍🏿🤚🏾🖐🏾✋🏽🖖🏿🤞🏼🤛🏾🖕🏻✍🏿🤜🏿✌🏽🤞🏼🤛🏾🖕🏻✍🏿🤚🏾🖐🏾✋🏽🖖🏿🤞🏼🤛🏾🖕🏻✍🏿🤜🏿🤜🏿✌🏽🤞🏼🤛🏾🖕🏻✍🏿🤚🏾🖐🏾✋🏽🖖🏿🤞🏼🤛🏾🖕🏻✍🏿🤜🏿✌🏽🤞🏼🤛🏾🖕🏻🤜🏿✌🏽🤞🏼🤛🏾🖕🏻✍🏿🤚🏾🖐🏾✋🏽🖖🏿🤜🏿✌🏽🤞🏼🤛🏾🖕🏻🤜🏿✌🏽🤞🏼🤛🏾🖕🏻✍🏿🤚🏾🖐🏾✋🏽🖖🏿🖐🏾✋🏽🖖🏿🤚🏾🤜🏿✌🏽🤞🏼🤛🏾🖕🏻🤜🏿✌🏽🤞🏼🤛🏾🖕🏻✍🏿🤚🏾🖐🏾✋🏽🖖🏿🖐🏾✋🏽🖖🏿🤜🏿✌")
+    st.sidebar.warning("Sign in to continue.🤜🏿✌🏽🤜🏿✌🏽🤞🏼🤛🏾🖕🏻✍🏿🤚🏾🖐🏾✋🏽🖖🏿🤞🏼🤛🏾🖕🏻✍🏿🤜🏿✌🏽🤞🏼🤛🏾🖕🏻✍🏿🤚🏾🖐🏾✋🏽🖖🏿🤞🏼🤛🏾🖕🏻✍🏿🤜🏿✌🏽🤞🏼🤛🏾🖕🏻✍🏿🤚🏾🖐🏾✋🏽🖖🏿🤞🏼🤛🏾🖕🏻✍🏿🤜🏿🤜🏿✌🏽🤞🏼🤛🏾🖕🏻✍🏿🤚🏾🖐🏾✋🏽🖖🏿🤞🏼🤛🏾🖕🏻✍🏿🤜🏿✌🏽🤞🏼🤛🏾🖕🏻🤜🏿✌🏽🤞🏼🤛🏾🖕🏻✍🏿🤚🏾🖐🏾✋🏽🖖🏿🤜🏿✌🏽🤞🏼🤜🏿✌🏽🤞🏼🤛🏾🖕🏻✍🏿🤚🏾🖐🏾✋🏽🖖🏿🤛🏾🖕🏻✍🏿🤚🏾🖐🏾✋🏽🖖🏿🖐🏾✋🏽🖖🏿🤚🏾🤜🏿✌")
