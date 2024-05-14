@@ -9,8 +9,8 @@ if 'Voted' not in st.session_state:
 if 'signed_in' not in st.session_state:
     st.session_state.signed_in = False
 
-st.title("#Voting Ahhh App")
-st.write("## --- sign in to continue --- ")
+st.title("# Voting Ahhh App")
+st.write("### --- sign in to continue --- ")
 
 # Function to sign in
 def sign_in(username, password):
