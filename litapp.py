@@ -48,11 +48,12 @@ if signed_in:
             votes[i] += 1
             st.bar_chart({food: votes[i] for i, food in enumerate(foodlist)})
             st.success('Successfully Voted.')
-            users[username]['Voted'] = True
             signed_in = True
             break
     if not any(user['Voted'] for user in users.values()):
         st.warning("Vote to unlock the comment section.")
+    else:
+        signed_in = True
 else:
     st.sidebar.warning("Sign in to continue.")
 
@@ -61,6 +62,7 @@ st.header('Comments')
 if not signed_in:
     st.warning("Vote and Sign in to leave a comment.")
 else:
+    sign_in = True
     prompt = st.text_input("Say something")
     if prompt:
         st.markdown(f'{username}: {prompt}', unsafe_allow_html=True)
