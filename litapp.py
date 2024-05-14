@@ -32,12 +32,13 @@ if st.sidebar.button("Sign In"):
 # Voting
 if st.session_state.signed_in and st.session_state.votedcounter == 0:
     st.header('Voting')
-    foodlist = ["fart", "chicken", "poopp", "bunger", "Fungus", "Monkey(Because why not)","Freaky Drizzy🥵🥵😍😍", "Mold"]
-    for i in foodlist:
-        if st.button(f'Vote for {i}'):
-            st.toast('Successfully Voted.')
-            st.session_state.Voted = True
-            st.session_state.votedcounter += 1
+    foodlist = ["fart", "chicken ", "poopp", "bunger", "Fungus", "Monkey(Because why not)","Freaky Drizzy🥵🥵😍😍", "Mold"]
+    if st.session_state.votedcounter == 0:
+        for i in foodlist:
+            if st.button(f'Vote for {i}'):
+                st.toast('Successfully Voted.')
+                st.session_state.Voted = True
+                st.session_state.votedcounter += 1
 
 # Comments
 if st.session_state.Voted and st.session_state.signed_in:
