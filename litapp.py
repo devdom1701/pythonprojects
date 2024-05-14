@@ -31,7 +31,7 @@ if st.sidebar.button("Sign In"):
 if st.session_state.signed_in and not st.session_state.Voted:
     st.header('Voting')
     foodlist = ["fart", "chicken", "poopp", "bunger", "Fungus","Mold","Starvation"]
-    for i in st.session_state.foodlist:
+    for i in foodlist:
         button = st.button(f'Vote for "{i}"')
         if st.session_state.Voted:
             st.toast("YOu cant VOTE anymore!!!!!")
