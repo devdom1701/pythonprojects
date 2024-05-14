@@ -37,7 +37,6 @@ if st.session_state.signed_in and st.session_state.votedcounter == 0:
             st.toast(f'Successfully Voted for {i}')
             st.session_state.votedcounter += 1
             st.session_state.Voted = True
-            st.wirte(f'+1 Vote')
 
 # Comments
 if st.session_state.Voted and st.session_state.signed_in:
