@@ -22,7 +22,7 @@ if 'voting_options' not in st.session_state:
 
 st.title("Voting for Food App")
 
-# Sign in funciton
+# Function to sign in
 def sign_in(username, password):
     if len(username) > 3 and len(password) > 3:
         st.sidebar.success(f'Done, signed in as "{username}"')
@@ -47,12 +47,13 @@ if st.session_state.signed_in and not st.session_state.Voted:
             st.toast(f'Press Again to vote for {option.name}')
             st.session_state.votedcounter += 1
             option.vote()
-            st.session_state.Voted = True  # Update here
+            st.session_state.Voted = True
+            st.experimental_set_query_params(tab="comments")
 
 # Comments and Graph
 if st.session_state.Voted and st.session_state.signed_in:
     st.header('Comments and Graph')
-    tabs = st.sidebar.radio("Tabs", ["Graph", "Comments"])
+    tabs = st.sidebar.radio("Tabs", ["Graph", "Comments"], index=1)
     if tabs == "Graph":
         st.subheader("Voting Results")
         votes_dict = {option.name: option.votes for option in st.session_state.voting_options}
