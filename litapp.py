@@ -22,7 +22,7 @@ if 'voting_options' not in st.session_state:
 
 st.title("Voting for Food App")
 
-# Function to sign in
+# Sign in funciton
 def sign_in(username, password):
     if len(username) > 3 and len(password) > 3:
         st.sidebar.success(f'Done, signed in as "{username}"')
@@ -47,20 +47,21 @@ if st.session_state.signed_in and not st.session_state.Voted:
             st.toast(f'Press Again to vote for {option.name}')
             st.session_state.votedcounter += 1
             option.vote()
-            st.session_state.Voted = True
+            st.session_state.Voted = True  # Update here
 
-# Comments
+# Comments and Graph
 if st.session_state.Voted and st.session_state.signed_in:
-    st.header('Comments')
-    prompt = st.text_input("Say something")
-    if prompt:
-        timestamp = datetime.now().strftime("%H:%M")
-        st.markdown(f'{username} , at {timestamp}: {prompt}', unsafe_allow_html=True)
+    st.header('Comments and Graph')
+    tabs = st.sidebar.radio("Tabs", ["Graph", "Comments"])
+    if tabs == "Graph":
+        st.subheader("Voting Results")
+        votes_dict = {option.name: option.votes for option in st.session_state.voting_options}
+        st.bar_chart(votes_dict)
+    elif tabs == "Comments":
+        st.subheader('Comments')
+        prompt = st.text_input("Say something")
+        if prompt:
+            timestamp = datetime.now().strftime("%H:%M")
+            st.markdown(f'{username} , at {timestamp}: {prompt}', unsafe_allow_html=True)
 elif not st.session_state.signed_in:
     st.sidebar.warning("Sign in to continue.")
-
-# Show voting results
-if st.session_state.Voted and st.session_state.signed_in:
-    st.header('Voting Results')
-    votes_dict = {option.name: option.votes for option in st.session_state.voting_options}
-    st.bar_chart(votes_dict)
