@@ -46,8 +46,8 @@ if st.session_state.Voted and st.session_state.signed_in:
     st.header('Comments')
     prompt = st.text_input("Say something")
     if prompt:
-        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        st.markdown(f'[{timestamp}] {username}: {prompt}', unsafe_allow_html=True)
+        timestamp = datetime.now().strftime("%Y/%m/%d %H:%M")
+        st.markdown(f'{username}, At [{timestamp}]: {prompt}', unsafe_allow_html=True)
 elif not st.session_state.signed_in:
     st.sidebar.warning("Sign in to continue.")
 
