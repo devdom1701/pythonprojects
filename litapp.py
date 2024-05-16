@@ -1,29 +1,30 @@
 import streamlit as st
 import random
 from datetime import datetime
-from sqlalchemy import create_engine, Column, Integer, String, Text
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
+import pyodbc
 
 # Database configuration
-DATABASE_URL = "mssql+pymssql://sa:dockerStrongPwd123@PhartSQL:1433/sa"
-Base = declarative_base()
+server = 'PhartSQL'
+database = 'sa'
+username = 'sa'
+password = 'dockerStrongPwd123'
+connection_string = f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password}'
 
-# Define the Comment model
-class Comment(Base):
-    __tablename__ = 'comments'
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    username = Column(String(50), nullable=False)
-    timestamp = Column(String(50), nullable=False)
-    message = Column(Text, nullable=False)
-
-# Set up the database
-engine = create_engine(DATABASE_URL)
-Session = sessionmaker(bind=engine)
-session = Session()
+# Establish the database connection
+conn = pyodbc.connect(connection_string)
+cursor = conn.cursor()
 
 # Create the comments table if it doesn't exist
-Base.metadata.create_all(engine)
+cursor.execute('''
+    IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='comments' AND xtype='U')
+    CREATE TABLE comments (
+        id INT IDENTITY(1,1) PRIMARY KEY,
+        username NVARCHAR(50) NOT NULL,
+        timestamp NVARCHAR(50) NOT NULL,
+        message NVARCHAR(MAX) NOT NULL
+    )
+''')
+conn.commit()
 
 class VotingOption:
     def __init__(self, name):
@@ -93,14 +94,17 @@ if st.session_state.Voted and st.session_state.signed_in:
     prompt = st.text_input("Say something")
     if prompt:
         timestamp = datetime.now().strftime("%H:%M")
-        new_comment = Comment(username=username, timestamp=timestamp, message=prompt)
-        session.add(new_comment)
-        session.commit()
+        cursor.execute('''
+            INSERT INTO comments (username, timestamp, message)
+            VALUES (?, ?, ?)
+        ''', (username, timestamp, prompt))
+        conn.commit()
         st.session_state.notcommented = False
 
-    comments = session.query(Comment).filter_by(username=username).all()
+    cursor.execute('SELECT username, timestamp, message FROM comments WHERE username = ?', (username,))
+    comments = cursor.fetchall()
     for comment in comments:
-        st.markdown(f'{comment.username}, at {comment.timestamp}: {comment.message}', unsafe_allow_html=True)
+        st.markdown(f'{comment[0]}, at {comment[1]}: {comment[2]}', unsafe_allow_html=True)
 elif not st.session_state.signed_in:
     st.sidebar.warning("Sign in to continue.")
 
