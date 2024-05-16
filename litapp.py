@@ -9,6 +9,8 @@ class VotingOption:
     def vote(self):
         self.votes += 1
 
+# ["Pizza", "Chicken Tenders", "Chicken Alfredo", "Bacon Cheeseburger", "Bosco Sticks", "Chicken Quesadilla", "Chicken Sandwich", "French Toast", "Pizza Crunchers", "General Tso's", "Walking Tacos", "Buffalo Chicken Pizza", "Chicken Fajita Bowl", "Popcorn Chicken Bowl", "Taco Tuesday", "Cheeseburger", "Pork Carnitas", "Pasta w/ Meat Sauce", "Loaded Potato Wedges", "Chicken Nuggets", "Grilled Cheese", "Brisket and Potato Bowl", "Chicken Strips", "Cheeseburger Waffle Fries", "Cheese Rippers", "BBQ Pork Sandwich", "Cheese Ravioli w/ Meat Sauce", "Chicken Carnita Bowl", "Philly Cheesesteak", "Ravioli", "Sweet and Sour Chicken", "Pepperoni Stuffed Breadstick", "Meatballs Subs","slop","Crabby Paddi"]
+
 if 'signincounter' not in st.session_state:
     st.session_state.signincounter = 0
 if 'votedcounter' not in st.session_state:
@@ -20,7 +22,7 @@ if 'notcommented' not in st.session_state:
 if 'signed_in' not in st.session_state:
     st.session_state.signed_in = False
 if 'voting_options' not in st.session_state:
-    st.session_state.voting_options = [VotingOption(name) for name in ["fart", "chicken", "poopp", "bunger", "Fungus", "Mold", "Starvation"]]
+    st.session_state.voting_options = [VotingOption(name) for name in ["fart", "chicken", "poopp", "bunger", "Fungus", "Mold", "Starvation","Rat Burg","Air(Personal Favorite)","Ice and Milk"]]
 if 'messages' not in st.session_state:
     st.session_state.messages = {}
 
@@ -39,11 +41,12 @@ def sign_in(username, password):
     else:
         st.sidebar.warning("Please enter a valid username and password.")
 
-username = st.sidebar.text_input("Username")
-password = st.sidebar.text_input("Password", type="password")
+if not st.session_state.Voted:
+    username = st.sidebar.text_input("Username")
+    password = st.sidebar.text_input("Password", type="password")
 
-if st.sidebar.button("Sign In"):
-    sign_in(username, password)
+    if st.sidebar.button("Sign In"):
+        sign_in(username, password)
 
 # Voting
 if st.session_state.signed_in and not st.session_state.Voted:
