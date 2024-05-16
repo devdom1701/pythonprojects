@@ -59,9 +59,8 @@ if st.session_state.Voted and st.session_state.signed_in:
     prompt = st.text_input("Say something")
     if prompt:
         timestamp = datetime.now().strftime("%H:%M")
-        message = f'{username} , at {timestamp}: {prompt}'
-        st.session_state.messages[username].append(message)
-        st.markdown(message, unsafe_allow_html=True)
+        st.session_state.messages[username].append(f'{username} , at {timestamp}: {prompt}')
+        st.markdown(f'{username} , at {timestamp}: {prompt}', unsafe_allow_html=True)
 
     st.header('Previous Messages')
     for msg in st.session_state.messages[username]:
