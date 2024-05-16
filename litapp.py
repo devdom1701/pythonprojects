@@ -51,7 +51,6 @@ if st.session_state.signed_in and not st.session_state.Voted:
     for option in st.session_state.voting_options:
         button = st.button(f'Vote for "{option.name}"')
         if button:
-            st.toast(f'Press Again to vote for {option.name}')
             st.session_state.votedcounter += 1
             option.vote()
             st.session_state.Voted = True
