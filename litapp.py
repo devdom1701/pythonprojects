@@ -24,7 +24,8 @@ if 'voting_options' not in st.session_state:
 if 'messages' not in st.session_state:
     st.session_state.messages = {}
 
-st.title("Voting for Food App")
+if not st.session_state.Voted:
+    st.title("Voting for Food App")
 
 # Function to sign in
 def sign_in(username, password):
