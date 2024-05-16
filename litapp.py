@@ -22,6 +22,7 @@ if 'voting_options' not in st.session_state:
 
 st.title("Voting for Food App")
 
+# Function to sign in
 def sign_in(username, password):
     if len(username) > 3 and len(password) > 3:
         st.sidebar.success(f'Done, signed in as "{username}"')
@@ -37,22 +38,24 @@ password = st.sidebar.text_input("Password", type="password")
 if st.sidebar.button("Sign In"):
     sign_in(username, password)
 
-# Voting section
-if st.session_state.signed_in:
-    if not st.session_state.Voted:
-        st.header('Voting')
-        for option in st.session_state.voting_options:
-            if st.button(f'Vote for "{option.name}"'):
-                st.toast(f'Press Again to vote for {option.name}')
-                st.session_state.votedcounter += 1
-                option.vote()
-                st.session_state.Voted = True
-                st.text_input("Say something")
-    else:
-        st.header('Comments')
-        prompt = st.text_input("Say something")
-        if prompt:
-            timestamp = datetime.now().strftime("%H:%M")
-            st.markdown(f'{username} , at {timestamp}: {prompt}', unsafe_allow_html=True)
-else:
+# Voting
+if st.session_state.signed_in and not st.session_state.Voted:
+    st.header('Voting')
+    for option in st.session_state.voting_options:
+        button = st.button(f'Vote for "{option.name}"')
+        if button:
+            st.toast(f'Press Again to vote for {option.name}')
+            st.session_state.votedcounter += 1
+            option.vote()
+            st.session_state.Voted = True
+            comments = st.text_input("Say something")
+
+# Comments
+if st.session_state.Voted and st.session_state.signed_in:
+    st.header('Comments')
+    prompt = st.text_input("Say something")
+    if prompt:
+        timestamp = datetime.now().strftime("%H:%M")
+        st.markdown(f'{username} , at {timestamp}: {prompt}', unsafe_allow_html=True)
+elif not st.session_state.signed_in:
     st.sidebar.warning("Sign in to continue.")
