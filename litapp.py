@@ -37,13 +37,12 @@ def handle_vote(option):
     option.vote()
     st.session_state.Voted = True
     votes_dict = {opt.name: opt.votes for opt in st.session_state.voting_options}
-    comments = st.text_input("Say something")
     st.experimental_dialog(title="Vote Summary", width="large")
     st.write(f"## Voting Results\n{votes_dict}")
-    st.write(f"## Comments\n{username} , at {datetime.now().strftime('%H:%M')}: {comments}")
 
 username = st.sidebar.text_input("Username")
 password = st.sidebar.text_input("Password", type="password")
+prompt = st.text_input("Say something") if st.session_state.Voted and st.session_state.signed_in else ""
 
 if st.sidebar.button("Sign In"):
     sign_in(username, password)
@@ -54,11 +53,8 @@ if st.session_state.signed_in and not st.session_state.Voted:
         if st.button(f'Vote for "{option.name}"'):
             handle_vote(option)
 
-if st.session_state.Voted and st.session_state.signed_in:
-    st.header('Comments')
-    prompt = st.text_input("Say something")
-    if prompt:
-        timestamp = datetime.now().strftime("%H:%M")
-        st.markdown(f'{username} , at {timestamp}: {prompt}', unsafe_allow_html=True)
+if prompt:
+    timestamp = datetime.now().strftime("%H:%M")
+    st.markdown(f'{username} , at {timestamp}: {prompt}', unsafe_allow_html=True)
 elif not st.session_state.signed_in:
     st.sidebar.warning("Sign in to continue.")
