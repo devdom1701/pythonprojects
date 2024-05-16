@@ -19,6 +19,8 @@ if 'signed_in' not in st.session_state:
     st.session_state.signed_in = False
 if 'voting_options' not in st.session_state:
     st.session_state.voting_options = [VotingOption(name) for name in ["fart", "chicken", "poopp", "bunger", "Fungus", "Mold", "Starvation"]]
+if 'messages' not in st.session_state:
+    st.session_state.messages = {}
 
 st.title("Voting for Food App")
 
@@ -29,6 +31,8 @@ def sign_in(username, password):
         st.toast("Signed In")
         st.session_state.signed_in = True
         st.session_state.signincounter += 1
+        if username not in st.session_state.messages:
+            st.session_state.messages[username] = []
     else:
         st.sidebar.warning("Please enter a valid username and password.")
 
@@ -55,7 +59,14 @@ if st.session_state.Voted and st.session_state.signed_in:
     prompt = st.text_input("Say something")
     if prompt:
         timestamp = datetime.now().strftime("%H:%M")
-        st.markdown(f'{username} , at {timestamp}: {prompt}', unsafe_allow_html=True)
+        message = f'{username} , at {timestamp}: {prompt}'
+        st.session_state.messages[username].append(message)
+        st.markdown(message, unsafe_allow_html=True)
+        st.text_input("Say something", value="", key="clear")
+
+    st.header('Previous Messages')
+    for msg in st.session_state.messages[username]:
+        st.markdown(msg, unsafe_allow_html=True)
 elif not st.session_state.signed_in:
     st.sidebar.warning("Sign in to continue.")
 
