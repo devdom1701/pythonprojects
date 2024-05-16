@@ -1,7 +1,6 @@
 import streamlit as st
 from datetime import datetime
 
-# Define VotingOption class
 class VotingOption:
     def __init__(self, name):
         self.name = name
@@ -10,7 +9,6 @@ class VotingOption:
     def vote(self):
         self.votes += 1
 
-# Initialize session state variables
 if 'signincounter' not in st.session_state:
     st.session_state.signincounter = 0
 if 'votedcounter' not in st.session_state:
@@ -38,35 +36,34 @@ def sign_in(username, password):
     else:
         st.sidebar.warning("Please enter a valid username and password.")
 
-# Sign-in inputs
 username = st.sidebar.text_input("Username")
 password = st.sidebar.text_input("Password", type="password")
 
-# Sign-in button
 if st.sidebar.button("Sign In"):
     sign_in(username, password)
 
-# Voting section
-if st.session_state.signed_in:
-    if not st.session_state.Voted:
-        st.header('Voting')
-        for option in st.session_state.voting_options:
-            if st.button(f'Vote for "{option.name}"'):
-                st.toast(f'Press Again to vote for {option.name}')
-                st.session_state.votedcounter += 1
-                option.vote()
-                st.session_state.Voted = True
-    else:
-        st.header('Comments')
-        prompt = st.text_input("Say something", value="", key="comment_input")
-        if prompt:
-            timestamp = datetime.now().strftime("%H:%M")
-            st.session_state.messages[username].insert(0, f'{username} , at {timestamp}: {prompt}')
-            st.session_state.comment_input = ""
+# Voting
+if st.session_state.signed_in and not st.session_state.Voted:
+    st.header('Voting')
+    for option in st.session_state.voting_options:
+        button = st.button(f'Vote for "{option.name}"')
+        if button:
+            st.toast(f'Press Again to vote for {option.name}')
+            st.session_state.votedcounter += 1
+            option.vote()
+            st.session_state.Voted = True
 
-        for msg in reversed(st.session_state.messages[username]):
-            st.markdown(msg, unsafe_allow_html=True)
-else:
+# Comments
+if st.session_state.Voted and st.session_state.signed_in:
+    st.header('Comments')
+    prompt = st.text_input("Say something")
+    if prompt:
+        timestamp = datetime.now().strftime("%H:%M")
+        st.session_state.messages[username].append(f'{username} , at {timestamp}: {prompt}')
+
+    for msg in st.session_state.messages[username]:
+        st.markdown(msg, unsafe_allow_html=True)
+elif not st.session_state.signed_in:
     st.sidebar.warning("Sign in to continue.")
 
 if st.session_state.Voted and st.session_state.signed_in:
