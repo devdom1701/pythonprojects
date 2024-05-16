@@ -48,7 +48,15 @@ if st.session_state.signed_in and not st.session_state.Voted:
             st.session_state.votedcounter += 1
             option.vote()
             st.session_state.Voted = True
+            votes_dict = {option.name: option.votes for option in st.session_state.voting_options}
             comments = st.text_input("Say something")
+            popup_content = f"""
+                # Voting Results
+                {votes_dict}
+                # Comments
+                {username} , at {datetime.now().strftime("%H:%M")}: {comments}
+            """
+            st.popup(popup_content, title="Vote Summary")
 
 # Comments
 if st.session_state.Voted and st.session_state.signed_in:
