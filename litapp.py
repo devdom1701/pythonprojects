@@ -1,12 +1,12 @@
 import streamlit as st
 import random
 from datetime import datetime
-from sqlalchemy import create_engine, Column, Integer, String, Text, Table, MetaData
+from sqlalchemy import create_engine, Column, Integer, String, Text
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
 # Database configuration
-DATABASE_URL = "mssql+pymssql://sa:dockerStrongPwd123@localhost:1433/comments_db"
+DATABASE_URL = "mssql+pymssql://sa:dockerStrongPwd123@PhartSQL:1433/sa"
 Base = declarative_base()
 
 # Define the Comment model
@@ -35,19 +35,12 @@ class VotingOption:
 
 food_list2 = ["Pizza", "Chicken Tenders", "Chicken Alfredo", "Bacon Cheeseburger", "Bosco Sticks", "Chicken Quesadilla", "Chicken Sandwich", "French Toast", "Pizza Crunchers", "General Tso's", "Walking Tacos", "Buffalo Chicken Pizza", "Chicken Fajita Bowl", "Popcorn Chicken Bowl", "Taco Tuesday", "Cheeseburger", "Pork Carnitas", "Pasta w/ Meat Sauce", "Loaded Potato Wedges", "Chicken Nuggets", "Grilled Cheese", "Brisket and Potato Bowl", "Chicken Strips", "Cheeseburger Waffle Fries", "Cheese Rippers", "BBQ Pork Sandwich", "Cheese Ravioli w/ Meat Sauce", "Chicken Carnita Bowl", "Philly Cheesesteak", "Ravioli", "Sweet and Sour Chicken", "Pepperoni Stuffed Breadstick", "Meatballs Subs","slop","Crabby Paddi"]
 
-a = random.randomint(1,10)
-choice = food_list2[a]
-b = random.randomint(11,19)
-choice2 = food_list2[b]
-c = random.randomint(1,20)
-choice2 = food_list2[c]
+# Randomly select choices from the food list
+choice = food_list2[random.randint(0, len(food_list2) - 1)]
+choice2 = food_list2[random.randint(0, len(food_list2) - 1)]
+choice3 = food_list2[random.randint(0, len(food_list2) - 1)]
 
-
-randomchoicelist = []
-randomchoicelist.append(a)
-randomchoicelist.append(b)
-randomchoicelist.append(c)
-
+randomchoicelist = [choice, choice2, choice3]
 
 if 'signincounter' not in st.session_state:
     st.session_state.signincounter = 0
@@ -61,8 +54,6 @@ if 'signed_in' not in st.session_state:
     st.session_state.signed_in = False
 if 'voting_options' not in st.session_state:
     st.session_state.voting_options = [VotingOption(name) for name in randomchoicelist]
-if 'messages' not in st.session_state:
-    st.session_state.messages = {}
 
 if not st.session_state.Voted:
     st.title("Voting for Food App")
@@ -74,8 +65,6 @@ def sign_in(username, password):
         st.toast("Signed In")
         st.session_state.signed_in = True
         st.session_state.signincounter += 1
-        if username not in st.session_state.messages:
-            st.session_state.messages[username] = []
     else:
         st.sidebar.warning("Please enter a valid username and password.")
 
