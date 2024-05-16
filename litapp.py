@@ -1,6 +1,7 @@
 import streamlit as st
 from datetime import datetime
 
+# Define VotingOption class
 class VotingOption:
     def __init__(self, name):
         self.name = name
@@ -9,6 +10,7 @@ class VotingOption:
     def vote(self):
         self.votes += 1
 
+# Initialize session state variables
 if 'signincounter' not in st.session_state:
     st.session_state.signincounter = 0
 if 'votedcounter' not in st.session_state:
@@ -56,17 +58,17 @@ if st.session_state.signed_in:
                 st.session_state.Voted = True
     else:
         st.header('Comments')
-        prompt = st.text_input("Say something")
+        prompt = st.text_input("Say something", value="", key="comment_input")
         if prompt:
             timestamp = datetime.now().strftime("%H:%M")
             st.session_state.messages[username].insert(0, f'{username} , at {timestamp}: {prompt}')
+            st.session_state.comment_input = ""
 
         for msg in reversed(st.session_state.messages[username]):
             st.markdown(msg, unsafe_allow_html=True)
 else:
     st.sidebar.warning("Sign in to continue.")
 
-# Voting Results
 if st.session_state.Voted and st.session_state.signed_in:
     st.header('Voting Results')
     votes_dict = {option.name: option.votes for option in st.session_state.voting_options}
