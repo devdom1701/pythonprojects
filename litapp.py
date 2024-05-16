@@ -15,6 +15,8 @@ if 'votedcounter' not in st.session_state:
     st.session_state.votedcounter = 0
 if 'Voted' not in st.session_state:
     st.session_state.Voted = False
+if 'notcommented' not in st.session_state:
+    st.session_state.notcommented = True
 if 'signed_in' not in st.session_state:
     st.session_state.signed_in = False
 if 'voting_options' not in st.session_state:
@@ -56,6 +58,8 @@ if st.session_state.signed_in and not st.session_state.Voted:
 # Comments
 if st.session_state.Voted and st.session_state.signed_in:
     st.header('Comments')
+    if st.session_state.notcommented:
+        st.info("Comment something!")
     prompt = st.text_input("Say something")
     if prompt:
         timestamp = datetime.now().strftime("%H:%M")
@@ -63,6 +67,7 @@ if st.session_state.Voted and st.session_state.signed_in:
 
     for msg in st.session_state.messages[username]:
         st.markdown(msg, unsafe_allow_html=True)
+        st.session_state.notcommented = False
 elif not st.session_state.signed_in:
     st.sidebar.warning("Sign in to continue.")
 
