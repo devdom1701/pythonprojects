@@ -31,30 +31,28 @@ def sign_in(username, password):
     else:
         st.sidebar.warning("Please enter a valid username and password.")
 
-def handle_vote(option):
-    st.toast(f'Press Again to vote for {option.name}')
-    st.session_state.votedcounter += 1
-    option.vote()
-    st.session_state.Voted = True
-    votes_dict = {opt.name: opt.votes for opt in st.session_state.voting_options}
-    st.experimental_dialog(title="Vote Summary", width="large")
-    st.write(f"## Voting Results\n{votes_dict}")
-
 username = st.sidebar.text_input("Username")
 password = st.sidebar.text_input("Password", type="password")
-prompt = st.text_input("Say something") if st.session_state.Voted and st.session_state.signed_in else ""
 
 if st.sidebar.button("Sign In"):
     sign_in(username, password)
 
-if st.session_state.signed_in and not st.session_state.Voted:
-    st.header('Voting')
-    for option in st.session_state.voting_options:
-        if st.button(f'Vote for "{option.name}"'):
-            handle_vote(option)
-
-if prompt:
-    timestamp = datetime.now().strftime("%H:%M")
-    st.markdown(f'{username} , at {timestamp}: {prompt}', unsafe_allow_html=True)
-elif not st.session_state.signed_in:
+# Voting section
+if st.session_state.signed_in:
+    if not st.session_state.Voted:
+        st.header('Voting')
+        for option in st.session_state.voting_options:
+            if st.button(f'Vote for "{option.name}"'):
+                st.toast(f'Press Again to vote for {option.name}')
+                st.session_state.votedcounter += 1
+                option.vote()
+                st.session_state.Voted = True
+                st.text_input("Say something")
+    else:
+        st.header('Comments')
+        prompt = st.text_input("Say something")
+        if prompt:
+            timestamp = datetime.now().strftime("%H:%M")
+            st.markdown(f'{username} , at {timestamp}: {prompt}', unsafe_allow_html=True)
+else:
     st.sidebar.warning("Sign in to continue.")
