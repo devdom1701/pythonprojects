@@ -61,8 +61,8 @@ if st.session_state.Voted and st.session_state.signed_in:
         timestamp = datetime.now().strftime("%H:%M")
         st.session_state.messages[username].append(f'{username} , at {timestamp}: {prompt}')
         st.markdown(f'{username} , at {timestamp}: {prompt}', unsafe_allow_html=True)
+        st.text_input("Say something", value="", key="clear")
 
-    st.header('Previous Messages')
     for msg in st.session_state.messages[username]:
         st.markdown(msg, unsafe_allow_html=True)
 elif not st.session_state.signed_in:
