@@ -42,12 +42,12 @@ def sign_in(username, password):
     else:
         st.sidebar.warning("Please enter a valid username and password.")
 
-if not st.session_state.Voted:
-    username = st.sidebar.text_input("Username")
-    password = st.sidebar.text_input("Password", type="password")
 
-    if st.sidebar.button("Sign In"):
-        sign_in(username, password)
+username = st.sidebar.text_input("Username")
+password = st.sidebar.text_input("Password", type="password")
+
+if st.sidebar.button("Sign In"):
+    sign_in(username, password)
 
 # Voting
 if st.session_state.signed_in and not st.session_state.Voted:
