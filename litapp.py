@@ -22,7 +22,6 @@ if 'voting_options' not in st.session_state:
 
 st.title("Voting for Food App")
 
-# Function to sign in
 def sign_in(username, password):
     if len(username) > 3 and len(password) > 3:
         st.sidebar.success(f'Done, signed in as "{username}"')
@@ -32,33 +31,29 @@ def sign_in(username, password):
     else:
         st.sidebar.warning("Please enter a valid username and password.")
 
+def handle_vote(option):
+    st.toast(f'Press Again to vote for {option.name}')
+    st.session_state.votedcounter += 1
+    option.vote()
+    st.session_state.Voted = True
+    votes_dict = {opt.name: opt.votes for opt in st.session_state.voting_options}
+    comments = st.text_input("Say something")
+    st.experimental_dialog(title="Vote Summary", width="large")
+    st.write(f"## Voting Results\n{votes_dict}")
+    st.write(f"## Comments\n{username} , at {datetime.now().strftime('%H:%M')}: {comments}")
+
 username = st.sidebar.text_input("Username")
 password = st.sidebar.text_input("Password", type="password")
 
 if st.sidebar.button("Sign In"):
     sign_in(username, password)
 
-# Voting
 if st.session_state.signed_in and not st.session_state.Voted:
     st.header('Voting')
     for option in st.session_state.voting_options:
-        button = st.button(f'Vote for "{option.name}"')
-        if button:
-            st.toast(f'Press Again to vote for {option.name}')
-            st.session_state.votedcounter += 1
-            option.vote()
-            st.session_state.Voted = True
-            votes_dict = {option.name: option.votes for option in st.session_state.voting_options}
-            comments = st.text_input("Say something")
-            popup_content = f"""
-                # Voting Results
-                {votes_dict}
-                # Comments
-                {username} , at {datetime.now().strftime("%H:%M")}: {comments}
-            """
-            st.popup(popup_content, title="Vote Summary")
+        if st.button(f'Vote for "{option.name}"'):
+            handle_vote(option)
 
-# Comments
 if st.session_state.Voted and st.session_state.signed_in:
     st.header('Comments')
     prompt = st.text_input("Say something")
