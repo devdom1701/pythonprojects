@@ -10,7 +10,7 @@ class VotingOption:
     def vote(self):
         self.votes += 1
 
-food_list2 = ["Pizza", "Chicken Tenders", "Chicken Alfredo", "Bacon Cheeseburger", "Bosco Sticks", "Chicken Quesadilla", "Chicken Sandwich", "French Toast", "Pizza Crunchers", "General Tso's", "Walking Tacos", "Buffalo Chicken Pizza", "Chicken Fajita Bowl", "Popcorn Chicken Bowl", "Taco Tuesday", "Cheeseburger", "Pork Carnitas", "Pasta w/ Meat Sauce", "Loaded Potato Wedges", "Chicken Nuggets", "Grilled Cheese", "Brisket and Potato Bowl", "Chicken Strips", "Cheeseburger Waffle Fries", "Cheese Rippers", "BBQ Pork Sandwich", "Cheese Ravioli w/ Meat Sauce", "Chicken Carnita Bowl", "Philly Cheesesteak", "Ravioli", "Sweet and Sour Chicken", "Pepperoni Stuffed Breadstick", "Meatballs Subs","slop","Crabby Paddi"]
+food_list2 = ["Pizza", "Chicken Tenders", "Chicken Alfredo", "Bacon Cheeseburger", "Bosco Sticks", "Chicken Quesadilla", "Chicken Sandwich", "French Toast", "Pizza Crunchers", "General Tso's", "Walking Tacos", "Buffalo Chicken Pizza", "Chicken Fajita Bowl", "Popcorn Chicken Bowl", "Taco Tuesday", "Cheeseburger", "Pork Carnitas", "Pasta w/ Meat Sauce", "Loaded Potato Wedges", "Chicken Nuggets", "Grilled Cheese", "Brisket and Potato Bowl", "Chicken Strips", "Cheeseburger Waffle Fries", "Cheese Rippers", "BBQ Pork Sandwich", "Cheese Ravioli w/ Meat Sauce", "Chicken Carnita Bowl", "Philly Cheesesteak", "Ravioli", "Sweet and Sour Chicken", "Pepperoni Stuffed Breadstick", "Meatballs Subs", "Slop", "Crabby Paddi"]
 
 if 'signincounter' not in st.session_state:
     st.session_state.signincounter = 0
@@ -23,9 +23,11 @@ if 'notcommented' not in st.session_state:
 if 'signed_in' not in st.session_state:
     st.session_state.signed_in = False
 if 'voting_options' not in st.session_state:
-    st.session_state.voting_options = [VotingOption(name) for name in ["fart", "chicken", "poopp", "bunger", "Fungus", "Mold", "Starvation","Rat Burg","Air(Personal Favorite)","Ice and Milk"]]
+    st.session_state.voting_options = [VotingOption(name) for name in food_list2]
 if 'messages' not in st.session_state:
     st.session_state.messages = {}
+if 'random_options' not in st.session_state:
+    st.session_state.random_options = random.sample(st.session_state.voting_options, 3)
 
 if not st.session_state.Voted:
     st.title("Voting for Food App")
@@ -42,7 +44,6 @@ def sign_in(username, password):
     else:
         st.sidebar.warning("Please enter a valid username and password.")
 
-
 username = st.sidebar.text_input("Username")
 password = st.sidebar.text_input("Password", type="password")
 
@@ -52,7 +53,7 @@ if st.sidebar.button("Sign In"):
 # Voting
 if st.session_state.signed_in and not st.session_state.Voted:
     st.header('Voting')
-    for option in st.session_state.voting_options:
+    for option in st.session_state.random_options:
         button = st.button(f'Vote for "{option.name}"')
         if button:
             st.session_state.votedcounter += 1
