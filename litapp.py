@@ -12,18 +12,19 @@ class VotingOption:
     def vote(self):
         self.votes += 1
 
+# Dictionary for images and descriptions
 food_details = {
-    "Pizza": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
-    "Chicken Tenders": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
-    "Chicken Alfredo": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
-    "Bacon Cheeseburger": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
-    "Bosco Sticks": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
-    "Chicken Quesadilla": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
-    "Chicken Sandwich": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
-    "French Toast": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
-    "Pizza Crunchers": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
-    "General Tso's": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
-    "Walking Tacos": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "Pizza": {"image": "https://imgur.com/a/dTvzcTp", "description": "Cheese with bread and tomatas"},
+    "Chicken Tenders": {"image": "https://imgur.com/a/dTvzcTp", "description": "Chicken but long"},
+    "Chicken Alfredo": {"image": "https://imgur.com/a/dTvzcTp", "description": "Chicken with sauce and pasta"},
+    "Bacon Cheeseburger": {"image": "https://imgur.com/a/dTvzcTp", "description": "Cheeseburger but bacon"},
+    "Bosco Sticks": {"image": "https://imgur.com/a/dTvzcTp", "description": "Sticks with cheese"},
+    "Chicken Quesadilla": {"image": "https://imgur.com/a/dTvzcTp", "description": "Quesadilla but chicken"},
+    "Chicken Sandwich": {"image": "https://imgur.com/a/dTvzcTp", "description": "Checken inbtweem sum buns"},
+    "French Toast": {"image": "https://imgur.com/a/dTvzcTp", "description": "French but toast flavored"},
+    "Pizza Crunchers": {"image": "https://imgur.com/a/dTvzcTp", "description": "Pizza but crunchy"},
+    "General Tso's": {"image": "https://imgur.com/a/dTvzcTp", "description": "Chicken or something"},
+    "Walking Tacos": {"image": "https://imgur.com/a/dTvzcTp", "description": ""},
     "Buffalo Chicken Pizza": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
     "Chicken Fajita Bowl": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
     "Popcorn Chicken Bowl": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
@@ -67,7 +68,10 @@ if 'notcommented' not in st.session_state:
 if 'signed_in' not in st.session_state:
     st.session_state.signed_in = False
 if 'voting_options' not in st.session_state:
-    st.session_state.voting_options = [VotingOption(name, food_details[name]['image'], food_details[name]['description']) for name in food_list2]
+    st.session_state.voting_options = [
+        VotingOption(name, food_details[name]['image'], food_details[name]['description']) 
+        for name in food_list2 if name in food_details
+    ]
 if 'messages' not in st.session_state:
     st.session_state.messages = {}
 if 'random_options' not in st.session_state:
