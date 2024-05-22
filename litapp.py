@@ -3,14 +3,58 @@ import random
 from datetime import datetime
 
 class VotingOption:
-    def __init__(self, name):
+    def __init__(self, name, image, description):
         self.name = name
+        self.image = image
+        self.description = description
         self.votes = 0
 
     def vote(self):
         self.votes += 1
 
-food_list2 = ["Pizza", "Chicken Tenders", "Chicken Alfredo", "Bacon Cheeseburger", "Bosco Sticks", "Chicken Quesadilla", "Chicken Sandwich", "French Toast", "Pizza Crunchers", "General Tso's", "Walking Tacos", "Buffalo Chicken Pizza", "Chicken Fajita Bowl", "Popcorn Chicken Bowl", "Taco Tuesday", "Cheeseburger", "Pork Carnitas", "Pasta w/ Meat Sauce", "Loaded Potato Wedges", "Chicken Nuggets", "Grilled Cheese", "Brisket and Potato Bowl", "Chicken Strips", "Cheeseburger Waffle Fries", "Cheese Rippers", "BBQ Pork Sandwich", "Cheese Ravioli w/ Meat Sauce", "Chicken Carnita Bowl", "Philly Cheesesteak", "Ravioli", "Sweet and Sour Chicken", "Pepperoni Stuffed Breadstick", "Meatballs Subs", "Slop", "Crabby Paddi"]
+food_details = {
+    "Pizza": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "Chicken Tenders": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "Chicken Alfredo": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "Bacon Cheeseburger": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "Bosco Sticks": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "Chicken Quesadilla": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "Chicken Sandwich": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "French Toast": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "Pizza Crunchers": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "General Tso's": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "Walking Tacos": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "Buffalo Chicken Pizza": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "Chicken Fajita Bowl": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "Popcorn Chicken Bowl": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "Chicken Fajita Bowl": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "Cheeseburger": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "Pork Carnitas": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "Pasta w/ Meat Sauce": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "Loaded Potato Wedges": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "Chicken Nuggets": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "Grilled Cheese": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "Brisket and Potato Bowl": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "Chicken Strips": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "Cheeseburger Waffle Fries": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "Cheese Rippers": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "BBQ Pork Sandwich": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "Cheese Ravioli w/ Meat Sauce": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "Philly Cheesesteak": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "Ravioli": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "Sweet and Sour Chicken": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "Pepperoni Stuffed Breadsticks": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "Meatball Subs": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+    "Slop": {"image": "https://imgur.com/a/dTvzcTp", "description": "Caleb"},
+}
+
+food_list2 = ["Pizza", "Chicken Tenders", "Chicken Alfredo", "Bacon Cheeseburger", "Bosco Sticks", "Chicken Quesadilla", 
+              "Chicken Sandwich", "French Toast", "Pizza Crunchers", "General Tso's", "Walking Tacos", "Buffalo Chicken Pizza", 
+              "Chicken Fajita Bowl", "Popcorn Chicken Bowl", "Cheeseburger", "Pork Carnitas", "Pasta w/ Meat Sauce", 
+              "Loaded Potato Wedges", "Chicken Nuggets", "Grilled Cheese", "Brisket and Potato Bowl", "Chicken Strips", 
+              "Cheeseburger Waffle Fries", "Cheese Rippers", "BBQ Pork Sandwich", "Cheese Ravioli w/ Meat Sauce", 
+             "Philly Cheesesteak", "Ravioli", "Sweet and Sour Chicken", "Pepperoni Stuffed Breadstick", 
+              "Meatballs Subs"]
 
 if 'signincounter' not in st.session_state:
     st.session_state.signincounter = 0
@@ -23,7 +67,7 @@ if 'notcommented' not in st.session_state:
 if 'signed_in' not in st.session_state:
     st.session_state.signed_in = False
 if 'voting_options' not in st.session_state:
-    st.session_state.voting_options = [VotingOption(name) for name in food_list2]
+    st.session_state.voting_options = [VotingOption(name, food_details[name]['image'], food_details[name]['description']) for name in food_list2]
 if 'messages' not in st.session_state:
     st.session_state.messages = {}
 if 'random_options' not in st.session_state:
@@ -54,11 +98,13 @@ if st.sidebar.button("Sign In"):
 if st.session_state.signed_in and not st.session_state.Voted:
     st.header('Voting')
     for option in st.session_state.random_options:
-        button = st.button(f'Vote for "{option.name}"')
-        if button:
-            st.session_state.votedcounter += 1
-            option.vote()
-            st.session_state.Voted = True
+        with st.expander(f"{option.name}"):
+            st.image(option.image, caption=option.name)
+            st.write(option.description)
+            if st.button(f'Vote for "{option.name}"'):
+                st.session_state.votedcounter += 1
+                option.vote()
+                st.session_state.Voted = True
 
 # Comments
 if st.session_state.Voted and st.session_state.signed_in:
