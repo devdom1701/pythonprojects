@@ -25,7 +25,7 @@ food_details = {
     "Pizza Crunchers": {"image": "https://i.imgur.com/5gawijE.jpeg", "Description": "Mozzarella and pizza sauce covered in breadcrumbs"},
     "General Tso's": {"image": "https://i.imgur.com/5gawijE.jpeg", "Description": "Orange chicken, with rice"},
     "Walking Tacos": {"image": "https://i.imgur.com/5gawijE.jpeg", "Description": "Ground beef and taco toppings in a bag of Doritos"},
-    "Buffalo Chicken Pizza": {"image": "https://i.imgur.codm/4AiIiq3.gif", "Description": "Chicken served on seasoned rice"},
+    "Buffalo Chicken Pizza": {"image": "https://i.imgur.com/5gawijE.jpeg", "Description": "Chicken served on seasoned rice"},
     "Chicken Fajita Bowl": {"image": "https://i.imgur.com/5gawijE.jpeg", "Description": "Popcorn chicken on mashed potatoes covered in gravy"},
     "Popcorn Chicken Bowl": {"image": "https://i.imgur.com/5gawijE.jpeg", "Description": "Popcorn chicken on mashed potatoes covered in gravy"},
     "Cheeseburger": {"image": "https://i.imgur.com/5gawijE.jpeg", "Description": "CCheeseburger3"},
@@ -45,7 +45,7 @@ food_details = {
     "Sweet and Sour Chicken": {"image": "https://i.imgur.com/5gawijE.jpeg", "Description": "Sour chicken with the beef"},
     "Pepperoni Stuffed Breadsticks": {"image": "https://i.imgur.com/5gawijE.jpeg", "Description": "Breadsticks with cheese and alittle bit a slop with peperoini also im seeing how long i can make the commit before it bugs out so just keep reading I swear this is a Real representation of how this food taste So just eat it because i think its very tastely"},
     "Meatball Subs": {"image": "https://i.imgur.com/5gawijE.jpeg", "Description": "Meatbull but subbed out."},
-    "Slop": {"image": "https://i.imgur.com/5gawijE.jpeg", "Description": "It taste good just try it. Bi't minty but you'll get used to it. Also we got it from Shrek's swamp"},
+    "Slop": {"image": "https://imgur.com/a/F9bcHOW", "Description": "It taste good just try it. Bi't minty but you'll get used to it. Also we got it from Shrek's swamp"},
 }
 
 food_list2 = ["Pizza", "Chicken Tenders", "Chicken Alfredo", "Bacon Cheeseburger", "Bosco Sticks", "Chicken Quesadilla", 
