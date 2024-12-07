@@ -1,5 +1,6 @@
 import os
 import pygame
+from pygame import mixer
 from PIL import Image
 
 # Pygame initialization
